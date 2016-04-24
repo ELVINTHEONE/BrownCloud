@@ -36,6 +36,8 @@ def index():
 
 @app.route("/auth_redirect")
 def auth_redirect():
+    user = User("", "", "", "", "")
+    return redirect(url_for("/"))
     code = request.args.get("code")
     try:
         #access_token, expires, scope, refresh_token = client.exchange_token(code)
