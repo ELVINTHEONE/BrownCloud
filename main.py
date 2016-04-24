@@ -36,7 +36,7 @@ def index():
 
 @app.route("/auth_redirect")
 def auth_redirect():
-    user = User("", "", "", "", "")
+    user = "hello"
     return redirect(url_for("/"))
     code = request.args.get("code")
     try:
