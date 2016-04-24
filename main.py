@@ -31,14 +31,14 @@ def index():
     if user is None:
         return redirect(client.authorize_url())
     else:
-        return render_template("index.html", user=user.me.username)
+        return render_template("index.html", user="test_user")
 
 
 @app.route("/auth_redirect")
 def auth_redirect():
     code = request.args.get("code")
     access_token, expires, scope, refresh_token = client.exchange_token(code)
-    user = User(access_token, expires, scope, refresh_token, client.get("/me"))
+    #user = User(access_token, expires, scope, refresh_token, client.get("/me"))
     return redirect(url_for("/"))
 
 if __name__ == '__main__':
