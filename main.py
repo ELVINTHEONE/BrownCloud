@@ -8,7 +8,7 @@ app.config.from_object(__name__)
 client = soundcloud.Client(
         client_id="53e3ccfd305043eb4e01b99b9cf18a37",
         client_secret="f29c8e8b2a7ba68a2d9fd4efa62d2e21",
-        redirect_uri="brown-cloud.herokuapp.com/auth_redirect"
+        redirect_uri="http://brown-cloud.herokuapp.com/auth_redirect"
         )
 
 user = None
