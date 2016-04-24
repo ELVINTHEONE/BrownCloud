@@ -36,9 +36,13 @@ def index():
 
 @app.route("/auth_redirect")
 def auth_redirect():
-    code = params['code'] #request.args.get("code")
-    access_token, expires, scope, refresh_token = client.exchange_token(code)
-    #user = User(access_token, expires, scope, refresh_token, client.get("/me"))
+    code = request.args.get("code")
+    try:
+        access_token, expires, scope, refresh_token = client.exchange_token(code)
+        user = User(access_token, expires, scope, refresh_token, client.get("/me"))
+    except:
+        print("unexpected error:", sys.exc_info()[0])
+
     return redirect(url_for("/"))
 
 if __name__ == '__main__':
