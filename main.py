@@ -31,7 +31,7 @@ def index():
     if user is None:
         return redirect(client.authorize_url())
     else:
-        return render_template("index.html", user="test_user")
+        return render_template("index.html")
 
 
 @app.route("/auth_redirect")
@@ -43,7 +43,7 @@ def auth_redirect():
         #user = User(access_token, "", "", "", "")
         return "token = " + user.access_token + "; user = " + user.me
     except:
-        print("unexpected error:", sys.exc_info()[0])
+        print("unexpected error:")
 
     return redirect(url_for("/"))
 
