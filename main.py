@@ -34,6 +34,7 @@ def auth_redirect():
     code = request.args.get('code')
     try:
         access_token = client.exchange_token(code)
+        user = "hello"
         #user = User( "", "", "", "", "")
         #return "hello!" + client.get('/me').username
     except:
