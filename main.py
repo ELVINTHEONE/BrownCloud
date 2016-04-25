@@ -38,8 +38,7 @@ def index():
 def auth_redirect():
     code = request.args.get('code')
     try:
-        access_token = client.exchange_token(code)
-        return "lol"
+        return client.exchange_token(code)
         access_token, expires, scope, refresh_token = client.exchange_token(code)
         return "yay"
         return render_text("Hi There, %s" % client.get('/me').username)
