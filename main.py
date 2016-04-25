@@ -38,7 +38,7 @@ def index():
 def auth_redirect():
     code = request.args.get('code')
     try:
-        access_token, expires, scope, refresh_token = client.exchange_token(code)
+        access_token = client.exchange_token(code)
         return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
