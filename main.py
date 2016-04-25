@@ -23,7 +23,6 @@ class User:
 
 @app.route("/")
 def index():
-    return render_template("index.html")
     if user is None:
         return redirect(client.authorize_url())
     else:
@@ -40,9 +39,7 @@ def auth_redirect():
         #return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
-    
-    return url_for("/")
-    return redirect(url_for("/"))
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run()
