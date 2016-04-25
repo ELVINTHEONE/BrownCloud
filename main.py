@@ -35,7 +35,7 @@ def auth_redirect():
     try:
         access_token = client.exchange_token(code)
         #user = User( "", "", "", "", "")
-        return "hello!" + client.get('/me').username
+        #return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
 
