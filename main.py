@@ -26,7 +26,7 @@ class User:
 
 @app.route("/")
 def index():
-    logger.info('user is ' + user)
+    logger.info('user is hello!')
     if user is None:
         return redirect(client.authorize_url())
     else:
@@ -39,7 +39,6 @@ def auth_redirect():
     try:
         access_token = client.exchange_token(code)
         user = "hello"
-        logging.info('access token is ' + access_token)
         #user = User( "", "", "", "", "")
         #return "hello!" + client.get('/me').username
     except:
