@@ -23,6 +23,7 @@ class User:
 
 @app.route("/")
 def index():
+    return render_template("index.html")
     if user is None:
         return redirect(client.authorize_url())
     else:
