@@ -13,7 +13,7 @@ client = soundcloud.Client(
 
 user = None
 
-class User():
+class User:
     access_token = ""
     expires = ""
     scope = ""
@@ -39,7 +39,7 @@ def auth_redirect():
     code = request.args.get('code')
     try:
         access_token = client.exchange_token(code)
-        user = User("", "", "", "", "")
+        user = User( "", "", "", "", "")
         return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
