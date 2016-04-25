@@ -36,6 +36,7 @@ def index():
 
 @app.route("/auth_redirect")
 def auth_redirect():
+    return "fook yoo"
     return render_template("index.html")
     code = request.args.get("code")
     try:
