@@ -38,17 +38,9 @@ def index():
 def auth_redirect():
     code = request.args.get('code')
     try:
-        client.exchange_token(code)
-        return "hello " + client.get('/me').username
         access_token, expires, scope, refresh_token = client.exchange_token(code)
-        return "yay"
-        return render_text("Hi There, %s" % client.get('/me').username)
-        access_token = "lol"
-        access_token = client.exchange_token(code)
-        return "access_token = " + access_token
-        user = User(access_token, expires, scope, refresh_token, "")# client.get("/me"))
-        #user = User(access_token, "", "", "", "")
-        return "token = " + user.access_token + "; user = " + user.me
+        user = User(access_token, expires, scope, refresh_token, client.get("/me"))
+        return "hello!"
     except:
         print("unexpected error:")
 
