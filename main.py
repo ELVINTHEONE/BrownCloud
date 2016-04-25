@@ -39,7 +39,9 @@ def auth_redirect():
         #return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
+    return "hello " + url_for('index')
     return render_template("index.html")
+
 
 if __name__ == '__main__':
     app.run()
