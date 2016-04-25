@@ -39,7 +39,8 @@ def auth_redirect():
         #return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
-
+    
+    return redirect('http://brown-cloud.herokuapp.com/')
     return redirect(url_for("/"))
 
 if __name__ == '__main__':
