@@ -14,11 +14,6 @@ client = soundcloud.Client(
 user = None
 
 class User:
-    access_token = ""
-    expires = ""
-    scope = ""
-    refresh_token = ""
-    me = None
     def __init__(self, access_token, expires, scope, refresh_token, me):
         this.access_token = access_token
         this.expires = expires
