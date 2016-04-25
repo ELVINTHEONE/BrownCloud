@@ -36,11 +36,11 @@ def index():
 
 @app.route("/auth_redirect")
 def auth_redirect():
+    code = request.args.get('code')
     try:
         access_token, expires, scope, refresh_token = client.exchange_token(code)
         user = User(access_token, expires, scope, refresh_token, client.get("/me"))
-        access_token = client.exchange_token(code)
-        user = User(access_token, "", "", "", "")
+        #user = User(access_token, "", "", "", "")
         return "token = " + user.access_token + "; user = " + user.me.username
     except:
         print("unexpected error:", sys.exc_info()[0])
