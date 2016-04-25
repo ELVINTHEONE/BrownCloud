@@ -1,6 +1,9 @@
 import os
+import logging
 import soundcloud
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+
+logger = logging.getLogger(__file__)
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -23,6 +26,7 @@ class User:
 
 @app.route("/")
 def index():
+    logger.info('user is ' + user)
     if user is None:
         return redirect(client.authorize_url())
     else:
@@ -35,10 +39,12 @@ def auth_redirect():
     try:
         access_token = client.exchange_token(code)
         user = "hello"
+        logging.info('access token is ' + access_token)
         #user = User( "", "", "", "", "")
         #return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
+    user = "wtf"
     return redirect(url_for('index'))
     return "hello " + url_for('/')
     return render_template("index.html")
