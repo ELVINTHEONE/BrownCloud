@@ -4,8 +4,6 @@ import soundcloud
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from src.session import ChunkedSecureCookieSessionInterface
 
-logger = logging.getLogger(__file__)
-
 app = Flask(__name__)
 app.config.from_object(__name__)
 
@@ -17,17 +15,17 @@ client = soundcloud.Client(
 
 @app.route("/")
 def index():
-    logger.info('user is hello!')
     token = request.cookies.get('access_token')
     if (token):
         return render_template("index.html")
     else:
-        return redirect(client.authorize_url())
+        resp = make_response(redirect(client.authorize_url()))
+        resp.set_cookie('test', 'abc')
+        return resp
 
 @app.route("/auth_redirect")
 def auth_redirect():
     code = request.args.get('code')
-    logger.info('code = %s', code)
     access_token = client.exchange_token(code)
     resp = make_response(redirect("/"))
     resp.set_cookie('access_token', access_token)
