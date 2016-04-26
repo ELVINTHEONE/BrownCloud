@@ -27,7 +27,7 @@ class User:
 @app.route("/")
 def index():
     logger.info('user is hello!')
-    if !user:
+    if not user:
         return redirect(client.authorize_url())
     else:
         return render_template("index.html")
