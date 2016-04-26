@@ -18,11 +18,11 @@ user = False
 
 class User:
     def __init__(self, access_token, expires, scope, refresh_token, me):
-        this.access_token = access_token
-        this.expires = expires
-        this.scope = scope
-        this.refresh_token = refresh_token
-        this.me = me
+       self.access_token = access_token
+       self.expires = expires
+       self.scope = scope
+       self.refresh_token = refresh_token
+       self.me = me
 
 @app.route("/")
 def index():
