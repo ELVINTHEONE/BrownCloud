@@ -38,12 +38,11 @@ def auth_redirect():
     code = request.args.get('code')
     try:
         access_token = client.exchange_token(code)
-        user = "hello"
+        user = True
         #user = User( "", "", "", "", "")
         #return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
-    user = True 
     return redirect(url_for('index'))
     return "hello " + url_for('/')
     return render_template("index.html")
