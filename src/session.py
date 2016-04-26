@@ -46,7 +46,7 @@ class ChunkedSecureCookieSessionInterface(SessionInterface):
 
         if not val:
             return self.session_class()
-                max_age = total_seconds(app.permanent_session_lifetime)
+        max_age = total_seconds(app.permanent_session_lifetime)
         try:
             data = s.loads(val, max_age=max_age)
             return self.session_class(data)
