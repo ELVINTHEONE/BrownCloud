@@ -27,16 +27,13 @@ def index():
 @app.route("/auth_redirect")
 def auth_redirect():
     code = request.args.get('code')
-    try:
-        logger.info('code = %s', code)
-        access_token = client.exchange_token(code)
-        resp = make_response(redirect(url_for("index")))
-        resp.set_cookie('access_token', access_token)
-        return resp
-        #user = User("", "", "", "", "")
-        #return "hello!" + client.get('/me').username
-    except:
-        logger.info("unexpected error:")
+    logger.info('code = %s', code)
+    access_token = client.exchange_token(code)
+    resp = make_response(redirect("/"))
+    resp.set_cookie('access_token', access_token)
+    return resp
+    #user = User("", "", "", "", "")
+    #return "hello!" + client.get('/me').username
     #return redirect(url_for('index'))
     #return render_template("index.html")
 
