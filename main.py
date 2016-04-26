@@ -14,7 +14,7 @@ client = soundcloud.Client(
         redirect_uri="http://brown-cloud.herokuapp.com/auth_redirect"
         )
 
-user = False
+user = None
 
 class User:
     def __init__(self, access_token, expires, scope, refresh_token, me):
@@ -27,7 +27,7 @@ class User:
 @app.route("/")
 def index():
     logger.info('user is hello!')
-    if not user:
+    if user is None:
         return redirect(client.authorize_url())
     else:
         return render_template("index.html")
@@ -37,8 +37,8 @@ def index():
 def auth_redirect():
     code = request.args.get('code')
     try:
+        logger.info('code = ' + code)
         access_token = client.exchange_token(code)
-        user = True
         #user = User( "", "", "", "", "")
         #return "hello!" + client.get('/me').username
     except:
