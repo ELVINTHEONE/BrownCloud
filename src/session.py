@@ -28,7 +28,7 @@ class ChunkedSecureCookieSessionInterface(SessionInterface):
             key_derivation=self.key_derivation,
             digest_method=self.digest_method
         )
-    return URLSafeTimedSerializer(app.secret_key, salt=self.salt, serializer=self.serializer, signer_kwargs=signer_kwargs)
+        return URLSafeTimedSerializer(app.secret_key, salt=self.salt, serializer=self.serializer, signer_kwargs=signer_kwargs)
 
     def open_session(self, app, request):
         s = self.get_signing_serializer(app)
