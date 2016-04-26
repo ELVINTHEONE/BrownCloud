@@ -1,7 +1,8 @@
 import os
 import logging
 import soundcloud
-from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
+from src.session import ChunkedSecureCookieSessionInterface
 
 logger = logging.getLogger(__file__)
 
@@ -14,36 +15,28 @@ client = soundcloud.Client(
         redirect_uri="http://brown-cloud.herokuapp.com/auth_redirect"
         )
 
-user = None
-
-class User:
-    def __init__(self, access_token, expires, scope, refresh_token, me):
-       self.access_token = access_token
-       self.expires = expires
-       self.scope = scope
-       self.refresh_token = refresh_token
-       self.me = me
-
 @app.route("/")
 def index():
     logger.info('user is hello!')
-    if user is None:
-        return redirect(client.authorize_url())
-    else:
+    token = request.cookies.get('access_token')
+    if (token):
         return render_template("index.html")
-
+    else:
+        return redirect(client.authorize_url())
 
 @app.route("/auth_redirect")
 def auth_redirect():
     code = request.args.get('code')
     try:
-        logger.info('code = ' + code)
+        logger.info('code = %s', code)
         access_token = client.exchange_token(code)
-        user = True
+        resp = make_response(redirect(url_for("index")))
+        resp.set_cookie('access_token', access_token)
+        return resp
         #user = User("", "", "", "", "")
         #return "hello!" + client.get('/me').username
     except:
-        print("unexpected error:")
+        logger.info("unexpected error:")
     return redirect(url_for('index'))
     return render_template("index.html")
 
