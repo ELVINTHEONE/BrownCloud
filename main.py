@@ -39,7 +39,7 @@ def auth_redirect():
     try:
         logger.info('code = ' + code)
         access_token = client.exchange_token(code)
-        #user = User( "", "", "", "", "")
+        user = User("", "", "", "", "")
         #return "hello!" + client.get('/me').username
     except:
         print("unexpected error:")
