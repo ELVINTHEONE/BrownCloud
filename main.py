@@ -19,14 +19,12 @@ def index():
     if (token):
         return render_template("index.html")
     else:
-        resp = make_response(redirect(client.authorize_url()))
-        resp.set_cookie('test', 'abc')
-        return resp
+        return redirect(client.authorize_url())
 
 @app.route("/auth_redirect")
 def auth_redirect():
     code = request.args.get('code')
-    access_token = client.exchange_token(code)
+    access_token, expires, scope, refresh_token = client.exchange_token(code)
     resp = make_response(redirect("/"))
     resp.set_cookie('access_token', '{0}'.format(access_token))
     return resp
