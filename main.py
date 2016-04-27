@@ -17,7 +17,7 @@ client = soundcloud.Client(
 def index():
     token = request.cookies.get('access_token')
     if (token):
-        return render_template("index.html")
+        return render_template("index.html", user=client.get('/me').username)
     else:
         return redirect(client.authorize_url())
 
@@ -25,15 +25,10 @@ def index():
 def auth_redirect():
     code = request.args.get('code')
     obj = client.exchange_token(code)
-    access_token = obj.access_token
     resp = make_response(redirect("/"))
-    resp.set_cookie('access_token', '{0}'.format(access_token))
+    resp.set_cookie('access_token', '{0}'.format(obj.access_token))
+    resp.set_cookie('expires', '{0}'.format(obj.expires))
     return resp
-    #user = User("", "", "", "", "")
-    #return "hello!" + client.get('/me').username
-    #return redirect(url_for('index'))
-    #return render_template("index.html")
-
 
 if __name__ == '__main__':
     app.run()
