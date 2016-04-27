@@ -29,7 +29,7 @@ def auth_redirect():
     obj = client.exchange_token(code)
     resp = make_response(redirect("/"))
     resp.set_cookie('access_token', '{0}'.format(obj.access_token))
-    resp.set_cookie('expires', '{0}'.format(obj.expires))
+    #resp.set_cookie('expires', '{0}'.format(obj.expires))
     return resp
 
 if __name__ == '__main__':
