@@ -1,4 +1,12 @@
 {% extends "layout.html" %}
+
+{% block body %}
 <div>
         <h3>Hello {{ username }}  Search for something</h3>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="../scripts/external/soundcloud-3.0.js"></script>
+<script type="text/javascript" src="../scripts/main.js"></script>
+{% endblock %}
