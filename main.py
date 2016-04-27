@@ -22,7 +22,9 @@ def index():
         return render_template("index.html", username=client.get('/me').username)
         #return render_template("index.html")
     else:
-        return redirect(_getGenericClient().authorize_url())
+        client = _getGenericClient()
+        return redirect(client.authorize_url())
+        #return redirect(_getGenericClient().authorize_url())
 
 @app.route("/auth_redirect")
 def auth_redirect():
