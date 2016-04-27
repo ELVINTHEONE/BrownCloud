@@ -20,7 +20,6 @@ def index():
     if (token):
         client = soundcloud.Client(access_token="{0}".format(token))
         return render_template("index.html", username=client.get('/me').username)
-        #return render_template("index.html")
     else:
         client = _getGenericClient()
         return redirect(client.authorize_url())
