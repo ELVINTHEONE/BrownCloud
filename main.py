@@ -24,7 +24,7 @@ def index():
 @app.route("/auth_redirect")
 def auth_redirect():
     code = request.args.get('code')
-    access_token, expires, scope, refresh_token = client.exchange_token(code)
+    access_token = client.exchange_token(code).access_token
     resp = make_response(redirect("/"))
     resp.set_cookie('access_token', '{0}'.format(access_token))
     return resp
