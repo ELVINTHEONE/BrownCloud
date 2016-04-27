@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 def _getGenericClient():
-    return soundcloud.client(
+    return soundcloud.Client(
             client_id="53e3ccfd305043eb4e01b99b9cf18a37",
             client_secret="f29c8e8b2a7ba68a2d9fd4efa62d2e21",
             redirect_url="http://brown-cloud.herokuapp.com/auth_redirect"
