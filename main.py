@@ -17,7 +17,7 @@ client = soundcloud.Client(
 def index():
     token = request.cookies.get('access_token')
     if (token):
-        client = soundcloud.Client(access_token="{0}".format(token))
+        #client = soundcloud.Client(access_token="{0}".format(token))
         return render_template("index.html", username=client.get('/me').username)
     else:
         return redirect(client.authorize_url())
