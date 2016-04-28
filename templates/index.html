@@ -54,10 +54,10 @@
                 if (query.length > 0) {
                         // reload the tracks based on the query string
                         $.post({
-                                url: url, //base_uri + 'tracks'
-                                data: {
+                                url: url, //base_uri + 'tracks'/'playlists'
+                                data: JSON.stringify({
                                         'query': query
-                                },
+                                }),
                                 success: function(dataFromServer) {
                                         // empty the list
                                         jqueryList.empty();
@@ -76,7 +76,7 @@
                 $("#track_search").onDelayedKeyup({
                         handler: function() {
                                 fetchAndAddToList(
-                                        base_uri + 'tracks',
+                                        {{ url_for('tracks') }},
                                         $.trim($(this).val()),
                                         $("ul#fetched_tracks")
                                 );
@@ -85,7 +85,7 @@
                 $("#playlist_search").onDelayedKeyup({
                         handler: function() {
                                 fetchAndAddToList(
-                                        base_uri + 'playlists',
+                                        {{ url_for('playlists') }},
                                         $.trim($(this).val()),
                                         $("ul#fetched_playlists")
                                 );
