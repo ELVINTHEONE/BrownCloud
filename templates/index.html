@@ -76,19 +76,19 @@
                 $("#track_search").onDelayedKeyup({
                         handler: function() {
                                 fetchAndAddToList(
-                                        {{ url_for('tracks') }},
+                                        base_uri + 'tracks',
                                         $.trim($(this).val()),
                                         $("ul#fetched_tracks")
-                                );
+                                )
                         }
                 });
                 $("#playlist_search").onDelayedKeyup({
                         handler: function() {
                                 fetchAndAddToList(
-                                        {{ url_for('playlists') }},
+                                        base_uri + 'playlists',
                                         $.trim($(this).val()),
                                         $("ul#fetched_playlists")
-                                );
+                                )
                         }
                 });
         });
