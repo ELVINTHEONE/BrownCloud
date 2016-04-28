@@ -1,7 +1,8 @@
 import os
 import logging
 import soundcloud
-from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response, jsonify
+import json
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from src.session import ChunkedSecureCookieSessionInterface
 
 app = Flask(__name__)
@@ -16,6 +17,10 @@ def _getGenericClient():
 
 def _getAccessToken(request):
     return request.cookies.get('browncloud_access_token')
+
+# jsonify a list
+def _toJson(list):
+    return json.dumps(list, default=lambda o: o.__dict__)
 
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
@@ -59,7 +64,7 @@ def get_tracks():
     tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
     # jsonify the tracks
     print("sending response")
-    return jsonify({'tracks': tracks})
+    return _toJson(tracks)
 
 if __name__ == '__main__':
     app.run(debug=True)
