@@ -27,6 +27,7 @@ def before_request():
         request.endpoint != 'static'):
         client = _getGenericClient()
         return redirect(client.authorize_url())
+    pass
 
 @app.route("/")
 def index():

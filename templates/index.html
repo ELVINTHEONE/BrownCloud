@@ -69,26 +69,26 @@
                         });
                 }
         }
-$(document).ready(function() {
-        var base_uri = "http://brown-cloud.herokuapp.com/";
-        $("#track_search").onDelayedKeyup({
-                handler: function() {
-                        fetchAndAddToList(
-                                base_uri + 'tracks',
-                                $.trim($(this).val()),
-                                $("ul#fetched_tracks")
-                        );
-                }
+        $(document).ready(function() {
+                var base_uri = "http://brown-cloud.herokuapp.com/";
+                $("#track_search").onDelayedKeyup({
+                        handler: function() {
+                                fetchAndAddToList(
+                                        base_uri + 'tracks',
+                                        $.trim($(this).val()),
+                                        $("ul#fetched_tracks")
+                                );
+                        }
+                });
+                $("#playlist_search").onDelayedKeyup({
+                        handler: function() {
+                                fetchAndAddToList(
+                                        base_uri + 'playlists',
+                                        $.trim($(this).val()),
+                                        $("ul#fetched_playlists")
+                                );
+                        }
+                });
         });
-        $("#playlist_search").onDelayedKeyup({
-                handler: function() {
-                        fetchAndAddToList(
-                                base_uri + 'playlists',
-                                $.trim($(this).val()),
-                                $("ul#fetched_playlists")
-                        );
-                }
-        });
-});
 </script>
 {% endblock %}
