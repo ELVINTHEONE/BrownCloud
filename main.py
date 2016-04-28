@@ -47,7 +47,7 @@ def auth_redirect():
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
     # spawn a client
-    client = soundcloud.Client(access_token=_getAccessToken())
+    client = soundcloud.Client(access_token="{0}".format(_getAccessToken()))
     # get the query string
     query = request.json['query']
     # query the tracks
