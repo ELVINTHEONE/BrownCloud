@@ -51,9 +51,10 @@ def get_tracks():
     # get the query string
     #query = request.json['query']
     # query the tracks
-    tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
+    # tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
     # jsonify the tracks
-    return jsonify({'tracks': tracks})
+    # return jsonify({'tracks': tracks})
+    return jsonify({'tracks': { title = "hello" } })
 
 if __name__ == '__main__':
     app.run(debug=True)
