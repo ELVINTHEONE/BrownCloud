@@ -21,7 +21,10 @@ def _getAccessToken(request):
 @app.before_request
 def before_request():
     token = _getAccessToken()
-    if (not token && request.endpoint != '/' && request.endpoint != 'auth_redirect' && request.endpoint != 'static'):
+    if (not token and
+        request.endpoint != '/' and
+        request.endpoint != 'auth_redirect' and
+        request.endpoint != 'static'):
         client = _getGenericClient()
         return redirect(client.authorize_url())
 
