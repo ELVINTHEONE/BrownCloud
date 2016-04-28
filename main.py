@@ -51,7 +51,7 @@ def get_tracks():
     # get the query string
     query = request.json['query']
     # query the tracks
-    tracks = client.get('/tracks', q=query, limit=10)
+    tracks = client.get('/tracks', q="{0}".format(query), limit=10)
     # jsonify the tracks
     return jsonify({'tracks': tracks})
 
