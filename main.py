@@ -20,7 +20,10 @@ def _getAccessToken(request):
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
 #def before_request():
-    #token = _getAccessToken()
+    print("before request getting a token")
+    token = _getAccessToken(request)
+    if (token):
+        print("before request got a token " + token)
     #if (not token and
         #request.endpoint != '/' and
         #request.endpoint != 'auth_redirect' and
@@ -47,17 +50,18 @@ def auth_redirect():
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
     # spawn a client
-    fmt = "{0}".format(_getAccessToken())
+    fmt = "{0}".format(_getAccessToken(request))
     print("about to get a client with token " + fmt)
     client = soundcloud.Client(access_token=fmt)
     print("got a client")
     # get the query string
-    #query = request.json['query']
+    query = request.json['query']
+    print("got query " + query)
     # query the tracks
-    # tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
+    tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
     # jsonify the tracks
-    # return jsonify({'tracks': tracks})
-    return "hello"
+    print("sending response")
+    return jsonify({'tracks': tracks})
 
 if __name__ == '__main__':
     app.run(debug=True)
