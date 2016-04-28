@@ -53,7 +53,7 @@ def get_tracks():
     client = _getGenericClient()
     print("got a client")
     # get the query string
-    query = request.get_json(force=True)
+    query = "hello" #request.get_json(force=True)
     print("got query " + query)
     # query the tracks
     tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
