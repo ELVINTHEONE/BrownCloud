@@ -49,10 +49,8 @@ def auth_redirect():
 # api functions
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
-    # spawn a client
-    fmt = "{0}".format(_getAccessToken(request))
-    print("about to get a client with token " + fmt)
-    client = soundcloud.Client(access_token=fmt)
+    # spawn a generic client
+    client = _getGenericClient()
     print("got a client")
     # get the query string
     query = request.json['query']
