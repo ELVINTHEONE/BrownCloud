@@ -62,8 +62,8 @@
                                         // empty the list
                                         jqueryList.empty();
                                         // add the fetched data
-                                        for (obj in dataFromServer) {
-                                                jqueryList.append("<li>"+JSON.stringify(obj) + obj.title+"</li>");
+                                        for (index in dataFromServer.data) {
+                                                jqueryList.append("<li>" + dataFromServer.data[index].title + "</li>");
                                         }
                                 },
                                 contentType:"application/json",
