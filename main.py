@@ -18,16 +18,16 @@ def _getAccessToken(request):
     return request.cookies.get('browncloud_access_token')
 
 # before each request, make sure we have a validation token, unless requesting the index or redirect
-@app.before_request
-def before_request():
-    token = _getAccessToken()
-    if (not token and
-        request.endpoint != '/' and
-        request.endpoint != 'auth_redirect' and
-        request.endpoint != 'static'):
-        client = _getGenericClient()
-        return redirect(client.authorize_url())
-    pass
+#@app.before_request
+#def before_request():
+    #token = _getAccessToken()
+    #if (not token and
+        #request.endpoint != '/' and
+        #request.endpoint != 'auth_redirect' and
+        #request.endpoint != 'static'):
+        #client = _getGenericClient()
+        #return redirect(client.authorize_url())
+    #pass
 
 @app.route("/")
 def index():
