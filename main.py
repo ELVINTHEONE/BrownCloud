@@ -54,7 +54,7 @@ def get_tracks():
     # tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
     # jsonify the tracks
     # return jsonify({'tracks': tracks})
-    return jsonify({'tracks': { title = "hello" } })
+    return "hello"
 
 if __name__ == '__main__':
     app.run(debug=True)
