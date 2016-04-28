@@ -2,11 +2,93 @@
 
 {% block body %}
 <div>
-        <h3>Hello {{ username }}  Search for something</h3>
+        <h3>Search for something</h3>
+        <div style="display:block">
+                <div class="searched_tracks" style="float: left; width: 50%;">
+                        <input type="text" id="track_search" placeholder="Search for tracks"/>
+                        <ul id="fetched_tracks">
+                        </ul>
+                </div>
+                <div class="searched_playlists" style="float: right; width:50%">
+                        <input type="text" id="playlist_search" placeholder="Search for playlists"/>
+                        <ul id="fetched_playlists">
+                        </ul>
+                </div>
+        </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="../scripts/external/soundcloud-3.0.js"></script>
-<script type="text/javascript" src="../scripts/main.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script type="text/javascript" src="//connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+<script type="text/javascript" src="../public/scripts/main.js"></script>
+<script>
+        // jQuery extension for a delayed keyup http://stackoverflow.com/a/6054104/747275
+        (function($){
+
+                $.widget("ui.onDelayedKeyup", {
+
+                        _init : function() {
+                                var self = this;
+                                $(this.element).keyup(function() {
+                                        if(typeof(window['inputTimeout']) != "undefined"){
+                                                window.clearTimeout(inputTimeout);
+                                        }
+                                        var handler = self.options.handler;
+                                        window['inputTimeout'] = window.setTimeout(function() {
+                                                handler.call(self.element) }, self.options.delay);
+                                });
+                        },
+                        options: {
+                                handler: $.noop(),
+                                delay: 500
+                        }
+
+                });
+        })(jQuery);
+</script>
+<script>
+        // tracks and playlists share the same data attributes, so a generic function is OK
+        function fetchAndAddToList(url, query, jqueryList) {
+                if (query.length > 0) {
+                        // reload the tracks based on the query string
+                        $.post({
+                                url: url, //base_uri + 'tracks'
+                                data: {
+                                        'query': query
+                                },
+                                success: function(dataFromServer) {
+                                        // empty the list
+                                        jqueryList.empty();
+                                        // add the fetched data
+                                        for (data in dataFromServer) {
+                                                jqueryList.append("<li>"+data.title+"</li>");
+                                        }
+                                },
+                                dataType: 'json'
+                        });
+                }
+        }
+$(document).ready(function() {
+        var base_uri = "http://brown-cloud.herokuapp.com/";
+        $("#track_search").onDelayedKeyup({
+                handler: function() {
+                        fetchAndAddToList(
+                                base_uri + 'tracks',
+                                $.trim($(this).val()),
+                                $("ul#fetched_tracks")
+                        );
+                }
+        });
+        $("#playlist_search").onDelayedKeyup({
+                handler: function() {
+                        fetchAndAddToList(
+                                base_uri + 'playlists',
+                                $.trim($(this).val()),
+                                $("ul#fetched_playlists")
+                        );
+                }
+        });
+});
+</script>
 {% endblock %}

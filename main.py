@@ -1,7 +1,7 @@
 import os
 import logging
 import soundcloud
-from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
+from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response, jsonify
 from src.session import ChunkedSecureCookieSessionInterface
 
 app = Flask(__name__)
@@ -14,16 +14,20 @@ def _getGenericClient():
             redirect_url="http://brown-cloud.herokuapp.com/auth_redirect"
             )
 
-@app.route("/")
-def index():
-    token = request.cookies.get('access_token')
-    if (token):
-        client = soundcloud.Client(access_token="{0}".format(token))
-        return render_template("index.html", username=client.get('/me').username)
-    else:
+def _getAccessToken(request):
+    return request.cookies.get('browncloud_access_token')
+
+# before each request, make sure we have a validation token, unless requesting the index or redirect
+@app.before_request
+def before_request():
+    token = _getAccessToken()
+    if (!token && request.endpoint != '/' && request.endpoint != 'auth_redirect' && request.endpoint != 'static'):
         client = _getGenericClient()
         return redirect(client.authorize_url())
-        #return redirect(_getGenericClient().authorize_url())
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/auth_redirect")
 def auth_redirect():
@@ -35,5 +39,17 @@ def auth_redirect():
     #resp.set_cookie('expires', '{0}'.format(obj.expires))
     return resp
 
+# api functions
+@app.route("/tracks", methods=['POST'])
+def get_tracks():
+    # spawn a client
+    client = soundcloud.Client(access_token=_getAccessToken())
+    # get the query string
+    query = request.json['query']
+    # query the tracks
+    tracks = client.get('/tracks', q=query, limit=10)
+    # jsonify the tracks
+    return jsonify({'tracks': tracks})
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
