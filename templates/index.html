@@ -69,23 +69,25 @@
 		function createListItem(item) {
 				var divID = item.user.id + "" + item.id;
 				return "<div id='" + divID + "' onclick='playSound(\"" + divID + ", " + item.id + "\")'>" +
-                                "<div class='sc_player_embed' style='float:left; width: 50%;'>" +
+                                "<div class='sc_player_embed' style='float:left; width:50%;'>" +
                                     "<h2>" + item.title + "</h2>" +
                                     "<h4" + item.description + "</h4>" +
                                     "<span class='sc_player'></span>" +
                                 "</div>" +
-								"<p>" +
-										"<span>" +
-												"User " +
-												"<a href='" + item.user.permalink_url + "' target='_blank'>" +
-														item.user.username + " " +
-														"<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
-												"</a>" +
-										"</span><br />" +
-										"<span>Created: " + item.created_at + "</span><br />" +
-										"<span>Genre: " + item.genre + "</span><br />" +
-										"<span>Tags: " + item.tag_list + "</span><br />" +
-								"</p>" +
+                                "<div style='float:right; width:50%'>" +
+                                    "<p>" +
+                                            "<span>" +
+                                                    "User " +
+                                                    "<a href='" + item.user.permalink_url + "' target='_blank'>" +
+                                                            item.user.username + " " +
+                                                            "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
+                                                    "</a>" +
+                                            "</span><br />" +
+                                            "<span>Created: " + item.created_at + "</span><br />" +
+                                            "<span>Genre: " + item.genre + "</span><br />" +
+                                            "<span>Tags: " + item.tag_list + "</span><br />" +
+                                    "</p>" +
+                                "</div>" +
 						"</div>";
 		}
 		// tracks and playlists share the same data attributes, so a generic function is OK
