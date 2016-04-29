@@ -49,6 +49,30 @@
         })(jQuery);
 </script>
 <script>
+        function removeLastComma(str) {
+                var s = str.trim();
+                var ix = s.lastIndexOf(",");
+                return s.substring(0, ix);
+        }
+        // create a list item for a track/playlist
+        function createListItem(item) {
+                var tags = "";
+                for (var ix = 0; ix < item.tags.length; ix++) {
+                        tags += (tags[ix] + ", ");
+                }
+                tags = removeLastComma(tags);
+                return "<div>" +
+                                "<h2>" + item.title + "</h2>" +
+                                "<h4" + item.description + "</h4>" +
+                                "<p>" +
+                                        "By: " + item.user.username +
+                                        "<br />" +
+                                        "Created: " + item.created_at +
+                                        "<br />" +
+                                        "Tags: " + tags +
+                                "</p>" +
+                        "</div>";
+        }
         // tracks and playlists share the same data attributes, so a generic function is OK
         function fetchAndAddToList(url, query, jqueryList) {
                 if (query.length > 0) {
@@ -64,7 +88,7 @@
                                         // add the fetched data
                                         for (var ix = 0; ix < dataFromServer.data.length; ix++) {
                                                 var item = dataFromServer.data[ix].obj;
-                                                jqueryList.append("<li>" + item.title + "</li>");
+                                                jqueryList.append("<li>" + createListItem(item) + "</li>");
                                         }
                                 },
                                 contentType:"application/json",
@@ -78,7 +102,7 @@
                         handler: function() {
                                 fetchAndAddToList(
                                         base_uri + 'tracks',
-                                        $.trim($(this).val()),
+                                        $.trim($(this).val()), 
                                         $("ul#fetched_tracks")
                                 )
                         }
