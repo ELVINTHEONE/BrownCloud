@@ -56,12 +56,24 @@ def auth_redirect():
 def get_tracks():
     # spawn a generic client
     client = _getGenericClient()
-    print("got a client")
     # get the query string
     query = request.json['query']
     print("got query " + query)
     # query the tracks
-    tracks = client.get('/tracks', q="{0}".format("helo"), limit=10)
+    tracks = client.get('/tracks', q=query, limit=10)
+    # jsonify the tracks
+    print("sending response")
+    return _toJson(tracks)
+
+@app.route("/playlists", methods=['POST'])
+def get_playlists():
+    # spawn a generic client
+    client = _getGenericClient()
+    # get the query string
+    query = request.json['query']
+    print("got query " + query)
+    # query the tracks
+    tracks = client.get('/tracks', q=query, limit=10)
     # jsonify the tracks
     print("sending response")
     return _toJson(tracks)
