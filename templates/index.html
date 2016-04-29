@@ -58,7 +58,7 @@
         function createListItem(item) {
                 var tags = "";
                 for (var ix = 0; ix < item.tag_list.length; ix++) {
-                        tags += (tags[ix] + ", ");
+                        tags += (item.tag_list[ix] + ", ");
                 }
                 tags = removeLastComma(tags);
                 return "<div>" +
