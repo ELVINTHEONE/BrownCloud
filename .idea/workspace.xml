@@ -29,21 +29,21 @@
           <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+                <state relative-caret-position="540">
+                  <caret line="65" column="65" selection-start-line="65" selection-start-column="65" selection-end-line="65" selection-end-column="65" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-                    <element signature="n#script#4;n#!!top" expanded="false" />
-                    <marker date="1461970288702" expanded="true" signature="3463:4547" placeholder="..." />
-                    <marker date="1461970288702" expanded="true" signature="3636:3688" placeholder="..." />
-                    <marker date="1461970288702" expanded="true" signature="3636:4133" placeholder="..." />
-                    <marker date="1461970288702" expanded="true" signature="3636:4195" placeholder="..." />
-                    <marker date="1461970288702" expanded="true" signature="3636:4196" placeholder="..." />
-                    <marker date="1461970288702" expanded="true" signature="3636:4254" placeholder="..." />
-                    <marker date="1461970288702" expanded="true" signature="3636:4512" placeholder="..." />
+                    <element signature="n#script#3;n#!!top" expanded="false" />
+                    <marker date="1461970879926" expanded="true" signature="3550:4634" placeholder="..." />
+                    <marker date="1461970879926" expanded="true" signature="3723:3775" placeholder="..." />
+                    <marker date="1461970879926" expanded="true" signature="3723:4220" placeholder="..." />
+                    <marker date="1461970879926" expanded="true" signature="3723:4282" placeholder="..." />
+                    <marker date="1461970879926" expanded="true" signature="3723:4283" placeholder="..." />
+                    <marker date="1461970879926" expanded="true" signature="3723:4341" placeholder="..." />
+                    <marker date="1461970879926" expanded="true" signature="3723:4599" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -66,8 +66,8 @@
           <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="88">
-                  <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+                <state relative-caret-position="52">
+                  <caret line="12" column="55" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="55" />
                   <folding />
                 </state>
               </provider>
@@ -260,12 +260,12 @@
       <option name="presentableId" value="Default" />
       <updated>1461799515209</updated>
       <workItem from="1461799516883" duration="14884000" />
-      <workItem from="1461949524025" duration="5429000" />
+      <workItem from="1461949524025" duration="6039000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20313000" />
+    <option name="totallyTimeSpent" value="20923000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -315,14 +315,14 @@
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#script#4;n#!!top" expanded="false" />
-            <marker date="1461970288702" expanded="true" signature="3463:4547" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:3688" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4133" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4195" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4196" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4254" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4512" placeholder="..." />
+            <element signature="n#script#3;n#!!top" expanded="false" />
+            <marker date="1461970879926" expanded="true" signature="3550:4634" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:3775" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4220" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4282" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4283" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4341" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4599" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -370,29 +370,29 @@
     <entry file="file://$PROJECT_DIR$/public/scripts/main.js" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        <state relative-caret-position="52">
+          <caret line="12" column="55" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+        <state relative-caret-position="540">
+          <caret line="65" column="65" selection-start-line="65" selection-start-column="65" selection-end-line="65" selection-end-column="65" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#script#4;n#!!top" expanded="false" />
-            <marker date="1461970288702" expanded="true" signature="3463:4547" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:3688" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4133" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4195" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4196" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4254" placeholder="..." />
-            <marker date="1461970288702" expanded="true" signature="3636:4512" placeholder="..." />
+            <element signature="n#script#3;n#!!top" expanded="false" />
+            <marker date="1461970879926" expanded="true" signature="3550:4634" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:3775" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4220" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4282" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4283" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4341" placeholder="..." />
+            <marker date="1461970879926" expanded="true" signature="3723:4599" placeholder="..." />
           </folding>
         </state>
       </provider>

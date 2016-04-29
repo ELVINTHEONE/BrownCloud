@@ -26,7 +26,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="//w.soundcloud.com/player/api.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"
         integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
@@ -63,9 +62,12 @@
                 return s.substring(0, ix);
         }
         function playSound(link) {
-                var player = soundcloud.getPlayer('myPlayer');
-                player.api_load(link);
-                player.api_play();
+                SC.oEmbed(link, {auto_play: true}).then(function(oEmbed) {
+                        console.log("oEmbed response " + oEmbed);
+                });
+                //var player = soundcloud.getPlayer('myPlayer');
+                //player.api_load(link);
+                //player.api_play();
         }
         // create a list item for a track/playlist
         function createListItem(item) {
@@ -110,6 +112,9 @@
                 }
         }
         $(document).ready(function() {
+                SC.initialize({
+                        client_id: '53e3ccfd305043eb4e01b99b9cf18a37'
+                });
                 var base_uri = "http://brown-cloud.herokuapp.com/";
                 $("#track_search").onDelayedKeyup({
                         handler: function() {
