@@ -2,8 +2,6 @@
 
 {% block body %}
 <div>
-		<div id="sc_player_embed" style="display:block">
-		</div>
 		<div style="display:block">
 				<h3>Search for something</h3>
 				<div class="searched_tracks" style="float: left; width: 50%;">
@@ -68,7 +66,7 @@
 		// create a list item for a track/playlist
 		function createListItem(item) {
 				var divID = item.user.id + "" + item.id;
-				return "<div id='" + divID + "' onclick='playSound(\"" + divID + ", " + item.id + "\")'>" +
+				return "<div id='" + divID + "' style='width:100%' onclick='playSound(\"" + divID + ", " + item.id + "\")'>" +
                                 "<div class='sc_player_embed' style='float:left; width:50%;'>" +
                                     "<h2>" + item.title + "</h2>" +
                                     "<h4" + item.description + "</h4>" +
