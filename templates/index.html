@@ -56,11 +56,6 @@
         }
         // create a list item for a track/playlist
         function createListItem(item) {
-                var tags = "";
-                for (var ix = 0; ix < item.tag_list.length; ix++) {
-                        tags += (item.tag_list[ix] + ", ");
-                }
-                tags = removeLastComma(tags);
                 return "<div>" +
                                 "<h2>" + item.title + "</h2>" +
                                 "<h4" + item.description + "</h4>" +
@@ -69,7 +64,7 @@
                                         "<br />" +
                                         "Created: " + item.created_at +
                                         "<br />" +
-                                        "Tags: " + tags +
+                                        "Tags: " + item.tag_list +
                                 "</p>" +
                         "</div>";
         }
