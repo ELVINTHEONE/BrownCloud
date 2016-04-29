@@ -60,11 +60,10 @@
                                 "<h2>" + item.title + "</h2>" +
                                 "<h4" + item.description + "</h4>" +
                                 "<p>" +
-                                        "By: " + item.user.username +
-                                        "<br />" +
-                                        "Created: " + item.created_at +
-                                        "<br />" +
-                                        "Tags: " + item.tag_list +
+                                        "<span>By: <a href='" + item.user.uri + "'>" + item.user.username + "</a></span><br />" +
+                                        "Created: " + item.created_at + "<br />" +
+                                        "Genre: " + item.genre + "<br />" +
+                                        "Tags: " + item.tag_list + "<br />" +
                                 "</p>" +
                         "</div>";
         }
