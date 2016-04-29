@@ -26,9 +26,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="//w.soundcloud.com/player/api.js"></script>
+<!--<script type="text/javascript" src="//w.soundcloud.com/player/api.js"></script>-->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"
         integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
         crossorigin="anonymous"></script><script type="text/javascript" src="//connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 <script>
@@ -110,6 +110,10 @@
                 }
         }
         $(document).ready(function() {
+                SC.initialize({
+                        client_id: '53e3ccfd305043eb4e01b99b9cf18a37',
+                        redirect_uri: 'http://brown-cloud.herokuapp.com/auth_redirect'
+                });
                 var base_uri = "http://brown-cloud.herokuapp.com/";
                 $("#track_search").onDelayedKeyup({
                         handler: function() {
