@@ -57,7 +57,7 @@
         // create a list item for a track/playlist
         function createListItem(item) {
                 var tags = "";
-                for (var ix = 0; ix < item.tags.length; ix++) {
+                for (var ix = 0; ix < item.tag_list.length; ix++) {
                         tags += (tags[ix] + ", ");
                 }
                 tags = removeLastComma(tags);
