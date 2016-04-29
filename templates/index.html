@@ -2,131 +2,135 @@
 
 {% block body %}
 <div>
-        <div id="sc_player_embed" style="display:block">
-        </div>
-        <div style="display:block">
-                <h3>Search for something</h3>
-                <div class="searched_tracks" style="float: left; width: 50%;">
-                        <input type="text" id="track_search" placeholder="Search for tracks"/>
-                        <ul id="fetched_tracks">
-                        </ul>
-                </div>
-                <div class="searched_playlists" style="float: right; width:50%">
-                        <input type="text" id="playlist_search" placeholder="Search for playlists"/>
-                        <ul id="fetched_playlists">
-                        </ul>
-                </div>
-        </div>
+		<div id="sc_player_embed" style="display:block">
+		</div>
+		<div style="display:block">
+				<h3>Search for something</h3>
+				<div class="searched_tracks" style="float: left; width: 50%;">
+						<input type="text" id="track_search" placeholder="Search for tracks"/>
+						<ul id="fetched_tracks">
+						</ul>
+				</div>
+				<div class="searched_playlists" style="float: right; width:50%">
+						<input type="text" id="playlist_search" placeholder="Search for playlists"/>
+						<ul id="fetched_playlists">
+						</ul>
+				</div>
+		</div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"
-        integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
-        crossorigin="anonymous"></script><script type="text/javascript" src="//connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+		integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
+		crossorigin="anonymous"></script><script type="text/javascript" src="//connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 <script>
-        // jQuery extension for a delayed keyup http://stackoverflow.com/a/6054104/747275
-        (function($){
+		// jQuery extension for a delayed keyup http://stackoverflow.com/a/6054104/747275
+		(function($){
 
-                $.widget("ui.onDelayedKeyup", {
+				$.widget("ui.onDelayedKeyup", {
 
-                        _init : function() {
-                                var self = this;
-                                $(this.element).keyup(function() {
-                                        if(typeof(window['inputTimeout']) != "undefined"){
-                                                window.clearTimeout(inputTimeout);
-                                        }
-                                        var handler = self.options.handler;
-                                        window['inputTimeout'] = window.setTimeout(function() {
-                                                handler.call(self.element) }, self.options.delay);
-                                });
-                        },
-                        options: {
-                                handler: $.noop(),
-                                delay: 500
-                        }
+						_init : function() {
+								var self = this;
+								$(this.element).keyup(function() {
+										if(typeof(window['inputTimeout']) != "undefined"){
+												window.clearTimeout(inputTimeout);
+										}
+										var handler = self.options.handler;
+										window['inputTimeout'] = window.setTimeout(function() {
+												handler.call(self.element) }, self.options.delay);
+								});
+						},
+						options: {
+								handler: $.noop(),
+								delay: 500
+						}
 
-                });
-        })(jQuery);
+				});
+		})(jQuery);
 </script>
 <script>
-        function removeLastComma(str) {
-                var s = str.trim();
-                var ix = s.lastIndexOf(",");
-                return s.substring(0, ix);
-        }
-        function _getSoundCloudPlayerIFrame(track_id) {
-            var widgetParams = '&color=ff6600&auto_play=false';
-            return '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track_id + widgetParams + '"></iframe>';
-        }
-        function playSound(track_id) {
-            var embed = $("#sc_player_embed");
-            embed.empty();
-            embed.append(_getSoundCloudPlayerIFrame(track_id));
-        }
-        // create a list item for a track/playlist
-        function createListItem(item) {
-                return "<div onclick='playSound(\"" + item.id + "\")'>" +
-                                "<h2>" + item.title + "</h2>" +
-                                "<h4" + item.description + "</h4>" +
-                                "<p>" +
-                                        "<span>" +
-                                                "User " +
-                                                "<a href='" + item.user.permalink_url + "' target='_blank'>" +
-                                                        item.user.username + " " +
-                                                        "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
-                                                "</a>" +
-                                        "</span><br />" +
-                                        "<span>Created: " + item.created_at + "</span><br />" +
-                                        "<span>Genre: " + item.genre + "</span><br />" +
-                                        "<span>Tags: " + item.tag_list + "</span><br />" +
-                                "</p>" +
-                        "</div>";
-        }
-        // tracks and playlists share the same data attributes, so a generic function is OK
-        function fetchAndAddToList(url, query, jqueryList) {
-                if (query.length > 0) {
-                        // reload the tracks based on the query string
-                        $.post({
-                                url: url, //base_uri + 'tracks'/'playlists'
-                                data: JSON.stringify({
-                                        'query': query
-                                }),
-                                success: function(dataFromServer) {
-                                        // empty the list
-                                        jqueryList.empty();
-                                        // add the fetched data
-                                        for (var ix = 0; ix < dataFromServer.data.length; ix++) {
-                                                var item = dataFromServer.data[ix].obj;
-                                                jqueryList.append("<li>" + createListItem(item) + "</li>");
-                                        }
-                                },
-                                contentType:"application/json",
-                                dataType: 'json'
-                        });
-                }
-        }
-        $(document).ready(function() {
-                var base_uri = "http://brown-cloud.herokuapp.com/";
-                $("#track_search").onDelayedKeyup({
-                        handler: function() {
-                                fetchAndAddToList(
-                                        base_uri + 'tracks',
-                                        $.trim($(this).val()), 
-                                        $("ul#fetched_tracks")
-                                )
-                        }
-                });
-                $("#playlist_search").onDelayedKeyup({
-                        handler: function() {
-                                fetchAndAddToList(
-                                        base_uri + 'playlists',
-                                        $.trim($(this).val()),
-                                        $("ul#fetched_playlists")
-                                )
-                        }
-                });
-        });
+		function removeLastComma(str) {
+				var s = str.trim();
+				var ix = s.lastIndexOf(",");
+				return s.substring(0, ix);
+		}
+		function _getSoundCloudPlayerIFrame(track_id) {
+			var widgetParams = '&color=ff6600&auto_play=false';
+			return '<iframe class="sc_iframe" width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track_id + widgetParams + '"></iframe>';
+		}
+		function playSound(div_id, track_id) {
+			var embed = $("#" + div_id + " div.sc_player_embed span");
+			embed.empty();
+			embed.append(_getSoundCloudPlayerIFrame(track_id));
+		}
+		// create a list item for a track/playlist
+		function createListItem(item) {
+				var divID = item.user.id + "" + item.id;
+				return "<div id='" + divID + "' onclick='playSound(\"" + divID + ", " + item.id + "\")'>" +
+                                "<div class='sc_player_embed' style='float:left; width: 50%;'>" +
+                                    "<h2>" + item.title + "</h2>" +
+                                    "<h4" + item.description + "</h4>" +
+                                    "<span class='sc_player'></span>" +
+                                "</div>" +
+								"<p>" +
+										"<span>" +
+												"User " +
+												"<a href='" + item.user.permalink_url + "' target='_blank'>" +
+														item.user.username + " " +
+														"<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
+												"</a>" +
+										"</span><br />" +
+										"<span>Created: " + item.created_at + "</span><br />" +
+										"<span>Genre: " + item.genre + "</span><br />" +
+										"<span>Tags: " + item.tag_list + "</span><br />" +
+								"</p>" +
+						"</div>";
+		}
+		// tracks and playlists share the same data attributes, so a generic function is OK
+		function fetchAndAddToList(url, query, jqueryList) {
+				if (query.length > 0) {
+						// reload the tracks based on the query string
+						$.post({
+								url: url, //base_uri + 'tracks'/'playlists'
+								data: JSON.stringify({
+										'query': query
+								}),
+								success: function(dataFromServer) {
+										// empty the list
+										jqueryList.empty();
+										// add the fetched data
+										for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+												var item = dataFromServer.data[ix].obj;
+												jqueryList.append("<li>" + createListItem(item) + "</li>");
+										}
+								},
+								contentType:"application/json",
+								dataType: 'json'
+						});
+				}
+		}
+		$(document).ready(function() {
+				var base_uri = "http://brown-cloud.herokuapp.com/";
+				$("#track_search").onDelayedKeyup({
+						handler: function() {
+								fetchAndAddToList(
+										base_uri + 'tracks',
+										$.trim($(this).val()),
+										$("ul#fetched_tracks")
+								)
+						}
+				});
+				$("#playlist_search").onDelayedKeyup({
+						handler: function() {
+								fetchAndAddToList(
+										base_uri + 'playlists',
+										$.trim($(this).val()),
+										$("ul#fetched_playlists")
+								)
+						}
+				});
+		});
 </script>
 {% endblock %}
