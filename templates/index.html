@@ -2,8 +2,15 @@
 
 {% block body %}
 <div>
-        <h3>Search for something</h3>
         <div style="display:block">
+                <object height="81" width="100%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+                        <param name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer"></param>
+                        <param name="allowscriptaccess" value="always"></param>
+                        <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer" type="application/x-shockwave-flash" width="100%" name="myPlayer"></embed>
+                </object>
+        </div>
+        <div style="display:block">
+                <h3>Search for something</h3>
                 <div class="searched_tracks" style="float: left; width: 50%;">
                         <input type="text" id="track_search" placeholder="Search for tracks"/>
                         <ul id="fetched_tracks">
@@ -19,6 +26,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script type="text/javascript" src="//w.soundcloud.com/player/api.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
         integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
@@ -54,15 +62,20 @@
                 var ix = s.lastIndexOf(",");
                 return s.substring(0, ix);
         }
+        function playSound(link) {
+                var player = soundcloud.getPlayer('myPlayer');
+                player.api_load(link);
+                player.api_play();
+        }
         // create a list item for a track/playlist
         function createListItem(item) {
-                return "<div>" +
+                return "<div onclick='playSound(" + item.permalink_url + ")'>" +
                                 "<h2>" + item.title + "</h2>" +
                                 "<h4" + item.description + "</h4>" +
                                 "<p>" +
                                         "<span>" +
                                                 "User " +
-                                                "<a href='" + item.user.permalink_url + "'>" +
+                                                "<a href='" + item.user.permalink_url + "' target='_blank'>" +
                                                         item.user.username + " " +
                                                         "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
                                                 "</a>" +
