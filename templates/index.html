@@ -60,10 +60,14 @@
                                 "<h2>" + item.title + "</h2>" +
                                 "<h4" + item.description + "</h4>" +
                                 "<p>" +
-                                        "<span>By: <a href='" + item.user.uri + "'>" + item.user.username + "</a></span><br />" +
-                                        "Created: " + item.created_at + "<br />" +
-                                        "Genre: " + item.genre + "<br />" +
-                                        "Tags: " + item.tag_list + "<br />" +
+                                        "<span>" +
+                                                "<a href='" + item.user.permalink_url + "'>" +
+                                                        "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
+                                                "</a>" +
+                                        "</span><br />" +
+                                        "<span>Created: " + item.created_at + "</span><br />" +
+                                        "<span>Genre: " + item.genre + "</span><br />" +
+                                        "<span>Tags: " + item.tag_list + "</span><br />" +
                                 "</p>" +
                         "</div>";
         }
