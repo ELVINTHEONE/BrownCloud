@@ -62,10 +62,11 @@
                                         // empty the list
                                         jqueryList.empty();
                                         // add the fetched data
-                                        console.log(JSON.stringify(dataFromServer.data));
-                                        for (var item in dataFromServer.data) {
+                                        for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+                                                var item = dataFromServer.data[ix];
                                                 console.log(JSON.stringify(item));
-                                                jqueryList.append("<li>" + item.title + "</li>");
+                                                console.log(JSON.stringify(item.obj));
+                                                jqueryList.append("<li>" + item.obj.title + "</li>");
                                         }
                                 },
                                 contentType:"application/json",
