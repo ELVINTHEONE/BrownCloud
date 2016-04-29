@@ -2,12 +2,7 @@
 
 {% block body %}
 <div>
-        <div style="display:block">
-                <object height="81" width="100%" id="myPlayer">
-                        <param name="movie" value="http://player.soundcloud.com/player.swf?object_id=myPlayer"></param>
-                        <param name="allowscriptaccess" value="always"></param>
-                        <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?object_id=myPlayer" type="application/x-shockwave-flash" width="100%" name="myPlayer"></embed>
-                </object>
+        <div id="sc_player_embed" style="display:block">
         </div>
         <div style="display:block">
                 <h3>Search for something</h3>
@@ -61,17 +56,16 @@
                 var ix = s.lastIndexOf(",");
                 return s.substring(0, ix);
         }
-        function playSound(link) {
-                SC.oEmbed(link, {auto_play: true}).then(function(oEmbed) {
-                        console.log("oEmbed response " + oEmbed);
-                });
-                //var player = soundcloud.getPlayer('myPlayer');
-                //player.api_load(link);
-                //player.api_play();
+        function _getSoundCloudPlayerIFrame(track_id) {
+            var widgetParams = '&color=ff6600&auto_play=false';
+            return '<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track_id + widgetParams + '"></iframe>';
+        }
+        function playSound(track_id) {
+            $("#sc_player_embed").appendChild(_getSoundCloudPlayerIFrame());
         }
         // create a list item for a track/playlist
         function createListItem(item) {
-                return "<div onclick='playSound(\"" + item.permalink_url + "\")'>" +
+                return "<div onclick='playSound(\"" + item.id + "\")'>" +
                                 "<h2>" + item.title + "</h2>" +
                                 "<h4" + item.description + "</h4>" +
                                 "<p>" +
@@ -112,9 +106,6 @@
                 }
         }
         $(document).ready(function() {
-                SC.initialize({
-                        client_id: '53e3ccfd305043eb4e01b99b9cf18a37'
-                });
                 var base_uri = "http://brown-cloud.herokuapp.com/";
                 $("#track_search").onDelayedKeyup({
                         handler: function() {
