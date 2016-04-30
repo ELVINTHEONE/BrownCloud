@@ -84,10 +84,11 @@ function createUserListItem(item, divID) {
     return  "<div id='" + divID + "'>" +
                 "<span>" +
                     "User " +
-                    "<a href='" + item.user.permalink_url + "' target='_blank'>" +
-                    item.user.username + " " +
-                    "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
+                    "<a href='" + item.permalink_url + "' target='_blank'>" +
+                    item.username + " " +
+                    "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
                     "</a>" +
+                    " " + item.description +
                 "</span><br />" +
                 "<span>Real Name: " + item.full_name + "</span><br />" +
                 "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />" +
