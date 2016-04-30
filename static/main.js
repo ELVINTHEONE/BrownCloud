@@ -82,7 +82,7 @@ function createSoundListItem(item, divID) {
 // create a list item for a user
 function createUserListItem(item, divID) {
     var div =   "<div id='" + divID + "'>" +
-                    "<div style='width:50%; float:left'>" +
+                    "<div>" +
                         "<span>" +
                             "<a href='" + item.permalink_url + "' target='_blank'>" +
                             "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
@@ -90,7 +90,7 @@ function createUserListItem(item, divID) {
                             "</a>" +
                         "</span>" +
                     "</div>" +
-                    "<div style='width:50%; float:right'>";
+                    "<div>";
     if (item.description)
         div +=  "<span> About: " + item.description + "</span><br />";
     if (item.full_name)
@@ -125,7 +125,7 @@ function fetchAndAddToList(url, prefix, jqueryList) {
                         jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
                     }
                     else {
-                        jqueryList.append("<li style='float:left; width:50%' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+                        jqueryList.append("<li style='float:left;' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
                     }
                 }
             },
