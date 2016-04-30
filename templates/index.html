@@ -61,7 +61,7 @@
 		function playSound(div_id, track_id) {
 			console.log("embedding the sound " + track_id + " in div " + div_id);
 			var embed = $("#" + div_id + " div.sc_player_embed span.sc_player");
-			if (embed.children("input").length == 0) {
+			if (embed.children("iframe").length == 0) {
                 embed.append(_getSoundCloudPlayerIFrame(track_id));
             }
 		}
