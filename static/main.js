@@ -89,7 +89,8 @@ function createUserListItem(item, divID) {
                             " " + item.username +
                             "</a>" +
                         "</span>" +
-                    "</div>";
+                    "</div>" +
+                    "<div style='width:50%; float:right'>";
     if (item.description)
         div +=  "<span> About: " + item.description + "</span><br />";
     if (item.full_name)
@@ -101,7 +102,7 @@ function createUserListItem(item, divID) {
         div += "<span>City: " + item.city + "</span><br />";
     if (item.country)
         div += "<span>Country: " + item.country + "</span><br />";
-    div += "</div>";
+    div += "</div></div>";
     return div;
 }
 // query for friends (aka users) tracks and playlists
