@@ -112,7 +112,7 @@ function fetchAndAddToList(url, prefix, jqueryList) {
                 var playSound = (prefix != 'friend');
                 for (var ix = 0; ix < dataFromServer.data.length; ix++) {
                     var item = dataFromServer.data[ix].obj;
-                    var divID = ix + "_" + item.user.id + "_" + item.id;
+                    var divID = ix + "_" + (playSound ? item.user.id : item.id) + "_" + item.id;
                     if (playSound) {
                         jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
                     }
