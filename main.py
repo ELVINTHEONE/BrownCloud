@@ -2,11 +2,16 @@ import os
 import logging
 import soundcloud
 import json
+from enum import Enum
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from src.session import ChunkedSecureCookieSessionInterface
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+class RequestType(Enum):
+    tracks = 1
+    playlists = 2
 
 def _getGenericClient():
     return soundcloud.Client(
@@ -26,23 +31,31 @@ def _toJson(list):
 def _sendQuery(request, type, limit):
     # spawn a generic client
     client = _getGenericClient()
-    ret = client.get(
-        type,
-        q = request.json['query'],
-        tags = request.json['tags'],
-        filter = request.json['visibility'],
-        license = request.json['license'],
-        bpm_from = request.json['bpmFrom'],
-        bpm_to = request.json['bpmTo'],
-        duration_from = request.json['durationFrom'],
-        duration_to = request.json['durationTo'],
-        created_at_from = request.json['createdAtFrom'],
-        created_at_to = request.json['createdAtTo'],
-        genres = request.json['genres'],
-        types = request.json['type'],
-        limit = limit
-    )
-    return _toJson(ret)
+    if (type == RequestType.tracks):
+        ret = client.get(
+            '/tracks',
+            q = request.json['query'],
+            tags = request.json['tags'],
+            filter = request.json['visibility'],
+            license = request.json['license'],
+            bpm_from = request.json['bpmFrom'],
+            bpm_to = request.json['bpmTo'],
+            duration_from = request.json['durationFrom'],
+            duration_to = request.json['durationTo'],
+            created_at_from = request.json['createdAtFrom'],
+            created_at_to = request.json['createdAtTo'],
+            genres = request.json['genres'],
+            types = request.json['type'],
+            limit = limit
+        )
+        return _toJson(ret)
+    else if (type == RequestType.playlists):
+        ret = client.get(
+            '/playlists',
+            q = request.json['query']
+            limit = limit
+        )
+        return _toJson(ret)
 
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
@@ -76,11 +89,11 @@ def auth_redirect():
 # api functions
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
-    return _sendQuery(request, '/tracks', 10)
+    return _sendQuery(request, RequestType.tracks, 10)
 
 @app.route("/playlists", methods=['POST'])
 def get_playlists():
-    return _sendQuery(request, '/playlists', 10)
+    return _sendQuery(request, RequestType.playlists, 10)
 
 if __name__ == '__main__':
     app.run(debug=True)
