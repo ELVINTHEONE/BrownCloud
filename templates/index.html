@@ -3,6 +3,11 @@
 {% block body %}
 <div>
     <div style="display:block">
+        <div class="user_favorites" style="width: 100%">
+            <h3>Find a friend</h3>
+            <input type="text" id="friend_search" placeholder="username"/>
+            <ul id="fetched_friends"></ul>
+        </div>
         <div class="searched_tracks" style="float: left; width: 50%;">
             <h3>Search for tracks</h3>
             <div id="track_filters">
@@ -139,6 +144,15 @@
 <script>
 		$(document).ready(function() {
 			var base_uri = "http://brown-cloud.herokuapp.com/";
+            $("#friend_search").onDelayedKeyup({
+                handler: function() {
+                    fetchAndAddToList(
+                        base_uri + "friends",
+                        "friend",
+                        $("ul#fetched_friends")
+                    )
+                }
+            });
 			$("#track_search").onDelayedKeyup({
 				handler: function() {
 					fetchAndAddToList(

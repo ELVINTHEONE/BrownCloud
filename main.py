@@ -10,8 +10,9 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 class RequestType(Enum):
-    tracks = 1
-    playlists = 2
+    friends = 1
+    tracks = 2
+    playlists = 3
 
 def _getGenericClient():
     return soundcloud.Client(
@@ -31,10 +32,18 @@ def _toJson(list):
 def _sendQuery(request, type, limit):
     # spawn a generic client
     client = _getGenericClient()
-    if (type == RequestType.tracks):
+    ret = None
+    query = request.json['query']
+    if (type == RequestType.friends):
+        ret = client.get(
+            '/users',
+            q = query,
+            limit = limit
+        )
+    elif (type == RequestType.tracks):
         ret = client.get(
             '/tracks',
-            q = request.json['query'],
+            q = query,
             tags = request.json['tags'],
             filter = request.json['visibility'],
             #license = request.json['license'],
@@ -48,14 +57,13 @@ def _sendQuery(request, type, limit):
             types = request.json['type'],
             limit = limit
         )
-        return _toJson(ret)
     elif (type == RequestType.playlists):
         ret = client.get(
             '/playlists',
-            q = request.json['query'],
+            q = query,
             limit = limit
         )
-        return _toJson(ret)
+    return _toJson(ret);
 
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
@@ -87,6 +95,10 @@ def auth_redirect():
     return resp
 
 # api functions
+@app.route("/friends", methods=['POST'])
+def get_friends():
+    return _sendQuery(request, RequestType.friends, 10)
+
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
     return _sendQuery(request, RequestType.tracks, 10)

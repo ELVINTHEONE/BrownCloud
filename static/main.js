@@ -39,6 +39,7 @@ function _getSoundCloudPlayerIFrame(track_id) {
     var widgetParams = '&color=ff6600&auto_play=false';
     return '<iframe class="sc_iframe" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track_id + widgetParams + '"></iframe>';
 }
+// Embed the SoundCloud player or toggle its visibility
 function playSound(div_id, track_id) {
     var embed = $("#" + div_id + " div.sc_player_embed span.sc_player");
     if (embed.children("iframe").length == 0) {
@@ -50,8 +51,12 @@ function playSound(div_id, track_id) {
         (embed.is(':visible') ? embed.hide() : embed.show());
     }
 }
+// Get the user's favorite tracks or toggle the user's favorite track visibility
+function getUserFavorites(item, divID) {
+
+}
 // create a list item for a track/playlist
-function createListItem(item, divID) {
+function createSoundListItem(item, divID) {
     return "<div id='" + divID + "'>" +
                 "<div>" +
                     "<h3>" + item.title + "</h3>" +
@@ -67,29 +72,52 @@ function createListItem(item, divID) {
                     "</span><br />" +
                     "<span>Created: " + item.created_at + "</span><br />" +
                     "<span>Genre: " + item.genre + "</span><br />" +
-                    "<span>Tags: " + item.tag_list + "</span><br />" +
+                    "<span>Tags: " + item.tag_list + "</span>" +
                 "</div>" +
                 "<div class='sc_player_embed'>"+
                     "<span class='sc_player'></span>" +
                 "</div>" +
             "</div>";
 }
-// tracks and playlists share the same data attributes, so a generic function is OK
+// create a list item for a user
+function createUserListItem(item, divID) {
+    return  "<div id='" + divID + "'>" +
+                "<span>" +
+                    "User " +
+                    "<a href='" + item.user.permalink_url + "' target='_blank'>" +
+                    item.user.username + " " +
+                    "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
+                    "</a>" +
+                "</span><br />" +
+                "<span>Real Name: " + item.full_name + "</span><br />" +
+                "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />" +
+                "<span>Website: <a href='" + item.website + "'>" + item.website-title + "</a></span><br />" +
+                "<span>City: " + item.city + "</span><br />" +
+                "<span>Country: " + item.country + "</span>" +
+            "</div>";
+}
+// query for friends (aka users) tracks and playlists
 function fetchAndAddToList(url, prefix, jqueryList) {
     var options = getOptions(prefix);
     if (options.query.length > 0) {
-        // reload the tracks based on the query string
+        // reload the data based on the query string
         $.post({
-            url: url, //base_uri + 'tracks'/'playlists'
+            url: url, //base_uri + 'friends'/'tracks'/'playlists'
             data: JSON.stringify(options),
             success: function(dataFromServer) {
                 // empty the list
                 jqueryList.empty();
                 // add the fetched data
+                var playSound = (prefix != 'friend');
                 for (var ix = 0; ix < dataFromServer.data.length; ix++) {
                     var item = dataFromServer.data[ix].obj;
                     var divID = ix + "_" + item.user.id + "_" + item.id;
-                    jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createListItem(item, divID) + "</li>");
+                    if (playSound) {
+                        jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
+                    }
+                    else {
+                        jqueryList.append("<li style='float:left;' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+                    }
                 }
             },
             contentType:"application/json",
