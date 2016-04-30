@@ -81,21 +81,26 @@ function createSoundListItem(item, divID) {
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
-    return  "<div id='" + divID + "'>" +
+    var div = "<div id='" + divID + "'>" +
                 "<span>" +
-                    "User " +
                     "<a href='" + item.permalink_url + "' target='_blank'>" +
-                    item.username + " " +
                     "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
+                    " " + item.username +
                     "</a>" +
-                    " " + item.description +
-                "</span><br />" +
-                "<span>Real Name: " + item.full_name + "</span><br />" +
-                "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />" +
-                "<span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />" +
-                "<span>City: " + item.city + "</span><br />" +
-                "<span>Country: " + item.country + "</span>" +
-            "</div>";
+                "</span><br />";
+    if (item.description)
+        div +=  " <span>About: " + item.description + "</span>";
+    if (item.full_name)
+        div += " <span>Real Name: " + item.full_name + "</span><br />";
+    div += " <span>Favorite Track Count: " + item.public_favorites_count + "</span><br />";
+    if (item.website && item.website_title)
+        div += " <span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />";
+    if (item.city)
+        div += " <span>City: " + item.city + "</span><br />";
+    if (item.country)
+        div += " <span>Country: " + item.country + "</span>";
+    div += "</div>";
+    return div;
 }
 // query for friends (aka users) tracks and playlists
 function fetchAndAddToList(url, prefix, jqueryList) {
