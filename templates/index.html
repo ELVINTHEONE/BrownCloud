@@ -56,36 +56,34 @@
 		}
 		function _getSoundCloudPlayerIFrame(track_id) {
 			var widgetParams = '&color=ff6600&auto_play=false';
-			return '<iframe class="sc_iframe" width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track_id + widgetParams + '"></iframe>';
+			return '<iframe class="sc_iframe" width="100%" height="8%" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track_id + widgetParams + '"></iframe>';
 		}
 		function playSound(div_id, track_id) {
-			var embed = $("#" + div_id + " div.sc_player_embed span");
+			var embed = $("#" + div_id + " p.sc_player_embed span");
 			embed.empty();
 			embed.append(_getSoundCloudPlayerIFrame(track_id));
 		}
 		// create a list item for a track/playlist
 		function createListItem(item) {
 				var divID = item.user.id + "" + item.id;
-				return "<div id='" + divID + "' style='width:100%' onclick='playSound(" + divID + ", " + item.id + ")'>" +
-                                "<div class='sc_player_embed' style='float:left; width:50%;'>" +
+				return "<div id='" + divID + "' style='height:10%; width:100%' onclick='playSound(" + divID + ", " + item.id + ")'>" +
+                                "<p class='sc_player_embed' style='float:left; width:50%;'>" +
                                     "<h2>" + item.title + "</h2>" +
                                     "<h4" + item.description + "</h4>" +
                                     "<span class='sc_player'></span>" +
-                                "</div>" +
-                                "<div style='float:right; width:50%'>" +
-                                    "<p>" +
-                                            "<span>" +
-                                                    "User " +
-                                                    "<a href='" + item.user.permalink_url + "' target='_blank'>" +
-                                                            item.user.username + " " +
-                                                            "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
-                                                    "</a>" +
-                                            "</span><br />" +
-                                            "<span>Created: " + item.created_at + "</span><br />" +
-                                            "<span>Genre: " + item.genre + "</span><br />" +
-                                            "<span>Tags: " + item.tag_list + "</span><br />" +
-                                    "</p>" +
-                                "</div>" +
+                                "</p>" +
+                                "<p style='float:right; width:50%'>" +
+										"<span>" +
+												"User " +
+												"<a href='" + item.user.permalink_url + "' target='_blank'>" +
+														item.user.username + " " +
+														"<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
+												"</a>" +
+										"</span><br />" +
+										"<span>Created: " + item.created_at + "</span><br />" +
+										"<span>Genre: " + item.genre + "</span><br />" +
+										"<span>Tags: " + item.tag_list + "</span><br />" +
+                                "</p>" +
 						"</div>";
 		}
 		// tracks and playlists share the same data attributes, so a generic function is OK
