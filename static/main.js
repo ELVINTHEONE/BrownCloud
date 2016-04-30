@@ -1,3 +1,9 @@
+function getTrackOptions() {
+    var opts = {
+
+    };
+    return opts;
+}
 function removeLastComma(str) {
     var s = str.trim();
     var ix = s.lastIndexOf(",");
@@ -21,26 +27,26 @@ function playSound(div_id, track_id) {
 // create a list item for a track/playlist
 function createListItem(item, divID) {
     return "<div id='" + divID + "'>" +
-        "<div>" +
-        "<h2>" + item.title + "</h2>" +
-        "<h4>" + item.description + "</h4>"  +
-        "</div>" +
-        "<div>" +
-        "<span>" +
-        "User " +
-        "<a href='" + item.user.permalink_url + "' target='_blank'>" +
-        item.user.username + " " +
-        "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
-        "</a>" +
-        "</span><br />" +
-        "<span>Created: " + item.created_at + "</span><br />" +
-        "<span>Genre: " + item.genre + "</span><br />" +
-        "<span>Tags: " + item.tag_list + "</span><br />" +
-        "</div>" +
-        "<div class='sc_player_embed'>"+
-        "<span class='sc_player'></span>" +
-        "</div>" +
-        "</div>";
+                "<div>" +
+                    "<h3>" + item.title + "</h3>" +
+                    "<p>" + item.description + "</p>"  +
+                "</div>" +
+                "<div>" +
+                    "<span>" +
+                        "User " +
+                        "<a href='" + item.user.permalink_url + "' target='_blank'>" +
+                            item.user.username + " " +
+                            "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
+                        "</a>" +
+                    "</span><br />" +
+                    "<span>Created: " + item.created_at + "</span><br />" +
+                    "<span>Genre: " + item.genre + "</span><br />" +
+                    "<span>Tags: " + item.tag_list + "</span><br />" +
+                "</div>" +
+                "<div class='sc_player_embed'>"+
+                    "<span class='sc_player'></span>" +
+                "</div>" +
+            "</div>";
 }
 // tracks and playlists share the same data attributes, so a generic function is OK
 function fetchAndAddToList(url, query, jqueryList) {
