@@ -61,13 +61,13 @@
 		function playSound(div_id, track_id) {
 			console.log("embedding the sound " + track_id);
 			var embed = $("#" + div_id + " div.sc_player_embed span.sc_player");
-			embed.empty();
-			embed.append(_getSoundCloudPlayerIFrame(track_id));
+			if (embed.children("input").length == 0) {
+                embed.append(_getSoundCloudPlayerIFrame(track_id));
+            }
 		}
 		// create a list item for a track/playlist
-		function createListItem(item) {
-			var divID = item.user.id + "" + item.id;
-			return "<div id='" + divID + "' style='width:100%' onclick='playSound(" + divID + ", " + item.id + ")'>" +
+		function createListItem(item, divID) {
+			return "<div id='" + divID + "' style='width:100%'>" +
 						"<div class='sc_player_embed' style='float:left; width:50%;'>" +
 							"<h2>" + item.title + "</h2>" +
 							"<h4>" + item.description + "</h4>" +
@@ -102,7 +102,8 @@
 						// add the fetched data
 						for (var ix = 0; ix < dataFromServer.data.length; ix++) {
 							var item = dataFromServer.data[ix].obj;
-							jqueryList.append("<li style='float:left; width:100%'>" + createListItem(item) + "</li>");
+                            var divID = item.user.id + "" + item.id;
+							jqueryList.append("<li style='float:left; width:100%' onclick='playSound(" + divID + ", " + item.id + ")'>" + createListItem(item) + "</li>");
 						}
 					},
 					contentType:"application/json",
