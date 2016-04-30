@@ -92,7 +92,7 @@ function createUserListItem(item, divID) {
                 "</span><br />" +
                 "<span>Real Name: " + item.full_name + "</span><br />" +
                 "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />" +
-                "<span>Website: <a href='" + item.website + "'>" + item.website-title + "</a></span><br />" +
+                "<span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />" +
                 "<span>City: " + item.city + "</span><br />" +
                 "<span>Country: " + item.country + "</span>" +
             "</div>";
