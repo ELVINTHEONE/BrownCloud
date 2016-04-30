@@ -6,9 +6,14 @@ div.page {
     align-content: center;
 }
 
+li {
+    padding: 2px;
+}
+
 li div div {
     width: 50%;
     float: left;
+    padding: 2px;
 }
 
 li div div + div {
