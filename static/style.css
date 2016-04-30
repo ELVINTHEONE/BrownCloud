@@ -13,6 +13,11 @@ ul {
 
 li {
     padding: 2px;
+    border: 1px solid black;
+}
+
+li:hover {
+    background-color: rgba(16, 67, 237, .5);
 }
 
 li div div {
