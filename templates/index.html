@@ -104,7 +104,7 @@
 						for (var ix = 0; ix < dataFromServer.data.length; ix++) {
 							var item = dataFromServer.data[ix].obj;
                             var divID = ix + "_" + item.user.id + "_" + item.id;
-							jqueryList.append("<li style='float:left; width:100%' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createListItem(item, divID) + "</li>");
+							jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createListItem(item, divID) + "</li>");
 						}
 					},
 					contentType:"application/json",
