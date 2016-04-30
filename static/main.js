@@ -2,7 +2,7 @@ function _getInputVal(prefix, id) {
     return $.trim($("input#" + prefix + "_" + id).val());
 }
 function _getCheckedRadioVal(divId) {
-    var checked = $(divId + " input[type=radio]:checked").first();
+    var checked = $(divId + " input[type=radio]:checked");
     return $.trim(checked.val());
 }
 function getOptions(prefix) {
@@ -10,8 +10,8 @@ function getOptions(prefix) {
     var opts = {
         query: _getInputVal(prefix, "search"),
         tags: _getInputVal(prefix, "tags"),
-        visibility: _getCheckedRadioVal(prefix + "_visibility"),
-        license: _getCheckedRadioVal(prefix + "_license"),
+        visibility: _getCheckedRadioVal("#" + prefix + "_visibility"),
+        license: _getCheckedRadioVal("#" + prefix + "_license"),
         bpmFrom: _getInputVal(prefix, "bpm_from"),
         bpmTo: _getInputVal(prefix, "bpm_to"),
         durationFrom: _getInputVal(prefix, "duration_from"),
@@ -19,7 +19,7 @@ function getOptions(prefix) {
         createdAtFrom: _getInputVal(prefix, "created_at_from"),
         createdAtTo: _getInputVal(prefix, "created_at_to"),
         genres: _getInputVal(prefix, "genres"),
-        type: _getCheckedRadioVal(prefix + "_type")
+        type: _getCheckedRadioVal("#" + prefix + "_type")
     };
     console.log('got options');
     console.log(JSON.stringify(opts));
