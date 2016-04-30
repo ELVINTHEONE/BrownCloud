@@ -49,7 +49,7 @@ def _sendQuery(request, type, limit):
             limit = limit
         )
         return _toJson(ret)
-    else if (type == RequestType.playlists):
+    elif (type == RequestType.playlists):
         ret = client.get(
             '/playlists',
             q = request.json['query']
