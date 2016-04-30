@@ -59,7 +59,6 @@
 			return '<iframe class="sc_iframe" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F' + track_id + widgetParams + '"></iframe>';
 		}
 		function playSound(div_id, track_id) {
-			console.log("embedding the sound " + track_id + " in div " + div_id);
 			var embed = $("#" + div_id + " div.sc_player_embed span.sc_player");
 			if (embed.children("iframe").length == 0) {
                 embed.append(_getSoundCloudPlayerIFrame(track_id));
@@ -105,7 +104,7 @@
 						for (var ix = 0; ix < dataFromServer.data.length; ix++) {
 							var item = dataFromServer.data[ix].obj;
                             var divID = ix + "_" + item.user.id + "_" + item.id;
-							jqueryList.append("<li style='float:left; width:100%' onclick='playSound(\"" + divID + "\", \"" + item.id + "\")'>" + createListItem(item, divID) + "</li>");
+							jqueryList.append("<li style='float:left; width:100%' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createListItem(item, divID) + "</li>");
 						}
 					},
 					contentType:"application/json",
