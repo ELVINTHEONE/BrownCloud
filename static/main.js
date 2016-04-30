@@ -81,24 +81,26 @@ function createSoundListItem(item, divID) {
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
-    var div = "<div id='" + divID + "'>" +
-                "<span>" +
-                    "<a href='" + item.permalink_url + "' target='_blank'>" +
-                    "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
-                    " " + item.username +
-                    "</a>" +
-                "</span><br />";
+    var div =   "<div id='" + divID + "'>" +
+                    "<div style='width:50%; float:left'>" +
+                        "<span>" +
+                            "<a href='" + item.permalink_url + "' target='_blank'>" +
+                            "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
+                            " " + item.username +
+                            "</a>" +
+                        "</span>" +
+                    "</div>";
     if (item.description)
-        div +=  " <span>About: " + item.description + "</span>";
+        div +=  "<span> About: " + item.description + "</span><br />";
     if (item.full_name)
-        div += " <span>Real Name: " + item.full_name + "</span><br />";
-    div += " <span>Favorite Track Count: " + item.public_favorites_count + "</span><br />";
+        div += "<span>Real Name: " + item.full_name + "</span><br />";
+    div += "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />";
     if (item.website && item.website_title)
-        div += " <span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />";
+        div += "<span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />";
     if (item.city)
-        div += " <span>City: " + item.city + "</span><br />";
+        div += "<span>City: " + item.city + "</span><br />";
     if (item.country)
-        div += " <span>Country: " + item.country + "</span>";
+        div += "<span>Country: " + item.country + "</span><br />";
     div += "</div>";
     return div;
 }
@@ -122,7 +124,7 @@ function fetchAndAddToList(url, prefix, jqueryList) {
                         jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
                     }
                     else {
-                        jqueryList.append("<li style='float:left;' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+                        jqueryList.append("<li style='float:left; width:50%' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
                     }
                 }
             },
