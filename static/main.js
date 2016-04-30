@@ -1,6 +1,24 @@
-function getTrackOptions() {
+function _getInputVal(prefix, id) {
+    return $.trim($("input#" + prefix + "_" + id).val());
+}
+function _getCheckedRadioVal(divId) {
+    var checked = $(divId + " input[type=radio]:checked").first();
+    return $.trim(checked.val());
+}
+function getOptions(prefix) {
     var opts = {
-
+        query: _getInputVal(prefix, "search"),
+        tags: _getInputVal(prefix, "tags"),
+        visibility: _getCheckedRadioVal(prefix + "_visibility"),
+        license: _getCheckedRadioVal(prefix + "_license"),
+        bpmFrom: _getInputVal(prefix, "bpm_from"),
+        bpmTo: _getInputVal(prefix, "bpm_to"),
+        durationFrom: _getInputVal(prefix, "duration_from"),
+        durationTo: _getInputVal(prefix, "duration_to"),
+        createdAtFrom: _getInputVal(prefix, "created_at_from"),
+        createdAtTo: _getInputVal(prefix, "created_at_to"),
+        genres: _getInputVal(prefix, "genres"),
+        type: _getCheckedRadioVal(prefix + "_type")
     };
     return opts;
 }
@@ -49,14 +67,12 @@ function createListItem(item, divID) {
             "</div>";
 }
 // tracks and playlists share the same data attributes, so a generic function is OK
-function fetchAndAddToList(url, query, jqueryList) {
+function fetchAndAddToList(url, prefix, jqueryList) {
     if (query.length > 0) {
         // reload the tracks based on the query string
         $.post({
             url: url, //base_uri + 'tracks'/'playlists'
-            data: JSON.stringify({
-                'query': query
-            }),
+            data: JSON.stringify(getOptions(prefix)),
             success: function(dataFromServer) {
                 // empty the list
                 jqueryList.empty();

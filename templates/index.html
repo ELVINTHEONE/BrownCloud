@@ -8,13 +8,13 @@
             <div id="track_filters">
                 <input type="text" id="track_search" placeholder="Search for tracks"/>
                 <input type="text" id="track_tags" placeholder="Tags"/>
-                <div class="track_visibility">
+                <div id="track_visibility">
                     <h4>Track Visibility</h4>
                     <input type="radio" id="track_visibility_all" name="all" value="all" checked="checked"><label for="track_visibility_all">All Tracks</label>
                     <input type="radio" id="track_visibility_public" name="public" value="public"><label for="track_visibility_public">Public Tracks</label>
                     <input type="radio" id="track_visibility_private" name="private" value="private"><label for="track_visibility_private">Private Tracks</label>
                 </div>
-                <div class="track_license">
+                <div id="track_license">
                     <h4><a href="https://en.wikipedia.org/wiki/Creative_Commons_license#Types_of_licenses" target="_blank"> Track License</a></h4>
                     <input type="radio" id="track_no_rights_reserved" name="no_rights_reserved" value="no_rights_reserved" checked="checked"><label for="track_no_rights_reserved">No Rights Reserved</label>
                     <input type="radio" id="track_all_rights_reserved" name="all_rights_reserved" value="all_rights_reserved"><label for="track_all_rights_reserved">All Rights Reserved</label>
@@ -32,7 +32,7 @@
                 <input type="text" id="track_duration_to" placeholder="Maximum Duration"/>
                 <input type="date" id="track_created_at_from" placeholder="Minimum Creation Date"/>
                 <input type="date" id="track_created_at_to" placeholder="Maximum Creation Date"/>
-                <div class="track_type">
+                <div id="track_type">
                     <h4>Track Type</h4>
                     <input type="radio" id="track_type_original" name="original" value="original"><label for="track_type_original">Original</label>
                     <input type="radio" id="track_type_remix" name="remix" value="remix"><label for="track_type_remix">Remix</label>
@@ -54,16 +54,16 @@
         <div class="searched_playlists" style="float: right; width:50%">
             <h3>Search for playlists</h3>
             <div id="playlist_filters">
-                <input type="text" id="playlist_search" placeholder="Search for tracks"/>
+                <input type="text" id="playlist_search" placeholder="Search for Playlists"/>
                 <input type="text" id="playlist_tags" placeholder="Tags"/>
-                <div class="track_visibility">
+                <div id="playlist_visibility">
                     <h4>Track Visibility</h4>
-                    <input type="radio" id="playlist_visibility_all" name="all" value="all" checked="checked"><label for="playlist_visibility_all">All Tracks</label>
-                    <input type="radio" id="playlist_visibility_public" name="public" value="public"><label for="playlist_visibility_public">Public Tracks</label>
-                    <input type="radio" id="playlist_visibility_private" name="private" value="private"><label for="playlist_visibility_private">Private Tracks</label>
+                    <input type="radio" id="playlist_visibility_all" name="all" value="all" checked="checked"><label for="playlist_visibility_all">All Playlists</label>
+                    <input type="radio" id="playlist_visibility_public" name="public" value="public"><label for="playlist_visibility_public">Public Playlists</label>
+                    <input type="radio" id="playlist_visibility_private" name="private" value="private"><label for="playlist_visibility_private">Private Playlists</label>
                 </div>
-                <div class="track_license">
-                    <h4><a href="https://en.wikipedia.org/wiki/Creative_Commons_license#Types_of_licenses" target="_blank"> Track License</a></h4>
+                <div id="playlist_license">
+                    <h4><a href="https://en.wikipedia.org/wiki/Creative_Commons_license#Types_of_licenses" target="_blank"> Playlist License</a></h4>
                     <input type="radio" id="playlist_no_rights_reserved" name="no_rights_reserved" value="no_rights_reserved" checked="checked"><label for="playlist_no_rights_reserved">No Rights Reserved</label>
                     <input type="radio" id="playlist_all_rights_reserved" name="all_rights_reserved" value="all_rights_reserved"><label for="playlist_all_rights_reserved">All Rights Reserved</label>
                     <input type="radio" id="playlist_cc_by" name="cc_by" value="cc_by"><label for="playlist_cc_by">Creative Commons License (BY)</label>
@@ -80,8 +80,8 @@
                 <input type="text" id="playlist_duration_to" placeholder="Maximum Duration"/>
                 <input type="date" id="playlist_created_at_from" placeholder="Minimum Creation Date"/>
                 <input type="date" id="playlist_created_at_to" placeholder="Maximum Creation Date"/>
-                <div class="track_type">
-                    <h4>Track Type</h4>
+                <div id="playlist_type">
+                    <h4>Playlist Type</h4>
                     <input type="radio" id="playlist_type_original" name="original" value="original"><label for="playlist_type_original">Original</label>
                     <input type="radio" id="playlist_type_remix" name="remix" value="remix"><label for="playlist_type_remix">Remix</label>
                     <input type="radio" id="playlist_type_live" name="live" value="live"><label for="playlist_type_live">Live</label>
@@ -141,8 +141,8 @@
 			$("#track_search").onDelayedKeyup({
 				handler: function() {
 					fetchAndAddToList(
-						base_uri + 'tracks',
-						$.trim($(this).val()),
+						base_uri + "tracks",
+						"track",
 						$("ul#fetched_tracks")
 					)
 				}
@@ -150,8 +150,8 @@
 			$("#playlist_search").onDelayedKeyup({
 				handler: function() {
 					fetchAndAddToList(
-						base_uri + 'playlists',
-						$.trim($(this).val()),
+						base_uri + "playlists",
+						"playlist",
 						$("ul#fetched_playlists")
 					)
 				}
