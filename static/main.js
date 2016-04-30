@@ -57,11 +57,12 @@ function getUserFavorites(item, divID) {
 }
 // create a list item for a track/playlist
 function createSoundListItem(item, divID) {
-    return "<div id='" + divID + "'>" +
+    var div =   "<div id='" + divID + "'>" +
                 "<div>" +
-                    "<h3>" + item.title + "</h3>" +
-                    "<p>" + item.description + "</p>"  +
-                "</div>" +
+                    "<h3>" + item.title + "</h3>";
+    if (item.description)
+        div += "<p>" + item.description + "</p>";
+    div += "</div>" +
                 "<div>" +
                     "<span>" +
                         "User " +
@@ -70,14 +71,17 @@ function createSoundListItem(item, divID) {
                             "<img src='"+ item.user.avatar_url + "' alt='" + item.user.username + " avatar '>" +
                         "</a>" +
                     "</span><br />" +
-                    "<span>Created: " + item.created_at + "</span><br />" +
-                    "<span>Genre: " + item.genre + "</span><br />" +
-                    "<span>Tags: " + item.tag_list + "</span>" +
-                "</div>" +
+                    "<span>Created: " + item.created_at + "</span><br />";
+    if (item.genre)
+        div += "<span>Genre: " + item.genre + "</span><br />";
+    if (item.tag_list)
+        div += "<span>Tags: " + item.tag_list + "</span>";
+    div += "</div>" +
                 "<div class='sc_player_embed'>"+
                     "<span class='sc_player'></span>" +
                 "</div>" +
             "</div>";
+    return div;
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
