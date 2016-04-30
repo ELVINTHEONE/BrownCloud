@@ -5,3 +5,19 @@ body {
 div.page {
     align-content: center;
 }
+
+li div div {
+    width: 50%;
+    float: left;
+}
+
+li div div + div {
+    float: right;
+}
+
+iframe.sc_iframe {
+    width: 100%;
+    height: 166px;
+    scrolling: no;
+    frameborder: no;
+}
