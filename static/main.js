@@ -68,11 +68,12 @@ function createListItem(item, divID) {
 }
 // tracks and playlists share the same data attributes, so a generic function is OK
 function fetchAndAddToList(url, prefix, jqueryList) {
-    if (query.length > 0) {
+    var options = getOptions(prefix);
+    if (options.query.length > 0) {
         // reload the tracks based on the query string
         $.post({
             url: url, //base_uri + 'tracks'/'playlists'
-            data: JSON.stringify(getOptions(prefix)),
+            data: JSON.stringify(),
             success: function(dataFromServer) {
                 // empty the list
                 jqueryList.empty();
