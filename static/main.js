@@ -125,7 +125,7 @@ function fetchAndAddToList(url, prefix, jqueryList) {
                         jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
                     }
                     else {
-                        jqueryList.append("<li style='width:50%' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+                        jqueryList.append("<li style='float:left; width:50%' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
                     }
                 }
             },
