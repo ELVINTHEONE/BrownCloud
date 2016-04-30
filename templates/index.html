@@ -68,7 +68,7 @@
 		// create a list item for a track/playlist
 		function createListItem(item, divID) {
 			return "<div id='" + divID + "'>" +
-						"<div class='sc_player_embed'>" +
+						"<div>" +
 							"<h2>" + item.title + "</h2>" +
 							"<h4>" + item.description + "</h4>" +
 							"<span class='sc_player'></span>" +
@@ -85,6 +85,7 @@
 							"<span>Genre: " + item.genre + "</span><br />" +
 							"<span>Tags: " + item.tag_list + "</span><br />" +
 						"</div>" +
+                        "<div class='sc_player_embed'></div>" +
 				"</div>";
 		}
 		// tracks and playlists share the same data attributes, so a generic function is OK
