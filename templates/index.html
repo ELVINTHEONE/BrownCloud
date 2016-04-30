@@ -66,7 +66,7 @@
 		// create a list item for a track/playlist
 		function createListItem(item) {
 				var divID = item.user.id + "" + item.id;
-				return "<div id='" + divID + "' style='height:10%; width:100%' onclick='playSound(" + divID + ", " + item.id + ")'>" +
+				return "<p id='" + divID + "' style='height:10%; width:100%' onclick='playSound(" + divID + ", " + item.id + ")'>" +
                                 "<p class='sc_player_embed' style='float:left; width:50%;'>" +
                                     "<h2>" + item.title + "</h2>" +
                                     "<h4" + item.description + "</h4>" +
@@ -84,7 +84,7 @@
 										"<span>Genre: " + item.genre + "</span><br />" +
 										"<span>Tags: " + item.tag_list + "</span><br />" +
                                 "</p>" +
-						"</div>";
+						"</p>";
 		}
 		// tracks and playlists share the same data attributes, so a generic function is OK
 		function fetchAndAddToList(url, query, jqueryList) {
