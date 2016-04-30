@@ -22,6 +22,28 @@ def _getAccessToken(request):
 def _toJson(list):
     return json.dumps(list, default=lambda o: o.__dict__)
 
+# send a request to SoundCloud
+def _sendQuery(request, type, limit):
+    # spawn a generic client
+    client = _getGenericClient()
+    ret = client.get(
+        type,
+        q = request.json['query'],
+        tags = request.json['tags'],
+        filter = request.json['visibility'],
+        license = request.json['license'],
+        bpm_from = request.json['bpmFrom'],
+        bpm_to = request.json['bpmTo'],
+        duration_from = request.json['durationFrom'],
+        duration_to = request.json['durationTo'],
+        created_at_from = request.json['createdAtFrom'],
+        created_at_to = request.json['createdAtTo'],
+        genres = request.json['genres'],
+        types = request.json['type'],
+        limit = limit
+    )
+    return _toJson(ret)
+
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
 #def before_request():
@@ -54,29 +76,11 @@ def auth_redirect():
 # api functions
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
-    # spawn a generic client
-    client = _getGenericClient()
-    # get the query string
-    query = request.json['query']
-    print("got query " + query)
-    # query the tracks
-    tracks = client.get('/tracks', q=query, limit=10)
-    # jsonify the tracks
-    print("sending response")
-    return _toJson(tracks)
+    return _sendQuery(request, '/tracks', 10)
 
 @app.route("/playlists", methods=['POST'])
 def get_playlists():
-    # spawn a generic client
-    client = _getGenericClient()
-    # get the query string
-    query = request.json['query']
-    print("got query " + query)
-    # query the tracks
-    tracks = client.get('/tracks', q=query, limit=10)
-    # jsonify the tracks
-    print("sending response")
-    return _toJson(tracks)
+    return _sendQuery(request, '/playlists', 10)
 
 if __name__ == '__main__':
     app.run(debug=True)

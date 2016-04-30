@@ -6,24 +6,29 @@ function _getCheckedRadioVal(divId) {
     return $.trim(checked.val());
 }
 function getOptions(prefix) {
-    console.log('getting options');
-    var opts = {
-        query: _getInputVal(prefix, "search"),
-        tags: _getInputVal(prefix, "tags"),
-        visibility: _getCheckedRadioVal("#" + prefix + "_visibility"),
-        license: _getCheckedRadioVal("#" + prefix + "_license"),
-        bpmFrom: _getInputVal(prefix, "bpm_from"),
-        bpmTo: _getInputVal(prefix, "bpm_to"),
-        durationFrom: _getInputVal(prefix, "duration_from"),
-        durationTo: _getInputVal(prefix, "duration_to"),
-        createdAtFrom: _getInputVal(prefix, "created_at_from"),
-        createdAtTo: _getInputVal(prefix, "created_at_to"),
-        genres: _getInputVal(prefix, "genres"),
-        type: _getCheckedRadioVal("#" + prefix + "_type")
-    };
-    console.log('got options');
-    console.log(JSON.stringify(opts));
-    return opts;
+    if (prefix == 'track') {
+        var opts = {
+            query: _getInputVal(prefix, "search"),
+            tags: _getInputVal(prefix, "tags"),
+            visibility: _getCheckedRadioVal("#" + prefix + "_visibility"),
+            license: _getCheckedRadioVal("#" + prefix + "_license"),
+            bpmFrom: _getInputVal(prefix, "bpm_from"),
+            bpmTo: _getInputVal(prefix, "bpm_to"),
+            durationFrom: _getInputVal(prefix, "duration_from"),
+            durationTo: _getInputVal(prefix, "duration_to"),
+            createdAtFrom: _getInputVal(prefix, "created_at_from"),
+            createdAtTo: _getInputVal(prefix, "created_at_to"),
+            genres: _getInputVal(prefix, "genres"),
+            type: _getCheckedRadioVal("#" + prefix + "_type")
+        };
+        return opts;
+    }
+    else {
+        opts = {
+            query: _getInputVal(prefix, "search")
+        };
+        return opts;
+    }
 }
 function removeLastComma(str) {
     var s = str.trim();
