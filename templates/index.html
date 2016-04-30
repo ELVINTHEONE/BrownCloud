@@ -102,7 +102,7 @@
 						// add the fetched data
 						for (var ix = 0; ix < dataFromServer.data.length; ix++) {
 							var item = dataFromServer.data[ix].obj;
-                            var divID = item.user.id + "" + item.id;
+                            var divID = ix + "_" + item.user.id + "_" + item.id;
 							jqueryList.append("<li style='float:left; width:100%' onclick='playSound(" + divID + ", " + item.id + ")'>" + createListItem(item, divID) + "</li>");
 						}
 					},
