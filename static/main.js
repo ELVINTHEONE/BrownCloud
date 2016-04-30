@@ -6,6 +6,7 @@ function _getCheckedRadioVal(divId) {
     return $.trim(checked.val());
 }
 function getOptions(prefix) {
+    console.log('getting options');
     var opts = {
         query: _getInputVal(prefix, "search"),
         tags: _getInputVal(prefix, "tags"),
@@ -20,6 +21,8 @@ function getOptions(prefix) {
         genres: _getInputVal(prefix, "genres"),
         type: _getCheckedRadioVal(prefix + "_type")
     };
+    console.log('got options');
+    console.log(JSON.stringify(opts));
     return opts;
 }
 function removeLastComma(str) {
@@ -73,7 +76,7 @@ function fetchAndAddToList(url, prefix, jqueryList) {
         // reload the tracks based on the query string
         $.post({
             url: url, //base_uri + 'tracks'/'playlists'
-            data: JSON.stringify(),
+            data: JSON.stringify(options),
             success: function(dataFromServer) {
                 // empty the list
                 jqueryList.empty();

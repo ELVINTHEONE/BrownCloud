@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c32ec799-d3e5-4204-9af7-5c3d5cd5f8c9" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/main.js" afterPath="$PROJECT_DIR$/static/main.js" />
     </list>
     <ignored path="BrownCloud.iws" />
@@ -23,7 +24,7 @@
     <favorites_list name="BrownCloud" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.32817152">
+    <splitter split-orientation="horizontal" split-proportion="0.47170934">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
@@ -69,14 +70,14 @@
           <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/static/main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="543">
-                  <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+                <state relative-caret-position="1263">
+                  <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
                   <folding>
-                    <marker date="1462038884728" expanded="true" signature="1882:2859" placeholder="..." />
-                    <marker date="1462038884728" expanded="true" signature="1908:2017" placeholder="..." />
-                    <marker date="1462038884728" expanded="true" signature="1908:2044" placeholder="..." />
-                    <marker date="1462038884728" expanded="true" signature="2070:2704" placeholder="..." />
-                    <marker date="1462038884728" expanded="true" signature="3656:3667" placeholder="..." />
+                    <marker date="1462039026492" expanded="true" signature="1989:2966" placeholder="..." />
+                    <marker date="1462039026492" expanded="true" signature="2015:2124" placeholder="..." />
+                    <marker date="1462039026492" expanded="true" signature="2015:2151" placeholder="..." />
+                    <marker date="1462039026492" expanded="true" signature="2177:2811" placeholder="..." />
+                    <marker date="1462039026492" expanded="true" signature="3770:3781" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -298,12 +299,12 @@
       <workItem from="1461974032736" duration="351000" />
       <workItem from="1461974402260" duration="115000" />
       <workItem from="1461974536933" duration="26000" />
-      <workItem from="1461974593692" duration="11875000" />
+      <workItem from="1461974593692" duration="12018000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36370000" />
+    <option name="totallyTimeSpent" value="36513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -544,14 +545,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+        <state relative-caret-position="1263">
+          <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
           <folding>
-            <marker date="1462038884728" expanded="true" signature="1882:2859" placeholder="..." />
-            <marker date="1462038884728" expanded="true" signature="1908:2017" placeholder="..." />
-            <marker date="1462038884728" expanded="true" signature="1908:2044" placeholder="..." />
-            <marker date="1462038884728" expanded="true" signature="2070:2704" placeholder="..." />
-            <marker date="1462038884728" expanded="true" signature="3656:3667" placeholder="..." />
+            <marker date="1462039026492" expanded="true" signature="1989:2966" placeholder="..." />
+            <marker date="1462039026492" expanded="true" signature="2015:2124" placeholder="..." />
+            <marker date="1462039026492" expanded="true" signature="2015:2151" placeholder="..." />
+            <marker date="1462039026492" expanded="true" signature="2177:2811" placeholder="..." />
+            <marker date="1462039026492" expanded="true" signature="3770:3781" placeholder="..." />
           </folding>
         </state>
       </provider>
