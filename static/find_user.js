@@ -48,42 +48,46 @@ function selectUser(item, divID) {
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
-    var div =   "<div id='" + divID + "'>" +
-            "<div class='col-md-6'>" +
-                "<span>" +
-                    "<a href='" + item.permalink_url + "' target='_blank'>" +
-                        "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
-                        " " + item.username +
-                    "</a>" +
-                "</span>" +
-                "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
-                "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
+    var div =   "<div id='" + divID + "' class='container'>" +
+            "<div class='row'>" +
+                "<div class='col-md-6'>" +
+                    "<span>" +
+                        "<a href='" + item.permalink_url + "' target='_blank'>" +
+                            "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
+                            " " + item.username +
+                        "</a>" +
+                    "</span>" +
+                    "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
+                    "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
+                "</div>" +
+            "<div class='col-md-6'>";
+        if (item.description)
+            div +=  "<span> About: " + item.description + "</span><br />";
+        if (item.full_name)
+            div += "<span>Real Name: " + item.full_name + "</span><br />";
+        if (item.public_favorites_count > 0)
+            div += "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />";
+        div += "<span>Tracks Created: " + item.track_count + "</span><br />";
+        div += "<span>Playlists Created: " + item.playlist_count + "</span><br />";
+        div += "<span>Followers: " + item.followers_count + "</span><br />";
+        div += "<span>Following: " + item.followings_count + "</span><br />";
+        if (item.website && item.website_title)
+            div += "<span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />";
+        if (item.city)
+            div += "<span>City: " + item.city + "</span><br />";
+        if (item.country)
+            div += "<span>Country: " + item.country + "</span><br />";
+        div +=  "</div>" +
             "</div>" +
-        "<div class='col-md-6'>";
-    if (item.description)
-        div +=  "<span> About: " + item.description + "</span><br />";
-    if (item.full_name)
-        div += "<span>Real Name: " + item.full_name + "</span><br />";
-    if (item.public_favorites_count > 0)
-        div += "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />";
-    div += "<span>Tracks Created: " + item.track_count + "</span><br />";
-    div += "<span>Playlists Created: " + item.playlist_count + "</span><br />";
-    div += "<span>Followers: " + item.followers_count + "</span><br />";
-    div += "<span>Following: " + item.followings_count + "</span><br />";
-    if (item.website && item.website_title)
-        div += "<span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />";
-    if (item.city)
-        div += "<span>City: " + item.city + "</span><br />";
-    if (item.country)
-        div += "<span>Country: " + item.country + "</span><br />";
-    div +=  "</div>" +
-            "<div class='favorite_tracks col-md-6'>" +
-                "<h3>Favorite tracks</h3>" +
-                "<ul></ul>" +
-            "</div>" +
-            "<div class='playlists col-md-6'>" +
-                "<h3>User playlists</h3>" +
-                "<ul></ul>" +
+            "<div class='row'>" +
+                "<div class='favorite_tracks col-md-6'>" +
+                    "<h3>Favorite tracks</h3>" +
+                    "<ul></ul>" +
+                "</div>" +
+                "<div class='playlists col-md-6'>" +
+                    "<h3>User playlists</h3>" +
+                    "<ul></ul>" +
+                "</div>" +
             "</div>" +
         "</div>";
     return div;
