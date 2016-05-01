@@ -1,10 +1,39 @@
+function getUserData(request, user_id, jqueryList) {
+    var base_uri = "http://brown-cloud.herokuapp.com/";
+    $.post({
+        url: base_uri + request,
+        data: JSON.stringify({
+            user_id: user_id
+        }),
+        success: function(dataFromServer) {
+            // empty the list
+            jqueryList.empty();
+            // add the fetched data
+            for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+                var item = dataFromServer.data[ix].obj;
+                var divID = ix + "_" + item.id;
+                jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
+            }
+        },
+        contentType:"application/json",
+        dataType: 'json'
+    });
+}
 // Get the user's favorite tracks or toggle the user's favorite track visibility
 function getUserFavorites(item, divID) {
-
+    getUserData(
+        'user_favorites',
+        item.id,
+        $("#" + divID + " ul")
+    );
 }
 // Get the user's favorite playlists or toggle their favorite playlist visibility
 function getUserPlaylists(item, divID) {
-    
+    getUserData(
+        'user_playlists',
+        item.id,
+        $("#" + divID + " ul")
+    );
 }
 function selectUser(item, divID) {
     var prevSelected = $("ul#fetched_friends li.selectedUser");
@@ -44,6 +73,17 @@ function createUserListItem(item, divID) {
         div += "<span>City: " + item.city + "</span><br />";
     if (item.country)
         div += "<span>Country: " + item.country + "</span><br />";
-    div += "</div></div>";
+    div +=  "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item + "\", \"" + divID +"\")'/><br />" +
+            "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item + "\", \"" + divID +"\")'/><br />" +
+            "</div>" +
+            "<div class='favorite_tracks'>" +
+                "<h3>Favorite tracks</h3>" +
+                "<ul></ul>" +
+            "</div>" +
+            "<div class='playlists'>" +
+                "<h3>User playlists</h3>" +
+                "<ul></ul>" +
+            "</div>" +
+        "</div>";
     return div;
 }

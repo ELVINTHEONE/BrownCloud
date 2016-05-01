@@ -72,7 +72,6 @@
             var item = dataFromServer.data[ix].obj;
             var divID = ix + "_" + item.user.id + "_" + item.id;
             jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
-            //jqueryList.append("<li style='float:left;' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
         }
     }
     $(document).ready(function() {
