@@ -104,7 +104,7 @@ function createUserListItem(item, divID) {
     div += "<span>Tracks Created: " + item.track_count + "</span><br />";
     div += "<span>Playlists Created: " + item.playlist_count + "</span><br />";
     div += "<span>Followers: " + item.followers_count + "</span><br />";
-    div += "<span>Following: " + item.following_count + "</span><br />";
+    div += "<span>Following: " + item.followings_count + "</span><br />";
     if (item.website && item.website_title)
         div += "<span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />";
     if (item.city)
