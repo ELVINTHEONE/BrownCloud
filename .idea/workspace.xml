@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c32ec799-d3e5-4204-9af7-5c3d5cd5f8c9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/date_pick_div.html" afterPath="$PROJECT_DIR$/templates/date_pick_div.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
     </list>
     <ignored path="BrownCloud.iws" />
@@ -318,12 +317,12 @@
       <workItem from="1461974032736" duration="351000" />
       <workItem from="1461974402260" duration="115000" />
       <workItem from="1461974536933" duration="26000" />
-      <workItem from="1461974593692" duration="26690000" />
+      <workItem from="1461974593692" duration="26766000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51185000" />
+    <option name="totallyTimeSpent" value="51261000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
