@@ -21,19 +21,19 @@ function getUserData(request, user_id, jqueryList) {
     });
 }
 // Get the user's favorite tracks or toggle the user's favorite track visibility
-function getUserFavorites(user_id, ulID) {
+function getUserFavorites(user_id, listSel) {
     getUserData(
         'user_favorites',
         user_id,
-        $("ul." + ulID)
+        $(listSel)
     );
 }
 // Get the user's favorite playlists or toggle their favorite playlist visibility
-function getUserPlaylists(user_id, ulID) {
+function getUserPlaylists(user_id, listSel) {
     getUserData(
         'user_playlists',
         user_id,
-        $("ul." + ulID)
+        $(listSel)
     );
 }
 function selectUser(item, divID) {
