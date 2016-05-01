@@ -27,14 +27,16 @@ li div {
     width: 98%;
 }
 
-li div div {
+li div.float_left {
     width: 47%;
     float: left;
     padding: 2px;
 }
 
-li div div + div {
+li div.float_right {
+    width: 47%;
     float: right;
+    padding: 2px;
 }
 
 li div.sc_player_embed {

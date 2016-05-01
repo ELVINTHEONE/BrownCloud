@@ -49,7 +49,7 @@ function selectUser(item, divID) {
 // create a list item for a user
 function createUserListItem(item, divID) {
     var div =   "<div id='" + divID + "'>" +
-            "<div>" +
+            "<div class='float_left'>" +
                 "<span>" +
                     "<a href='" + item.permalink_url + "' target='_blank'>" +
                         "<img src='"+ item.avatar_url + "' alt='" + item.username + " avatar '>" +
@@ -59,7 +59,7 @@ function createUserListItem(item, divID) {
                 "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
                 "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
             "</div>" +
-        "<div>";
+        "<div class='float_right'>";
     if (item.description)
         div +=  "<span> About: " + item.description + "</span><br />";
     if (item.full_name)
@@ -78,11 +78,11 @@ function createUserListItem(item, divID) {
         div += "<span>Country: " + item.country + "</span><br />";
     div +=  "</div>"  +
         "</div>"+
-        "<div class='favorite_tracks' style='width:47%; float:left; padding:2px'>" +
+        "<div class='favorite_tracks float_left'>" +
             "<h3>Favorite tracks</h3>" +
             "<ul></ul>" +
         "</div>" +
-        "<div class='playlists' style='width:47%; float:right; padding:2px'>" +
+        "<div class='playlists float_right'>" +
             "<h3>User playlists</h3>" +
             "<ul></ul>" +
         "</div>";

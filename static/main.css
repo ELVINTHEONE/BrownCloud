@@ -1,0 +1,9 @@
+li div div {
+    width: 47%;
+    float: left;
+    padding: 2px;
+}
+
+li div div + div {
+    float: right;
+}
