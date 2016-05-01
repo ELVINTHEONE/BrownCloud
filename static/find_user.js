@@ -48,6 +48,8 @@ function selectUser(item, divID) {
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
+    var favoritesSel = "#" + divID + " ul.favorite_tracks";
+    var playlistsSel = "#" + divID + " ul.favorite_playlists";
     var div =   "<div id='" + divID + "'>" +
             "<div class='row'>" +
                 "<div class='col-md-6'>" +
@@ -57,8 +59,8 @@ function createUserListItem(item, divID) {
                             " " + item.username +
                         "</a>" +
                     "</span>" +
-                    "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"favorite_tracks\")'/><br />" +
-                    "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"playlists\")'/><br />" +
+                    "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"" + favoritesSel + "\")'/><br />" +
+                    "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"" + playlistsSel + "\")'/><br />" +
                 "</div>" +
             "<div class='col-md-6'>";
         if (item.description)
