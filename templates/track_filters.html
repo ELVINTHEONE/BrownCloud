@@ -28,13 +28,9 @@
     <input type="text" id="track_duration_from" placeholder="Minimum Duration (seconds)"/>
     <input type="text" id="track_duration_to" placeholder="Maximum Duration (seconds)"/>
     <label for="track_created_at_from">Minimum Track Creation Date</label>
-    {{ dp.datepick("track_created_at_from", year) }}
-    <!--{{ dp.datepick("track_created_at_from", year) }}-->
+    {% call dp.datepick("track_created_at_from", year) %}
     <label for="track_created_at_to">Maximum Track Creation Date</label>
-    {{ dp.datepick("track_created_at_to", year) }}
-    <!--{{ dp.datepick("track_created_at_to", year) }}-->
-    <!--<input type="date" id="track_created_at_from" placeholder="Minimum Creation Date"/>-->
-    <!--<input type="date" id="track_created_at_to" placeholder="Maximum Creation Date"/>-->
+    {% call dp.datepick("track_created_at_to", year) %}
     <div id="track_type">
         <h4>Track Type</h4>
         <input type="radio" id="track_type_original" name="track_type_group" value="original" checked="checked"><label for="track_type_original">Original</label>
