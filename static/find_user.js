@@ -48,8 +48,8 @@ function selectUser(item, divID) {
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
-    var favoritesSel = "#" + divID + " ul.favorite_tracks";
-    var playlistsSel = "#" + divID + " ul.favorite_playlists";
+    var favoritesSel = "#" + divID + " div.favorite_tracks ul";
+    var playlistsSel = "#" + divID + " div.favorite_playlists ul";
     var div =   "<div id='" + divID + "'>" +
             "<div class='row'>" +
                 "<div class='col-md-6'>" +
