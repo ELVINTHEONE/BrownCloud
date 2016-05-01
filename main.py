@@ -83,7 +83,7 @@ def _sendQuery(request, type, limit):
     #pass
 
 @app.errorhandler(500)
-def fuckkkkkkkkkkk(ex):
+def print_err(ex):
     print(ex)
     track = get_current_traceback(skip=1, show_hidden_frames=True, ignore_system_exceptions=False)
     track.log()

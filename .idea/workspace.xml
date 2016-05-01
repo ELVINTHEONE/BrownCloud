@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c32ec799-d3e5-4204-9af7-5c3d5cd5f8c9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/date_pick_div.html" afterPath="$PROJECT_DIR$/templates/date_pick_div.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/main.js" afterPath="$PROJECT_DIR$/static/main.js" />
     </list>
     <ignored path="BrownCloud.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -88,33 +88,33 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/static/main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-990">
-                  <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+                <state relative-caret-position="720">
+                  <caret line="106" column="27" selection-start-line="106" selection-start-column="27" selection-end-line="106" selection-end-column="27" />
                   <folding>
-                    <marker date="1462061478713" expanded="true" signature="2355:3364" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="2381:2510" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="2381:2530" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="2556:3209" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="3502:3879" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="3502:3880" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="3561:3879" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="3567:3879" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="3653:3843" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="5488:5499" placeholder="..." />
-                    <marker date="1462061478713" expanded="true" signature="5727:5738" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="2355:3364" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="2381:2510" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="2381:2530" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="2556:3209" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="3502:3879" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="3502:3880" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="3561:3879" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="3567:3879" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="3653:3843" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="5809:5820" placeholder="..." />
+                    <marker date="1462115640523" expanded="true" signature="6048:6059" placeholder="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="678">
-                  <caret line="107" column="55" selection-start-line="107" selection-start-column="55" selection-end-line="107" selection-end-column="55" />
+                <state relative-caret-position="282">
+                  <caret line="85" column="4" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
                   <folding />
                 </state>
               </provider>
@@ -153,11 +153,11 @@
         <option value="$PROJECT_DIR$/templates/layout.html" />
         <option value="$PROJECT_DIR$/public/scripts/main.js" />
         <option value="$PROJECT_DIR$/static/style.css" />
-        <option value="$PROJECT_DIR$/static/main.js" />
         <option value="$PROJECT_DIR$/templates/track_filters.html" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/templates/date_pick_div.html" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/static/main.js" />
       </list>
     </option>
   </component>
@@ -330,12 +330,12 @@
       <workItem from="1461974032736" duration="351000" />
       <workItem from="1461974402260" duration="115000" />
       <workItem from="1461974536933" duration="26000" />
-      <workItem from="1461974593692" duration="30873000" />
+      <workItem from="1461974593692" duration="31399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55368000" />
+    <option name="totallyTimeSpent" value="55894000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -588,31 +588,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/main.js">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-990">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <marker date="1462061478713" expanded="true" signature="2355:3364" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="2381:2510" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="2381:2530" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="2556:3209" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="3502:3879" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="3502:3880" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="3561:3879" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="3567:3879" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="3653:3843" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="5488:5499" placeholder="..." />
-            <marker date="1462061478713" expanded="true" signature="5727:5738" placeholder="..." />
-          </folding>
+        <state relative-caret-position="282">
+          <caret line="85" column="4" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/static/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="107" column="55" selection-start-line="107" selection-start-column="55" selection-end-line="107" selection-end-column="55" />
-          <folding />
+        <state relative-caret-position="720">
+          <caret line="106" column="27" selection-start-line="106" selection-start-column="27" selection-end-line="106" selection-end-column="27" />
+          <folding>
+            <marker date="1462115640523" expanded="true" signature="2355:3364" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="2381:2510" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="2381:2530" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="2556:3209" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="3502:3879" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="3502:3880" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="3561:3879" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="3567:3879" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="3653:3843" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="5809:5820" placeholder="..." />
+            <marker date="1462115640523" expanded="true" signature="6048:6059" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

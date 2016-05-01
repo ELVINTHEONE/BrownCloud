@@ -99,7 +99,12 @@ function createUserListItem(item, divID) {
         div +=  "<span> About: " + item.description + "</span><br />";
     if (item.full_name)
         div += "<span>Real Name: " + item.full_name + "</span><br />";
-    div += "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />";
+    if (item.public_favorites_count > 0)
+        div += "<span>Favorite Track Count: " + item.public_favorites_count + "</span><br />";
+    div += "<span>Tracks Created: " + item.track_count + "</span>";
+    div += "<span>Playlists Created: " + item.playlist_count + "</span>";
+    div += "<span>Followers: " + item.followers_count + "</span>";
+    div += "<span>Following: " + item.following_count + "</span>";
     if (item.website && item.website_title)
         div += "<span>Website: <a href='" + item.website + "'>" + item.website_title + "</a></span><br />";
     if (item.city)
