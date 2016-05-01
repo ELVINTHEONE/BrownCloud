@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% import "date_pick_div.html" as dp %}
+{% import "track_filters.html" as tf %}
 
 {% block body %}
 <div>
@@ -11,55 +11,7 @@
         </div>
         <div class="searched_tracks" style="float: left; width: 50%;">
             <h3>Search for tracks</h3>
-            <div id="track_filters">
-                <input type="text" id="track_search" placeholder="Search for tracks"/>
-                <input type="text" id="track_tags" placeholder="Tags"/>
-                <div id="track_visibility">
-                    <h4>Track Visibility</h4>
-                    <input type="radio" id="track_visibility_all" name="track_visibility_group" value="all" checked="checked"><label for="track_visibility_all">All Tracks</label>
-                    <input type="radio" id="track_visibility_public" name="track_visibility_group" value="public"><label for="track_visibility_public">Public Tracks</label>
-                    <input type="radio" id="track_visibility_private" name="track_visibility_group" value="private"><label for="track_visibility_private">Private Tracks</label>
-                </div>
-                <div id="track_license">
-                    <h4><a href="https://en.wikipedia.org/wiki/Creative_Commons_license#Types_of_licenses" target="_blank"> Track License</a></h4>
-                    <input type="radio" id="track_to_share" name="track_license_group" value="to_share" checked="checked"><label for="track_to_share">To Share</label>
-                    <input type="radio" id="track_to_use_commercially" name="track_license_group" value="to_use_commercially"><label for="track_to_use_commercially">To Use Commercially</label>
-                    <input type="radio" id="track_to_modify_commercially" name="track_license_group" value="to_modify_commercially"><label for="track_to_modify_commercially">To Modify Commercially</label>
-                    <input type="radio" id="track_cc_by" name="track_license_group" value="cc-by"><label for="track_cc_by">Creative Commons License (BY)</label>
-                    <input type="radio" id="track_cc_by_nd" name="track_license_group" value="cc-by-nd"><label for="track_cc_by_nd">Creative Commons License (BY-ND)</label>
-                    <input type="radio" id="track_cc_by_sa" name="track_license_group" value="cc-by-sa"><label for="track_cc_by_sa">Creative Commons License (BY-SA)</label>
-                    <input type="radio" id="track_cc_by_nc_nd" name="track_license_group" value="cc-by-nc-nd"><label for="track_cc_by_nc_nd">Creative Commons License (NC-ND)</label>
-                    <input type="radio" id="track_cc_by_nc_sa" name="track_license_group" value="cc-by-nc-sa"><label for="track_cc_by_nc_sa">Creative Commons License (BY-NC-SA)</label>
-                    <input type="radio" id="track_cc_by_nc_nd_sa" name="track_license_group" value="cc-by-nc-nd-sa"><label for="track_cc_by_nc_nd_sa">Creative Commons License (BY-NC-ND-SA)</label>
-                </div>
-                <input type="text" id="track_genres" placeholder="Genre(s)"/>
-                <input type="text" id="track_bpm_from" placeholder="Minimum BPM"/>
-                <input type="text" id="track_bpm_to" placeholder="Maximum BPM"/>
-                <input type="text" id="track_duration_from" placeholder="Minimum Duration (seconds)"/>
-                <input type="text" id="track_duration_to" placeholder="Maximum Duration (seconds)"/>
-                <label for="track_created_at_from">Minimum Track Creation Date</label>
-                {{ dp.datepick("track_created_at_from", year) }}
-                <label for="track_created_at_to">Maximum Track Creation Date</label>
-                {{ dp.datepick("track_created_at_to", year) }}
-                <!--<input type="date" id="track_created_at_from" placeholder="Minimum Creation Date"/>-->
-                <!--<input type="date" id="track_created_at_to" placeholder="Maximum Creation Date"/>-->
-                <div id="track_type">
-                    <h4>Track Type</h4>
-                    <input type="radio" id="track_type_original" name="track_type_group" value="original" checked="checked"><label for="track_type_original">Original</label>
-                    <input type="radio" id="track_type_remix" name="track_type_group" value="remix"><label for="track_type_remix">Remix</label>
-                    <input type="radio" id="track_type_live" name="track_type_group" value="live"><label for="track_type_live">Live</label>
-                    <input type="radio" id="track_type_recording" name="track_type_group" value="recording"><label for="track_type_recording">Recording</label>
-                    <input type="radio" id="track_type_spoken" name="track_type_group" value="spoken"><label for="track_type_spoken">Spoken</label>
-                    <input type="radio" id="track_type_podcast" name="track_type_group" value="podcast"><label for="track_type_podcast">Podcast</label>
-                    <input type="radio" id="track_type_demo" name="track_type_group" value="demo"><label for="track_type_demo">Demo</label>
-                    <input type="radio" id="track_type_in_progress" name="track_type_group" value="in_progress"><label for="track_type_in_progress">In Progress</label>
-                    <input type="radio" id="track_type_stem" name="track_type_group" value="stem"><label for="track_type_stem">Stem</label>
-                    <input type="radio" id="track_type_loop" name="track_type_group" value="loop"><label for="track_type_loop">Loop</label>
-                    <input type="radio" id="track_type_sound_effect" name="track_type_group" value="sound_effect"><label for="track_type_sound_effect">Sound Effect</label>
-                    <input type="radio" id="track_type_sample" name="track_type_group" value="sample"><label for="track_type_sample">Sample</label>
-                    <input type="radio" id="track_type_other" name="track_type_group" value="other"><label for="track_type_other">Other</label>
-                </div>
-            </div>
+            {{ tf.track_filters() }}
             <ul id="fetched_tracks" style="list-style-position: inside"></ul>
         </div>
         <div class="searched_playlists" style="float: right; width:50%">
