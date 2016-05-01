@@ -3,6 +3,7 @@ function getUserData(request, user_id, jqueryList) {
     var opts = {
         user_id: user_id
     };
+    console.log('user_id = ' + opts.user_id);
     $.post({
         url: base_uri + request,
         data: JSON.stringify(opts),
