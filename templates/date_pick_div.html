@@ -1,7 +1,7 @@
-{% macro datepick(id) -%}
+{% macro datepick(id, currentYear) -%}
 <div id='{{ id }}'>
     <select class='year' title="Year">
-        {% for year in range(2016, 1970, -1) %}
+        {% for year in range(currentYear, 1990, -1) %}
             <option value='{{year}}'>{{year}}</option>
         {% endfor %}
     </select>
