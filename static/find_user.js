@@ -3,7 +3,6 @@ function getUserData(request, user_id, jqueryList) {
     var opts = {
         user_id: user_id
     };
-    console.log('user_id = ' + opts.user_id);
     $.post({
         url: base_uri + request,
         data: JSON.stringify(opts),
@@ -78,11 +77,11 @@ function createUserListItem(item, divID) {
     if (item.country)
         div += "<span>Country: " + item.country + "</span><br />";
     div +=  "</div>" +
-            "<div class='favorite_tracks'>" +
+            "<div class='favorite_tracks' style='width:47%; float:left; padding:2px'>" +
                 "<h3>Favorite tracks</h3>" +
                 "<ul></ul>" +
             "</div>" +
-            "<div class='playlists'>" +
+            "<div class='playlists' style='width:47%; float:right; padding:2px'>" +
                 "<h3>User playlists</h3>" +
                 "<ul></ul>" +
             "</div>" +
