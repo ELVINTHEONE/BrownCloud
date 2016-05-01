@@ -76,15 +76,15 @@ function createUserListItem(item, divID) {
         div += "<span>City: " + item.city + "</span><br />";
     if (item.country)
         div += "<span>Country: " + item.country + "</span><br />";
-    div +=  "</div>"  +
-        "</div>"+
-        "<div class='favorite_tracks float_left'>" +
-            "<h3>Favorite tracks</h3>" +
-            "<ul></ul>" +
-        "</div>" +
-        "<div class='playlists float_right'>" +
-            "<h3>User playlists</h3>" +
-            "<ul></ul>" +
+    div +=  "</div>" +
+            "<div class='favorite_tracks float_left'>" +
+                "<h3>Favorite tracks</h3>" +
+                "<ul></ul>" +
+            "</div>" +
+            "<div class='playlists float_right'>" +
+                "<h3>User playlists</h3>" +
+                "<ul></ul>" +
+            "</div>" +
         "</div>";
     return div;
 }
