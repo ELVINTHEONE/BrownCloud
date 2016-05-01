@@ -27,13 +27,13 @@ function getList(user_id, listSel, apiResourceName) {
         // already fetched the data, toggle the visibility
         if ($(listSel + ":first-child").is(':visible')) {
             // hide the children
-            $list.children.each(function() {
+            $list.children().each(function() {
                 $(this).hide();
             });
         }
         else {
             // redisplay this children
-            $list.children.each(function() {
+            $list.children().each(function() {
                 $(this).show();
             });
         }
