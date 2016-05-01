@@ -21,19 +21,19 @@ function getUserData(request, user_id, jqueryList) {
     });
 }
 // Get the user's favorite tracks or toggle the user's favorite track visibility
-function getUserFavorites(user_id, divID) {
+function getUserFavorites(user_id, ulID) {
     getUserData(
         'user_favorites',
         user_id,
-        $("#" + divID + " ul")
+        $("ul." + ulID)
     );
 }
 // Get the user's favorite playlists or toggle their favorite playlist visibility
-function getUserPlaylists(user_id, divID) {
+function getUserPlaylists(user_id, ulID) {
     getUserData(
         'user_playlists',
         user_id,
-        $("#" + divID + " ul")
+        $("ul." + ulID)
     );
 }
 function selectUser(item, divID) {
@@ -48,7 +48,7 @@ function selectUser(item, divID) {
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
-    var div =   "<div id='" + divID + "' class='container'>" +
+    var div =   "<div id='" + divID + "' class='col-md-12'>" +
             "<div class='row'>" +
                 "<div class='col-md-6'>" +
                     "<span>" +
