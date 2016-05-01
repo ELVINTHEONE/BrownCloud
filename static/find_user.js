@@ -23,7 +23,7 @@ function getUserData(request, user_id, jqueryList) {
 function getList(user_id, listSel, apiResourceName) {
     // Check if the data is already fetched
     var $list = $(listSel);
-    if ($list && $list.children.length > 0) {
+    if ($list && $list.children().length > 0) {
         // already fetched the data, toggle the visibility
         if ($(listSel + ":first-child").is(':visible')) {
             // hide the children
