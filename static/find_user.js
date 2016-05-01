@@ -22,18 +22,18 @@ function getUserData(request, user_id, jqueryList) {
     });
 }
 // Get the user's favorite tracks or toggle the user's favorite track visibility
-function getUserFavorites(item, divID) {
+function getUserFavorites(user_id, divID) {
     getUserData(
         'user_favorites',
-        item.id,
+        user_id,
         $("#" + divID + " ul")
     );
 }
 // Get the user's favorite playlists or toggle their favorite playlist visibility
-function getUserPlaylists(item, divID) {
+function getUserPlaylists(user_id, divID) {
     getUserData(
         'user_playlists',
-        item.id,
+        user_id,
         $("#" + divID + " ul")
     );
 }
@@ -57,8 +57,8 @@ function createUserListItem(item, divID) {
                         " " + item.username +
                     "</a>" +
                 "</span>" +
-                "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item + "\", \"" + divID +"\")'/><br />" +
-                "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item + "\", \"" + divID +"\")'/><br />" +
+                "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
+                "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
             "</div>" +
         "<div>";
     if (item.description)
