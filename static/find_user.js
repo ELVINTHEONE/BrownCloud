@@ -20,21 +20,40 @@ function getUserData(request, user_id, jqueryList) {
         dataType: 'json'
     });
 }
+function getList(user_id, listSel, apiResourceName) {
+    // Check if the data is already fetched
+    var $list = $(listSel);
+    if ($list && $list.children.length > 0) {
+        // already fetched the data, toggle the visibility
+        if ($list.children[0].is(':visisble')) {
+            // hide the children
+            $list.children.each(function() {
+                $(this).hide();
+            });
+        }
+        else {
+            // redisplay this children
+            $list.children.each(function() {
+                $(this).show();
+            });
+        }
+    }
+    else {
+        // fetch the data
+        getUserData(
+            apiResourceName,
+            user_id,
+            $list
+        );
+    }
+}
 // Get the user's favorite tracks or toggle the user's favorite track visibility
 function getUserFavorites(user_id, listSel) {
-    getUserData(
-        'user_favorites',
-        user_id,
-        $(listSel)
-    );
+    getList(user_id, listSel, 'user_favorites');
 }
 // Get the user's favorite playlists or toggle their favorite playlist visibility
 function getUserPlaylists(user_id, listSel) {
-    getUserData(
-        'user_playlists',
-        user_id,
-        $(listSel)
-    );
+    getList(user_id, listSel, 'user_playlists');
 }
 function selectUser(item, divID) {
     var prevSelected = $("ul#fetched_friends li.selectedUser");
