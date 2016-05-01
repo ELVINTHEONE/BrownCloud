@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c32ec799-d3e5-4204-9af7-5c3d5cd5f8c9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/date_pick_div.html" afterPath="$PROJECT_DIR$/templates/date_pick_div.html" />
-    </list>
+    <list default="true" id="c32ec799-d3e5-4204-9af7-5c3d5cd5f8c9" name="Default" comment="" />
     <ignored path="BrownCloud.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -26,10 +24,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.5801072">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
+                <state relative-caret-position="558">
                   <caret line="40" column="53" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -44,11 +42,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="date_pick_div.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="date_pick_div.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/templates/date_pick_div.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="288">
-                  <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+                <state relative-caret-position="144">
+                  <caret line="8" column="41" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="41" />
                   <folding />
                 </state>
               </provider>
@@ -317,12 +315,12 @@
       <workItem from="1461974032736" duration="351000" />
       <workItem from="1461974402260" duration="115000" />
       <workItem from="1461974536933" duration="26000" />
-      <workItem from="1461974593692" duration="26839000" />
+      <workItem from="1461974593692" duration="26888000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51334000" />
+    <option name="totallyTimeSpent" value="51383000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -577,9 +575,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/date_pick_div.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
+        <state relative-caret-position="558">
           <caret line="40" column="53" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -590,14 +596,6 @@
             <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#script#3;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/date_pick_div.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
