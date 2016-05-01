@@ -57,8 +57,8 @@ function createUserListItem(item, divID) {
                             " " + item.username +
                         "</a>" +
                     "</span>" +
-                    "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
-                    "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"" + divID +"\")'/><br />" +
+                    "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"favorite_tracks\")'/><br />" +
+                    "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"playlists\")'/><br />" +
                 "</div>" +
             "<div class='col-md-6'>";
         if (item.description)
