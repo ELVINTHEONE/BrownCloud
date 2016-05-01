@@ -14,8 +14,8 @@ function getOptions(prefix) {
             license: _getCheckedRadioVal("#" + prefix + "_license"),
             bpmFrom: _getInputVal(prefix, "bpm_from"),
             bpmTo: _getInputVal(prefix, "bpm_to"),
-            durationFrom: _getInputVal(prefix, "duration_from"),
-            durationTo: _getInputVal(prefix, "duration_to"),
+            durationFrom: parseInt(_getInputVal(prefix, "duration_from")) * 1000, // convert to milliseconds
+            durationTo: parseInt(_getInputVal(prefix, "duration_to")) * 1000,
             createdAtFrom: _getInputVal(prefix, "created_at_from"),
             createdAtTo: _getInputVal(prefix, "created_at_to"),
             genres: _getInputVal(prefix, "genres"),

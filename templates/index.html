@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import 'date_pick_div.html' as dp %}
 
 {% block body %}
 <div>
@@ -34,10 +35,12 @@
                 <input type="text" id="track_genres" placeholder="Genre(s)"/>
                 <input type="text" id="track_bpm_from" placeholder="Minimum BPM"/>
                 <input type="text" id="track_bpm_to" placeholder="Maximum BPM"/>
-                <input type="text" id="track_duration_from" placeholder="Minimum Duration"/>
-                <input type="text" id="track_duration_to" placeholder="Maximum Duration"/>
-                <input type="date" id="track_created_at_from" placeholder="Minimum Creation Date"/>
-                <input type="date" id="track_created_at_to" placeholder="Maximum Creation Date"/>
+                <input type="text" id="track_duration_from" placeholder="Minimum Duration (seconds)"/>
+                <input type="text" id="track_duration_to" placeholder="Maximum Duration (seconds)"/>
+                {% dp.datepick("track_created_at_from") %}
+                {% dp.datepick("track_created_at_to") %}
+                <!--<input type="date" id="track_created_at_from" placeholder="Minimum Creation Date"/>-->
+                <!--<input type="date" id="track_created_at_to" placeholder="Maximum Creation Date"/>-->
                 <div id="track_type">
                     <h4>Track Type</h4>
                     <input type="radio" id="track_type_original" name="track_type_group" value="original" checked="checked"><label for="track_type_original">Original</label>
