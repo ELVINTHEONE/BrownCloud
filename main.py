@@ -37,14 +37,15 @@ def _sendQuery(request, type, limit):
     # spawn a generic client
     client = _getGenericClient()
     ret = None
-    query = request.json['query']
     if (type == RequestType.friends):
+        query = request.json['query']
         ret = client.get(
             '/users',
             q = query,
             limit = limit
         )
     elif (type == RequestType.tracks):
+        query = request.json['query']
         ret = client.get(
             '/tracks',
             q = query,
@@ -62,6 +63,7 @@ def _sendQuery(request, type, limit):
             limit = limit
         )
     elif (type == RequestType.playlists):
+        query = request.json['query']
         ret = client.get(
             '/playlists',
             q = query,

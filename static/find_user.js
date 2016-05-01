@@ -55,6 +55,8 @@ function createUserListItem(item, divID) {
                         " " + item.username +
                     "</a>" +
                 "</span>" +
+                "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item + "\", \"" + divID +"\")'/><br />" +
+                "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item + "\", \"" + divID +"\")'/><br />" +
             "</div>" +
         "<div>";
     if (item.description)
@@ -73,9 +75,7 @@ function createUserListItem(item, divID) {
         div += "<span>City: " + item.city + "</span><br />";
     if (item.country)
         div += "<span>Country: " + item.country + "</span><br />";
-    div +=  "<input type=['button'] style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item + "\", \"" + divID +"\")'/><br />" +
-            "<input type=['button'] style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item + "\", \"" + divID +"\")'/><br />" +
-            "</div>" +
+    div +=  "</div>" +
             "<div class='favorite_tracks'>" +
                 "<h3>Favorite tracks</h3>" +
                 "<ul></ul>" +
