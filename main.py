@@ -83,7 +83,12 @@ def _sendQuery(request, type, limit):
 
 @app.route("/")
 def index():
-    return render_template("index.html", year=datetime.date.today().year)
+    try:
+        return render_template("index.html", year=datetime.date.today().year)
+    except Exception,e:
+        track = get_current_traceback(skip=1, show_hidden_frames=True, ignore_system_exceptions=False)
+        track.log()
+        abort(500)
 
 @app.route("/auth_redirect")
 def auth_redirect():
