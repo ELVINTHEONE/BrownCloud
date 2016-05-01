@@ -1,13 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div>
-    <div style="display:block">
-        <div class="user_favorites" style="width: 100%">
-            <h3>Find a friend</h3>
-            <input type="text" id="friend_search" placeholder="username"/>
-            <ul id="fetched_friends"></ul>
-        </div>
+<div class="col-md-12">
+    <div class="user_favorites">
+        <h3>Find a friend</h3>
+        <input type="text" id="friend_search" placeholder="username"/>
+        <ul id="fetched_friends"></ul>
     </div>
 </div>
 {% endblock %}

@@ -1,8 +1,17 @@
 <html>
+<!-- From Twitter bootstrap getting-started -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>BrownCloud</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<!-- Twitter Bootstrap compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<!-- Twitter Bootstrap Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 {% block styles %}{% endblock %}
-    <nav class="nav">
+    <nav class="nav nav-bar">
         <ul>
             <li>
                 <a href="{{ url_for('index') }}">Find tracks and playlists</a>
@@ -10,7 +19,7 @@
             </li>
         </ul>
     </nav>
-    <div class="page">
+    <div class="container col-md-12">
         <h1>BrownCloud</h1>
         {% for message in get_flashed_messages() %}
             <div class="flash">{{ message }}</div>
@@ -20,6 +29,8 @@
 
     <!-- Add jQuery -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <!-- Twitter bootstrap compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <!-- Scripts for SoundCloud -->
     <script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"
             integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
