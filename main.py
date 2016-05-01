@@ -105,7 +105,7 @@ def auth_redirect():
 # api functions
 @app.route("/friends", methods=['POST'])
 def get_friends():
-    return _sendQuery(request, RequestType.friends, 10)
+    return _sendQuery(request, RequestType.friends, 100)
 
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
