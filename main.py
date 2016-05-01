@@ -81,7 +81,8 @@ def _sendQuery(request, type, limit):
         #return redirect(client.authorize_url())
     #pass
 
-@app.after_request():
+@app.after_request
+def after_request():
     track = get_current_traceback(skip=1, show_hidden_frames=True, ignore_system_exceptions=False)
     track.log()
 
