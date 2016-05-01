@@ -130,7 +130,7 @@ def get_playlists():
 
 @app.route("/user_favorites", methods=['POST'])
 def get_user_favorites():
-    return _sendQuery(request, RequestType.user_favorite_tracks, 10)
+    return _sendQuery(request, RequestType.user_favorites, 10)
 
 @app.route("/user_playlists", methods=['POST'])
 def get_user_playlists():
