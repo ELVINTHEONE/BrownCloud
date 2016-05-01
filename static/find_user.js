@@ -25,7 +25,7 @@ function getList(user_id, listSel, apiResourceName) {
     var $list = $(listSel);
     if ($list && $list.children.length > 0) {
         // already fetched the data, toggle the visibility
-        if ($list.children.first().is(':visisble')) {
+        if ($list.children(":first").is(':visisble')) {
             // hide the children
             $list.children.each(function() {
                 $(this).hide();
