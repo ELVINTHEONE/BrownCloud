@@ -23,12 +23,20 @@ function getUserData(request, user_id, jqueryList) {
 function getList(user_id, listSel, apiResourceName) {
     // Check if the data is already fetched
     var $list = $(listSel);
-    if ($list && $list.children().length > 0) {
+    if ($list && $list.children.length > 0) {
         // already fetched the data, toggle the visibility
-        console.log('toggling visibility');
-        $list.children().each(function() {
-            $('.hidden', this).toggle();
-        });
+        if ($(listSel + ":first-child").is(':visisble')) {
+            // hide the children
+            $list.children.each(function() {
+                $(this).hide();
+            });
+        }
+        else {
+            // redisplay this children
+            $list.children.each(function() {
+                $(this).show();
+            });
+        }
     }
     else {
         // fetch the data
