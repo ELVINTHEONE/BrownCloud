@@ -2,6 +2,7 @@ import os
 import logging
 import soundcloud
 import json
+import datetime
 from enum import Enum
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from src.session import ChunkedSecureCookieSessionInterface
@@ -82,7 +83,7 @@ def _sendQuery(request, type, limit):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", year=datetime.date.today().year)
 
 @app.route("/auth_redirect")
 def auth_redirect():
