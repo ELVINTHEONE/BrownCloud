@@ -6,6 +6,7 @@ import datetime
 from enum import Enum
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from src.session import ChunkedSecureCookieSessionInterface
+from  werkzeug.debug import get_current_traceback
 
 app = Flask(__name__)
 app.config.from_object(__name__)
