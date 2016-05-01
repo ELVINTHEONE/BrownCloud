@@ -1,10 +1,11 @@
 function getUserData(request, user_id, jqueryList) {
     var base_uri = "http://brown-cloud.herokuapp.com/";
+    var opts = {
+        user_id: user_id
+    };
     $.post({
         url: base_uri + request,
-        data: JSON.stringify({
-            user_id: user_id
-        }),
+        data: JSON.stringify(opts),
         success: function(dataFromServer) {
             // empty the list
             jqueryList.empty();
