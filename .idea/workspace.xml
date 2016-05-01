@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c32ec799-d3e5-4204-9af7-5c3d5cd5f8c9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/find_user.js" afterPath="$PROJECT_DIR$/static/find_user.js" />
-    </list>
+    <list default="true" id="c32ec799-d3e5-4204-9af7-5c3d5cd5f8c9" name="Default" comment="" />
     <ignored path="BrownCloud.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -62,8 +60,8 @@
           <file leaf-file-name="find_user.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/find_user.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="414">
-                  <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+                <state relative-caret-position="630">
+                  <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -359,12 +357,12 @@
       <workItem from="1461974536933" duration="26000" />
       <workItem from="1461974593692" duration="34455000" />
       <workItem from="1462136943513" duration="2904000" />
-      <workItem from="1462139871362" duration="4617000" />
+      <workItem from="1462139871362" duration="4727000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66471000" />
+    <option name="totallyTimeSpent" value="66581000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -823,14 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/find_user.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/find_user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -844,6 +834,14 @@
             <marker date="1462144487360" expanded="true" signature="4524:4952" placeholder="..." />
             <marker date="1462144487360" expanded="true" signature="4579:4952" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/find_user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
