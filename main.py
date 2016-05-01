@@ -99,7 +99,7 @@ def print_err(ex):
 def index():
     return render_template("index.html", year=datetime.date.today().year)
 
-@app.route("find_user", methods=['GET'])
+@app.route("/find_user", methods=['GET'])
 def find_user():
     return render_template("find_user.html")
 
