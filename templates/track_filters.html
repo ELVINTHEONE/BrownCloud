@@ -1,6 +1,6 @@
+{% import "date_pick_div.html" as dp %}
 
-{% macro trackFilters(year) -%}
-{{ year }}
+{% macro track_filters(year) -%}
 <div id="track_filters">
     <input type="text" id="track_search" placeholder="Search for tracks"/>
     <input type="text" id="track_tags" placeholder="Tags"/>
@@ -27,6 +27,12 @@
     <input type="text" id="track_bpm_to" placeholder="Maximum BPM"/>
     <input type="text" id="track_duration_from" placeholder="Minimum Duration (seconds)"/>
     <input type="text" id="track_duration_to" placeholder="Maximum Duration (seconds)"/>
+    <label for="track_created_at_from">Minimum Track Creation Date</label>
+    {% call dp.datepick("track_created_at_from", year) %}
+    <!--{{ dp.datepick("track_created_at_from", year) }}-->
+    <label for="track_created_at_to">Maximum Track Creation Date</label>
+    {% call dp.datepick("track_created_at_to", year) %}
+    <!--{{ dp.datepick("track_created_at_to", year) }}-->
     <!--<input type="date" id="track_created_at_from" placeholder="Minimum Creation Date"/>-->
     <!--<input type="date" id="track_created_at_to" placeholder="Maximum Creation Date"/>-->
     <div id="track_type">
