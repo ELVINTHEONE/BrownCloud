@@ -1,6 +1,6 @@
 {% macro datepick(id) -%}
 <div id='{{ id }}'>
-    <select class='year'>
+    <select class='year' title="Year">
         <option value='2016'>2016</option>
         <option value='2015'>2015</option>
         <option value='2014'>2014</option>
@@ -13,7 +13,7 @@
         <option value='2007'>2007</option>
         <option value='2006'>2006</option>
     </select>
-    <select class='month'>
+    <select class='month' title="Month">
         <option value='January'>January</option>
         <option value='February'>February</option>
         <option value='March'>March</option>
@@ -27,7 +27,7 @@
         <option value='November'>November</option>
         <option value='December'>December</option>
     </select>
-    <select class='day'>
+    <select class='day' title="Day">
         <option value='1'>1</option>
         <option value='2'>2</option>
         <option value='3'>3</option>

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% import 'date_pick_div.html' as dp %}
+{% import "date_pick_div.html" as dp %}
 
 {% block body %}
 <div>
@@ -37,8 +37,8 @@
                 <input type="text" id="track_bpm_to" placeholder="Maximum BPM"/>
                 <input type="text" id="track_duration_from" placeholder="Minimum Duration (seconds)"/>
                 <input type="text" id="track_duration_to" placeholder="Maximum Duration (seconds)"/>
-                {% dp.datepick("track_created_at_from") %}
-                {% dp.datepick("track_created_at_to") %}
+                {{ dp.datepick("track_created_at_from") }}
+                {{ dp.datepick("track_created_at_to") }}
                 <!--<input type="date" id="track_created_at_from" placeholder="Minimum Creation Date"/>-->
                 <!--<input type="date" id="track_created_at_to" placeholder="Maximum Creation Date"/>-->
                 <div id="track_type">
