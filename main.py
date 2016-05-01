@@ -15,6 +15,8 @@ class RequestType(Enum):
     friends = 1
     tracks = 2
     playlists = 3
+    user_favorites = 4
+    user_playlists = 5
 
 def _getGenericClient():
     return soundcloud.Client(
@@ -65,7 +67,12 @@ def _sendQuery(request, type, limit):
             q = query,
             limit = limit
         )
-    return _toJson(ret);
+    elif (type == RequestType.user_favorites):
+        ret = client.get('/users/' + request.json['user_id'] + '/favorites')
+    elif (type == RequestType.user_playlists):
+        ret = client.get('/users/' + request.json['user_id'] + '/playlists')
+
+    return _toJson(ret)
 
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
@@ -88,11 +95,15 @@ def print_err(ex):
     track = get_current_traceback(skip=1, show_hidden_frames=True, ignore_system_exceptions=False)
     track.log()
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def index():
     return render_template("index.html", year=datetime.date.today().year)
 
-@app.route("/auth_redirect")
+@app.route("find_user", methods=['GET'])
+def find_user():
+    return render_template("find_user.html")
+
+@app.route("/auth_redirect", methods=['GET'])
 def auth_redirect():
     code = request.args.get('code')
     client = _getGenericClient()
@@ -114,6 +125,14 @@ def get_tracks():
 @app.route("/playlists", methods=['POST'])
 def get_playlists():
     return _sendQuery(request, RequestType.playlists, 10)
+
+@app.route("/user_favorites", methods=['POST'])
+def get_user_favorites():
+    return _sendQuery(request, RequestType.user_favorite_tracks, 10)
+
+@app.route("/user_playlists", methods=['POST'])
+def get_user_favorites():
+    return _sendQuery(request, RequestType.user_playlists, 10)
 
 if __name__ == '__main__':
     app.run(debug=True)

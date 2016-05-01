@@ -1,6 +1,14 @@
 <html>
 <title>BrownCloud</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <nav class="nav">
+        <ul>
+            <li>
+                <a href="{{ url_for('index') }}">Find tracks and playlists</a>
+                <a href="{{ url_for('find_user') }}">Find users</a>
+            </li>
+        </ul>
+    </nav>
     <div class="page">
         <h1>BrownCloud</h1>
         {% for message in get_flashed_messages() %}
@@ -8,5 +16,37 @@
         {% endfor %}
         {% block body %}{% endblock %}
     </div>
-    {% block scripts %}{% endblock %}
+
+    <!-- Add jQuery -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <!-- Scripts for SoundCloud -->
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"
+            integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//connect.soundcloud.com/sdk/sdk-3.0.0.js"></script><!-- App scripts -->
+    <script>
+        // jQuery extension for a delayed keyup http://stackoverflow.com/a/6054104/747275
+        (function($){
+            $.widget("ui.onDelayedKeyup", {
+                _init : function() {
+                    var self = this;
+                    $(this.element).keyup(function() {
+                        if(typeof(window['inputTimeout']) != "undefined"){
+                            window.clearTimeout(inputTimeout);
+                        }
+                        var handler = self.options.handler;
+                        window['inputTimeout'] = window.setTimeout(function() {
+                            handler.call(self.element) }, self.options.delay);
+                    });
+                },
+                options: {
+                    handler: $.noop(),
+                    delay: 500
+                }
+            });
+        })(jQuery);
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='commmon.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
 </html>

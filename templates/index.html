@@ -4,11 +4,6 @@
 {% block body %}
 <div>
     <div style="display:block">
-        <div class="user_favorites" style="width: 100%">
-            <h3>Find a friend</h3>
-            <input type="text" id="friend_search" placeholder="username"/>
-            <ul id="fetched_friends"></ul>
-        </div>
         <div class="searched_tracks" style="float: left; width: 50%;">
             <h3>Search for tracks</h3>
             {{ track_filters(year) }}
@@ -67,67 +62,43 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- Add jQuery -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-<!-- Scripts for SoundCloud -->
-<script src="//code.jquery.com/ui/1.11.3/jquery-ui.min.js"
-		integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
-		crossorigin="anonymous"></script>
-<script type="text/javascript" src="//connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
-<!-- App scripts -->
-<script>
-    // jQuery extension for a delayed keyup http://stackoverflow.com/a/6054104/747275
-    (function($){
-        $.widget("ui.onDelayedKeyup", {
-            _init : function() {
-                var self = this;
-                $(this.element).keyup(function() {
-                    if(typeof(window['inputTimeout']) != "undefined"){
-                        window.clearTimeout(inputTimeout);
-                    }
-                    var handler = self.options.handler;
-                    window['inputTimeout'] = window.setTimeout(function() {
-                        handler.call(self.element) }, self.options.delay);
-                });
-            },
-            options: {
-                handler: $.noop(),
-                delay: 500
-            }
-        });
-    })(jQuery);
-</script>
 <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
 <script>
-		$(document).ready(function() {
-			var base_uri = "http://brown-cloud.herokuapp.com/";
-            $("#friend_search").onDelayedKeyup({
-                handler: function() {
-                    fetchAndAddToList(
-                        base_uri + "friends",
-                        "friend",
-                        $("ul#fetched_friends")
-                    )
-                }
-            });
-			$("#track_search").onDelayedKeyup({
-				handler: function() {
-					fetchAndAddToList(
-						base_uri + "tracks",
-						"track",
-						$("ul#fetched_tracks")
-					)
-				}
-			});
-			$("#playlist_search").onDelayedKeyup({
-				handler: function() {
-					fetchAndAddToList(
-						base_uri + "playlists",
-						"playlist",
-						$("ul#fetched_playlists")
-					)
-				}
-			});
-		});
+    function onSuccess(dataFromServer, jqueryList) {
+        // empty the list
+        jqueryList.empty();
+        // add the fetched data
+        for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+            var item = dataFromServer.data[ix].obj;
+            var divID = ix + "_" + item.user.id + "_" + item.id;
+            jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
+            //jqueryList.append("<li style='float:left;' onclick='getUserFavorites(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+        }
+    }
+    $(document).ready(function() {
+        var base_uri = "http://brown-cloud.herokuapp.com/";
+        $("#track_search").onDelayedKeyup({
+            handler: function() {
+                fetchAndAddToList(
+                    base_uri + "tracks",
+                    "track",
+                    function(dataFromServer) {
+                        onSuccess(dataFromServer, $("ul#fetched_tracks"));
+                    }
+                )
+            }
+        });
+        $("#playlist_search").onDelayedKeyup({
+            handler: function() {
+                fetchAndAddToList(
+                    base_uri + "playlists",
+                    "playlist",
+                    function(dataFromServer) {
+                        onSuccess(dataFromServer, $("ul#fetched_playlists"));
+                    }
+                )
+            }
+        });
+    });
 </script>
 {% endblock %}

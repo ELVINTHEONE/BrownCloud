@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div>
+    <div style="display:block">
+        <div class="user_favorites" style="width: 100%">
+            <h3>Find a friend</h3>
+            <input type="text" id="friend_search" placeholder="username"/>
+            <ul id="fetched_friends"></ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='find_user.js') }}"></script>
+<script>
+    function onSuccess(dataFromServer, jqueryList) {
+        // empty the list
+        jqueryList.empty();
+        // add the fetched data
+        for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+            var item = dataFromServer.data[ix].obj;
+            var divID = ix + "_" + item.id;
+            jqueryList.append("<li style='float:left;' onclick='selectUser(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+        }
+    }
+    $(document).ready(function() {
+        var base_uri = "http://brown-cloud.herokuapp.com/";
+        $("#friend_search").onDelayedKeyup({
+            handler: function () {
+                fetchAndAddToList(
+                    base_uri + "friends",
+                    "friend",
+                    function(dataFromServer) {
+                        onSuccess(dataFromServer, $("ul#fetched_friends"));
+                    }
+                )
+            }
+        });
+    });
+</script>{% endblock %}
