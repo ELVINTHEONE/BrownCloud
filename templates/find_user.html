@@ -20,7 +20,7 @@
         for (var ix = 0; ix < dataFromServer.data.length; ix++) {
             var item = dataFromServer.data[ix].obj;
             var divID = ix + "_" + item.id;
-            jqueryList.append("<li style='float:left;' onclick='selectUser(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+            jqueryList.append("<li class='col-md-12' onclick='selectUser(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
         }
     }
     $(document).ready(function() {

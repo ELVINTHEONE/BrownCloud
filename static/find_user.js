@@ -13,7 +13,7 @@ function getUserData(request, user_id, jqueryList) {
             for (var ix = 0; ix < dataFromServer.data.length; ix++) {
                 var item = dataFromServer.data[ix].obj;
                 var divID = ix + "_" + item.id;
-                jqueryList.append("<li class='col-md-12' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
+                jqueryList.append("<li class='col-md-6' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
             }
         },
         contentType:"application/json",
@@ -48,8 +48,8 @@ function selectUser(item, divID) {
 }
 // create a list item for a user
 function createUserListItem(item, divID) {
-    var div =   "<div id='" + divID + "' class='col-md-12'>" +
-            "<div class='row col-md-12'>" +
+    var div =   "<div id='" + divID + "'>" +
+            "<div class='row'>" +
                 "<div class='col-md-6'>" +
                     "<span>" +
                         "<a href='" + item.permalink_url + "' target='_blank'>" +
@@ -79,7 +79,7 @@ function createUserListItem(item, divID) {
             div += "<span>Country: " + item.country + "</span><br />";
         div +=  "</div>" +
             "</div>" +
-            "<div class='row col-md-12'>" +
+            "<div class='row'>" +
                 "<div class='favorite_tracks col-md-6'>" +
                     "<h3>Favorite tracks</h3>" +
                     "<ul></ul>" +
