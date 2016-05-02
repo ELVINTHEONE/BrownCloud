@@ -23,7 +23,7 @@ li div.sc_player_embed {
 }
 
 p.hide_desc {
-    visibility: hidden;
+    display: none;
 }
 
 p.show_desc {
