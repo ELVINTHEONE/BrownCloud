@@ -71,7 +71,7 @@ function createSoundListItem(item, divID) {
         "<div id='" + divID + "'>" +
             "<div>" +
                 "<div class='col-md-8'>" +
-                    "<h5>" + item.title + "</h5>";
+                    "<h4>" + item.title + "</h4>";
             if (item.description) {
                 div +=
                     "<p class='hide_desc'>" + item.description + "</p>";
