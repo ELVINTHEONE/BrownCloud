@@ -83,22 +83,12 @@ function createSoundListItem(item, divID) {
             "</div>" +
         "</div>" +
         "<div>" +
-            "<span>" +
-            "User " +
+            "<span>By " +
             "<a href='" + item.user.permalink_url + "' target='_blank'>" +
                 item.user.username +
             "</a>" +
             "</span><br />" +
-            "<span>Created: " + item.created_at + ", </span>";
-    if (item.genre) {
-        div +=
-            "<span>Genre: " + item.genre + ", </span>";
-    }
-    if (item.tag_list) {
-        div +=
-            "<span>Tags: " + item.tag_list + "</span>";
-    }
-    div +=
+            "<span>" + item.created_at + "</span>" +
         "</div>" +
         "<div class='sc_player_embed'>"+
             "<span class='sc_player'></span>" +
