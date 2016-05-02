@@ -13,7 +13,7 @@ function getUserData(request, user_id, jqueryList) {
             for (var ix = 0; ix < dataFromServer.data.length; ix++) {
                 var item = dataFromServer.data[ix].obj;
                 var divID = ix + "_" + item.id;
-                jqueryList.append("<li class='col-md-5' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
+                jqueryList.append("<li class='col-md-5 user_favorites' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
             }
         },
         contentType:"application/json",
