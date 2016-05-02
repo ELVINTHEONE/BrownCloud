@@ -22,6 +22,14 @@ li div.sc_player_embed {
     width: 100%;
 }
 
+p.hide_desc {
+    visibility: hidden;
+}
+
+p.show_desc {
+    visibility: visible;
+}
+
 div iframe.sc_iframe {
     width: 100%;
     height: 166px;
