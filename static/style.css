@@ -18,9 +18,18 @@ li.user_favorites {
     margin: 2px;
     padding: 2px;
     border: 1px solid black;
-    max-height: 100px;
     overflow: hidden;
     overflow-clip: ellipsis;
+}
+
+li.user_favorites.hide_desc {
+    min-height: 100px;
+    max-height: 100px;
+}
+
+li.user_favorites.show_desc {
+    min-height: 0;
+    max-height: 100%;
 }
 
 li.sound:hover {

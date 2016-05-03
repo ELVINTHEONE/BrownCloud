@@ -13,25 +13,25 @@
 {% block scripts %}
 <script type="text/javascript" src="{{ url_for('static', filename='find_user.js') }}"></script>
 <script>
-    function onSuccess(dataFromServer, jqueryList) {
+    var page = new FindUserPage('{{ base_uri }}');
+    function onSuccess(page, dataFromServer, jqueryList) {
         // empty the list
         jqueryList.empty();
         // add the fetched data
         for (var ix = 0; ix < dataFromServer.data.length; ix++) {
             var item = dataFromServer.data[ix].obj;
             var divID = ix + "_" + item.id;
-            jqueryList.append("<li class='col-md-12' onclick='selectUser(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createUserListItem(item, divID) + "</li>");
+            jqueryList.append("<li class='col-md-12' onclick='page.selectUser(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + page.createUserListItem(item, divID) + "</li>");
         }
     }
     $(document).ready(function() {
-        var base_uri = "http://brown-cloud.herokuapp.com/";
         $("#friend_search").onDelayedKeyup({
             handler: function () {
                 fetchAndAddToList(
-                    base_uri + "friends",
+                    page.base_uri + "friends",
                     "friend",
                     function(dataFromServer) {
-                        onSuccess(dataFromServer, $("ul#fetched_friends"));
+                        onSuccess(page, dataFromServer, $("ul#fetched_friends"));
                     }
                 )
             }

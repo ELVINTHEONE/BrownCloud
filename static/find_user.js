@@ -1,10 +1,12 @@
-function getUserData(request, user_id, jqueryList) {
-    var base_uri = "http://brown-cloud.herokuapp.com/";
+function FindUserPage(base_uri) {
+    this.base_uri = base_uri;
+}
+FindUserPage.prototype.getUserData = function (request, user_id, jqueryList) {
     var opts = {
         user_id: user_id
     };
     $.post({
-        url: base_uri + request,
+        url: this.base_uri + request,
         data: JSON.stringify(opts),
         success: function(dataFromServer) {
             // empty the list
@@ -19,8 +21,8 @@ function getUserData(request, user_id, jqueryList) {
         contentType:"application/json",
         dataType: 'json'
     });
-}
-function getList(user_id, listSel, apiResourceName) {
+};
+FindUserPage.prototype.getList = function (user_id, listSel, apiResourceName) {
     // Check if the data is already fetched
     var $list = $(listSel);
     if ($list && $list.children().length > 0) {
@@ -40,22 +42,22 @@ function getList(user_id, listSel, apiResourceName) {
     }
     else {
         // fetch the data
-        getUserData(
+        this.getUserData(
             apiResourceName,
             user_id,
             $list
         );
     }
-}
+};
 // Get the user's favorite tracks or toggle the user's favorite track visibility
-function getUserFavorites(user_id, listSel) {
-    getList(user_id, listSel, 'user_favorites');
-}
+FindUserPage.prototype.getUserFavorites = function(user_id, listSel) {
+    this.getList(user_id, listSel, 'user_favorites');
+};
 // Get the user's favorite playlists or toggle their favorite playlist visibility
-function getUserPlaylists(user_id, listSel) {
-    getList(user_id, listSel, 'user_playlists');
-}
-function selectUser(item, divID) {
+FindUserPage.prototype.getUserPlaylists = function(user_id, listSel) {
+    this.getList(user_id, listSel, 'user_playlists');
+};
+FindUserPage.prototype.selectUser = function(item, divID) {
     var prevSelected = $("ul#fetched_friends li.selectedUser");
     var selUserClass = 'selectedUser';
     if (prevSelected.length > 0) {
@@ -64,9 +66,9 @@ function selectUser(item, divID) {
     }
     var selectedUser = $("#" + divID);
     selectedUser.addClass(selUserClass);
-}
+};
 // create a list item for a user
-function createUserListItem(item, divID) {
+FindUserPage.prototype.createUserListItem = function(item, divID) {
     var favoritesSel = "#" + divID + " div.favorite_tracks ul";
     var playlistsSel = "#" + divID + " div.playlists ul";
     var div =   "<div id='" + divID + "'>" +
@@ -78,8 +80,8 @@ function createUserListItem(item, divID) {
                             " " + item.username +
                         "</a>" +
                     "</span>" +
-                    "<input type=['button'] class='btn btn-default' style='float: right' value='favorite tracks' onclick='getUserFavorites(\"" + item.id + "\", \"" + favoritesSel + "\")'/><br />" +
-                    "<input type=['button'] class='btn btn-default' style='float: right' value='favorite playlists' onclick='getUserPlaylists(\"" + item.id + "\", \"" + playlistsSel + "\")'/><br />" +
+                    "<button class='btn btn-default' style='float: right' onclick='page.getUserFavorites(\"" + item.id + "\", \"" + favoritesSel + "\")'>favorite tracks</button><br />" +
+                    "<button class='btn btn-default' style='float: right' onclick='page.getUserPlaylists(\"" + item.id + "\", \"" + playlistsSel + "\")'>favorite playlists</button><br />" +
                 "</div>" +
             "<div class='col-md-6'>";
         if (item.description)
@@ -112,4 +114,4 @@ function createUserListItem(item, divID) {
             "</div>" +
         "</div>";
     return div;
-}
+};

@@ -5,11 +5,16 @@ import json
 import datetime
 from enum import Enum
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
+from flask.ext.cors import CORS, cross_origin
 from src.session import ChunkedSecureCookieSessionInterface
 from  werkzeug.debug import get_current_traceback
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_object(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+BASE_URI = os.environ['BASE_URI']
 
 class RequestType(Enum):
     friends = 1
@@ -99,11 +104,15 @@ def print_err(ex):
 
 @app.route("/", methods=['GET'])
 def index():
-    return render_template("index.html", year=datetime.date.today().year)
+    return render_template(
+        "index.html",
+        year=datetime.date.today().year,
+        base_uri=BASE_URI
+    )
 
 @app.route("/find_user", methods=['GET'])
 def find_user():
-    return render_template("find_user.html")
+    return render_template("find_user.html", base_uri=BASE_URI)
 
 @app.route("/auth_redirect", methods=['GET'])
 def auth_redirect():
@@ -117,8 +126,10 @@ def auth_redirect():
 
 # api functions
 @app.route("/friends", methods=['POST'])
+@cross_origin()
 def get_friends():
-    return _sendQuery(request, RequestType.friends, 100)
+    print("finding " + request.json['query']);
+    return _sendQuery(request, RequestType.friends, 10)
 
 @app.route("/tracks", methods=['POST'])
 def get_tracks():

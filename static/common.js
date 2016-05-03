@@ -41,14 +41,21 @@ function _getSoundCloudPlayerIFrame(track_id) {
 }
 // Embed the SoundCloud player or toggle its visibility
 function playSound(div_id, track_id) {
+    console.log('div id = ' + div_id);
+    var div = $("#" + div_id);
     var embed = $("#" + div_id + " div.sc_player_embed span.sc_player");
     if (embed.children("iframe").length == 0) {
         // Add the player since it's not there yet
         embed.append(_getSoundCloudPlayerIFrame(track_id));
+        // Set the "shown" class
+        div.removeClass('hide_desc');
+        div.addClass('show_desc');
     }
     else {
         // Toggle the visibility of the player
         (embed.is(':visible') ? embed.hide() : embed.show());
+        div.removeClass('show_desc');
+        div.addClass('hide_desc');
     }
 }
 // query for friends (aka users) tracks and playlists
