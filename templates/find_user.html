@@ -1,17 +1,29 @@
 {% extends "layout.html" %}
 
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/find_user.css') }}">
+{% endblock %}
+
 {% block body %}
 <div class="col-md-12">
     <div class="user_favorites">
         <h3>Find a friend</h3>
-        <input type="text" id="friend_search" placeholder="username"/>
+        <div id="friend_search_filters">
+            <input type="text" id="friend_search" placeholder="username"/>
+            <label for="friends_to_fetch">Number of users to display: </label>
+            <input type="number" id="friends_to_fetch" value="10" name="friends_to_fetch"/>
+            <label for="friends_avi_only">Show only users with an avatar: </label>
+            <input type="checkbox" id="friends_avi_only" name="friends_avi_only"/>
+            <input type="text" id="friends_city" name="friends_city" placeholder="City"/>
+            <input type="text" id="friends_country" name="friends_country" placeholder="Country"/>
+        </div>
         <ul id="fetched_friends"></ul>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='find_user.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/find_user.js') }}"></script>
 <script>
     var page = new FindUserPage('{{ base_uri }}');
     function onSuccess(page, dataFromServer, jqueryList) {
@@ -21,7 +33,7 @@
         for (var ix = 0; ix < dataFromServer.data.length; ix++) {
             var item = dataFromServer.data[ix].obj;
             var divID = ix + "_" + item.id;
-            jqueryList.append("<li class='col-md-12' onclick='page.selectUser(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + page.createUserListItem(item, divID) + "</li>");
+            jqueryList.append("<li class='col-md-6' onclick='page.selectUser(\"" + divID + "\", \"" + item.id + "\")'>" + page.createUserListItem(item, divID) + "</li>");
         }
     }
     $(document).ready(function() {

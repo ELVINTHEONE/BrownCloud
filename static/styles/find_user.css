@@ -1,0 +1,42 @@
+
+li div {
+    margin: 0 10px;
+}
+
+li div button + button {
+    margin-right: 5px;
+}
+
+li.user_favorites {
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid black;
+    overflow: hidden;
+    overflow-clip: ellipsis;
+}
+
+li.user_favorites.hide_desc {
+    min-height: 100px;
+    max-height: 100px;
+}
+
+li.user_favorites.show_desc {
+    min-height: 0;
+    max-height: 100%;
+}
+
+div.sound_list_item {
+    display: inline-flex;
+}
+
+div.sound_list_item div {
+    margin: 2px;
+}
+
+div.user_details, div.user_music {
+    display: none;
+}
+
+div#friend_search_filters {
+    margin-bottom: 5px;
+}

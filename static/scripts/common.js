@@ -74,32 +74,26 @@ function fetchAndAddToList(url, prefix, onSuccess) {
 }
 // create a list item for a track/playlist
 function createSoundListItem(item, divID) {
+    var date = new Date(item.created_at);
     var div =
         "<div id='" + divID + "'>" +
-            "<div>" +
-                "<div class='col-md-8'>" +
-                    "<h4>" + item.title + "</h4>";
-            if (item.description) {
-                div +=
-                    "<p class='hide_desc'>" + item.description + "</p>";
-            }
-    div +=
+            "<div class='sound_list_item'>" +
+                "<div class='left'>" +
+                    "<h4>" + item.title + "</h4>" +
+                    "<p class='hide_desc'>" + item.description + "</p>" +
+                "</div>" +
+                "<div class='right'>" +
+                    "<span>By " +
+                    "<a href='" + item.user.permalink_url + "' target='_blank'>" +
+                        item.user.username +
+                    "</a>" +
+                    "</span><br />" +
+                    "<span>Created " + date.toDateString() + "</span>" +
+                "</div>" +
             "</div>" +
-            "<div class='col-md-4'>" +
-
+            "<div class='sc_player_embed'>"+
+                "<span class='sc_player'></span>" +
             "</div>" +
-        "</div>" +
-        "<div>" +
-            "<span>By " +
-            "<a href='" + item.user.permalink_url + "' target='_blank'>" +
-                item.user.username +
-            "</a>" +
-            "</span><br />" +
-            "<span>" + item.created_at + "</span>" +
-        "</div>" +
-        "<div class='sc_player_embed'>"+
-            "<span class='sc_player'></span>" +
-        "</div>" +
         "</div>";
     return div;
 }
