@@ -1,13 +1,12 @@
 import os
 import logging
-import soundcloud
-import json
 import datetime
-from enum import Enum
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from flask.ext.cors import CORS, cross_origin
 from src.session import ChunkedSecureCookieSessionInterface
-from  werkzeug.debug import get_current_traceback
+from werkzeug.debug import get_current_traceback
+
+from lib.sc_lib import _getGenericClient, _toJson, _sendQuery, RequestType
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -16,70 +15,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 BASE_URI = os.environ['BASE_URI']
 
-class RequestType(Enum):
-    friends = 1
-    tracks = 2
-    playlists = 3
-    user_favorites = 4
-    user_playlists = 5
-
-def _getGenericClient():
-    return soundcloud.Client(
-            client_id="53e3ccfd305043eb4e01b99b9cf18a37",
-            client_secret="f29c8e8b2a7ba68a2d9fd4efa62d2e21",
-            redirect_url="http://brown-cloud.herokuapp.com/auth_redirect"
-            )
-
+# return the BrownCloud access token from the client's cookie, if they have one
 def _getAccessToken(request):
     return request.cookies.get('browncloud_access_token')
-
-# jsonify a list
-def _toJson(list):
-    return json.dumps(list, default=lambda o: o.__dict__)
-
-# send a request to SoundCloud
-def _sendQuery(request, type, limit):
-    # spawn a generic client
-    client = _getGenericClient()
-    ret = None
-    if (type == RequestType.friends):
-        query = request.json['query']
-        ret = client.get(
-            '/users',
-            q = query,
-            limit = limit
-        )
-    elif (type == RequestType.tracks):
-        query = request.json['query']
-        ret = client.get(
-            '/tracks',
-            q = query,
-            tags = request.json['tags'],
-            filter = request.json['visibility'],
-            #license = request.json['license'],
-            bpmFrom= request.json['bpmFrom'],
-            bpmTo = request.json['bpmTo'],
-            durationFrom = request.json['durationFrom'],
-            durationTo = request.json['durationTo'],
-            createdAtFrom = request.json['createdAtFrom'],
-            createdAtTo = request.json['createdAtTo'],
-            genres = request.json['genres'],
-            types = request.json['type'],
-            limit = limit
-        )
-    elif (type == RequestType.playlists):
-        query = request.json['query']
-        ret = client.get(
-            '/playlists',
-            q = query,
-            limit = limit
-        )
-    elif (type == RequestType.user_favorites):
-        ret = client.get('/users/' + request.json['user_id'] + '/favorites')
-    elif (type == RequestType.user_playlists):
-        ret = client.get('/users/' + request.json['user_id'] + '/playlists')
-
-    return _toJson(ret)
 
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
