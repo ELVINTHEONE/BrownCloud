@@ -23,6 +23,16 @@ function getOptions(prefix) {
         };
         return opts;
     }
+    else if (prefix == 'friend') {
+        var opts = {
+            query: _getInputVal(prefix, "search"),
+            limit: _getInputVal(prefix, "num_to_fetch"),
+            aviOnly: _getCheckedRadioVal("#" + prefix + "_avi_only"),
+            city: _getInputVal(prefix, "city"),
+            country: _getInputVal(prefix, "country")
+        };
+        return opts;
+    }
     else {
         opts = {
             query: _getInputVal(prefix, "search")

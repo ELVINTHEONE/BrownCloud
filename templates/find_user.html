@@ -6,16 +6,16 @@
 
 {% block body %}
 <div class="col-md-12">
-    <div class="user_favorites">
+    <div>
         <h3>Find a friend</h3>
         <div id="friend_search_filters">
             <input type="text" id="friend_search" placeholder="username"/>
-            <label for="friends_to_fetch">Number of users to display: </label>
-            <input type="number" id="friends_to_fetch" value="10" name="friends_to_fetch"/>
-            <label for="friends_avi_only">Show only users with an avatar: </label>
-            <input type="checkbox" id="friends_avi_only" name="friends_avi_only"/>
-            <input type="text" id="friends_city" name="friends_city" placeholder="City"/>
-            <input type="text" id="friends_country" name="friends_country" placeholder="Country"/>
+            <label for="friend_num_to_fetch">Number of users to display: </label>
+            <input type="number" id="friend_num_to_fetch" value="10" name="friends_to_fetch"/>
+            <label for="friend_avi_only">Show only users with an avatar: </label>
+            <input type="checkbox" id="friend_avi_only" name="friends_avi_only"/>
+            <input type="text" id="friend_city" name="friend_city" placeholder="City"/>
+            <input type="text" id="friend_country" name="friend_country" placeholder="Country"/>
         </div>
         <ul id="fetched_friends"></ul>
     </div>
@@ -35,6 +35,10 @@
             var divID = ix + "_" + item.id;
             jqueryList.append("<li class='col-md-6' onclick='page.selectUser(\"" + divID + "\", \"" + item.id + "\")'>" + page.createUserListItem(item, divID) + "</li>");
         }
+        $("li").find("button").on('click', function(e) {
+            $(this).addClass('btn-clicked');
+            //e.stopPropagation();
+        });
     }
     $(document).ready(function() {
         $("#friend_search").onDelayedKeyup({

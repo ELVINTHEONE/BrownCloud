@@ -27,7 +27,6 @@ FindUserPage.prototype.getList = function (user_id, listSel, apiResourceName) {
     var $list = $(listSel);
     if ($list && $list.children().length > 0) {
         // already fetched the data, toggle the visibility
-        console.log("not fetching " + listSel + " data");
         if ($(listSel + ":first-child").is(':visible')) {
             // hide the children
             $list.children().each(function() {
@@ -43,7 +42,6 @@ FindUserPage.prototype.getList = function (user_id, listSel, apiResourceName) {
     }
     else {
         // fetch the data
-        console.log("fetching the user's " + listSel + " data");
         this.getUserData(
             apiResourceName,
             user_id,
@@ -77,20 +75,54 @@ FindUserPage.prototype.setUserVisibility = function(jqueryListItem, selUserClass
         jqueryListItem.find(userMusicDiv).hide();
     }
 };
+/**
+ * Select a user from the list.
+ *
+ * If there is a previously selected user and that user is not equal to the currently
+ * selected user
+ *    Then hide the previously selected user
+ * Else if the previously selected user is equal to the currently selected user and the
+ * no button was pressed
+ *    Then hide the selected user
+ *
+ * If there is a selected user that is not equal to the previously selected user and
+ * 1. there was no button press or 2. the user is currently not expanded, expand the
+ * user details
+ *
+ * @param divID ID of the selected user
+ * @param itemID
+ */
 FindUserPage.prototype.selectUser = function(divID, itemID) {
-    console.log("selecting user " + itemID);
     var prevSelected = $("ul#fetched_friends li div.selectedUser");
     var selectedUser = $("#" + divID);
     var selUserClass = 'selectedUser',
         userDetailsClass = 'user_details',
         userDetailsSel = 'div.' + userDetailsClass,
         userMusicDiv = 'div.user_music';
-    if (prevSelected.length > 0 && prevSelected != selectedUser) {
-        console.log('hiding previous user');
+    var hasPrev = (prevSelected.length > 0);
+    var prevButton = prevSelected.find("button.btn-clicked");
+    var prevBtnClicked = (prevButton.length > 0);
+    var prevIsCur = (hasPrev && prevSelected.attr('id') == selectedUser.attr('id'));
+    var curButton = selectedUser.find("button.btn-clicked");
+    var curBtnClicked = (curButton.length > 0);
+    //console.log("prev is cur " + prevIsCur + ", prevBtnClicked = " + prevBtnClicked + ", curBtnClicked = " + curBtnClicked);
+    if (!prevIsCur || (prevIsCur && !prevBtnClicked)) {
+        //console.log("removing prev user");
         this.setUserVisibility(prevSelected, selUserClass, userDetailsSel, userMusicDiv, false);
     }
-    console.log('showing this user');
-    this.setUserVisibility(selectedUser, selUserClass, userDetailsSel, userMusicDiv, true);
+    //console.log("visible details: " + selectedUser.find(userDetailsSel).is(":visible"));
+    if (!prevIsCur && (!curBtnClicked || !selectedUser.find(userDetailsSel).is(":visible"))) {
+        //console.log("showing user");
+        this.setUserVisibility(selectedUser, selUserClass, userDetailsSel, userMusicDiv, true);
+    }
+    if (prevBtnClicked) {
+        //console.log("removing attribute from prev sel");
+        prevButton.removeClass("btn-clicked");
+    }
+    if (curBtnClicked) {
+        //console.log("removing attribute from cur sel");
+        curButton.removeClass("btn-clicked");
+    }
 };
 // create a list item for a user
 FindUserPage.prototype.createUserListItem = function(item, divID) {
@@ -108,7 +140,7 @@ FindUserPage.prototype.createUserListItem = function(item, divID) {
                     "<button class='btn btn-default' style='float: right' onclick='page.getUserPlaylists(\"" + item.id + "\", \"" + playlistsSel + "\"); return true;'>favorite playlists</button>" +
                     "<button class='btn btn-default' style='float: right' onclick='page.getUserFavorites(\"" + item.id + "\", \"" + favoritesSel + "\"); return true;'>favorite tracks</button>" +
                 "</div>" +
-            "<div class='col-md-6 user_details'>";
+            "<div class='user_details'>";
         if (item.description)
             div +=  "<span> About: " + item.description + "</span><br />";
         if (item.full_name)
@@ -132,7 +164,7 @@ FindUserPage.prototype.createUserListItem = function(item, divID) {
                     "<h3>Favorite tracks</h3>" +
                     "<ul></ul>" +
                 "</div>" +
-                "<div class='playlists col-md-6'>" +
+                "<div class='playlists col-md-5'>" +
                     "<h3>User playlists</h3>" +
                     "<ul></ul>" +
                 "</div>" +
