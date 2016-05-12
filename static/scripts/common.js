@@ -5,6 +5,9 @@ function _getCheckedRadioVal(divId) {
     var checked = $(divId + " input[type=radio]:checked");
     return $.trim(checked.val());
 }
+function _getCheckboxVal(checkboxId) {
+    return $(checkboxId).is(":checked");
+}
 function getOptions(prefix) {
     if (prefix == 'track') {
         var opts = {
@@ -26,8 +29,8 @@ function getOptions(prefix) {
     else if (prefix == 'friend') {
         var opts = {
             query: _getInputVal(prefix, "search"),
-            limit: _getInputVal(prefix, "num_to_fetch"),
-            aviOnly: _getCheckedRadioVal("#" + prefix + "_avi_only"),
+            numToFetch: _getInputVal(prefix, "num_to_fetch"),
+            aviOnly: _getCheckboxVal("#" + prefix + "_avi_only"),
             city: _getInputVal(prefix, "city"),
             country: _getInputVal(prefix, "country")
         };
@@ -51,7 +54,6 @@ function _getSoundCloudPlayerIFrame(track_id) {
 }
 // Embed the SoundCloud player or toggle its visibility
 function playSound(div_id, track_id) {
-    console.log('div id = ' + div_id);
     var div = $("#" + div_id);
     var embed = $("#" + div_id + " div.sc_player_embed span.sc_player");
     if (embed.children("iframe").length == 0) {
@@ -87,7 +89,7 @@ function createSoundListItem(item, divID) {
     var date = new Date(item.created_at);
     var div =
         "<div id='" + divID + "'>" +
-            "<div class='sound_list_item'>" +
+            "<div id='" + item.id + "' class='sound_list_item'>" +
                 "<div class='left'>" +
                     "<h4>" + item.title + "</h4>" +
                     "<p class='hide_desc'>" + item.description + "</p>" +

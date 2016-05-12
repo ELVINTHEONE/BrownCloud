@@ -1,12 +1,11 @@
 import os
-import logging
 import datetime
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from flask.ext.cors import CORS, cross_origin
 from src.session import ChunkedSecureCookieSessionInterface
 from werkzeug.debug import get_current_traceback
 
-from lib.sc_lib import _getGenericClient, _toJson, _sendQuery, RequestType
+from lib.sc_lib import getGenericClient, toJson, sendQuery, RequestType
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -14,6 +13,7 @@ app.config.from_object(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 BASE_URI = os.environ['BASE_URI']
+SOUNDCLOUD_MAX_REQUEST_LIMIT = 200
 
 # return the BrownCloud access token from the client's cookie, if they have one
 def _getAccessToken(request):
@@ -30,7 +30,7 @@ def _getAccessToken(request):
         #request.endpoint != '/' and
         #request.endpoint != 'auth_redirect' and
         #request.endpoint != 'static'):
-        #client = _getGenericClient()
+        #client = getGenericClient()
         #return redirect(client.authorize_url())
     #pass
 
@@ -55,7 +55,7 @@ def find_user():
 @app.route("/auth_redirect", methods=['GET'])
 def auth_redirect():
     code = request.args.get('code')
-    client = _getGenericClient()
+    client = getGenericClient()
     obj = client.exchange_token(code)
     resp = make_response(redirect("/"))
     resp.set_cookie('access_token', '{0}'.format(obj.access_token))
@@ -66,24 +66,23 @@ def auth_redirect():
 @app.route("/friends", methods=['POST'])
 @cross_origin()
 def get_friends():
-    print("finding " + request.json['query']);
-    return _sendQuery(request, RequestType.friends, 10)
+    return sendQuery(request, RequestType.friends, SOUNDCLOUD_MAX_REQUEST_LIMIT)
 
 @app.route("/tracks", methods=['POST'])
 def get_tracks():
-    return _sendQuery(request, RequestType.tracks, 10)
+    return sendQuery(request, RequestType.tracks, 10)
 
 @app.route("/playlists", methods=['POST'])
 def get_playlists():
-    return _sendQuery(request, RequestType.playlists, 10)
+    return sendQuery(request, RequestType.playlists, 10)
 
 @app.route("/user_favorites", methods=['POST'])
 def get_user_favorites():
-    return _sendQuery(request, RequestType.user_favorites, 10)
+    return sendQuery(request, RequestType.user_favorites, 10)
 
 @app.route("/user_playlists", methods=['POST'])
 def get_user_playlists():
-    return _sendQuery(request, RequestType.user_playlists, 10)
+    return sendQuery(request, RequestType.user_playlists, 10)
 
 if __name__ == '__main__':
     app.run(debug=True)

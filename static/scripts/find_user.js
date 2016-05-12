@@ -15,8 +15,13 @@ FindUserPage.prototype.getUserData = function (request, user_id, jqueryList) {
             for (var ix = 0; ix < dataFromServer.data.length; ix++) {
                 var item = dataFromServer.data[ix].obj;
                 var divID = ix + "_" + item.id;
-                jqueryList.append("<li class='col-md-12 user_favorites' onclick='playSound(\"" + divID + "\", \"" + item.id + "\")'>" + createSoundListItem(item, divID) + "</li>");
+                jqueryList.append("<li class='col-md-12 user_favorites'>" + createSoundListItem(item, divID) + "</li>");
             }
+            // Prevent the list item from shrinking when the track is clicked
+            jqueryList.children('li').click(function(e) {
+                playSound($(this).children("div").first().attr('id'), $(this).find("div.sound_list_item").first().attr('id'));
+                return false;
+            });
         },
         contentType:"application/json",
         dataType: 'json'
@@ -75,24 +80,25 @@ FindUserPage.prototype.setUserVisibility = function(jqueryListItem, selUserClass
         jqueryListItem.find(userMusicDiv).hide();
     }
 };
+
 /**
  * Select a user from the list.
  *
  * If there is a previously selected user and that user is not equal to the currently
- * selected user
+ * selected user OR the previous user is equal to the selected user and no button click
+ * occurred
  *    Then hide the previously selected user
- * Else if the previously selected user is equal to the currently selected user and the
- * no button was pressed
- *    Then hide the selected user
  *
- * If there is a selected user that is not equal to the previously selected user and
- * 1. there was no button press or 2. the user is currently not expanded, expand the
- * user details
+ * If the selected user is not equal to the previously selected user and
+ * 1. there was no button press or 2. the user is currently not expanded
+ *    Then expand the user details
+ *
+ * Remove the "button clicked" class from the previously clicked button (if there was one)
+ * Remove the "button clicked" class from the currently clicked button (if one was clicked)
  *
  * @param divID ID of the selected user
- * @param itemID
  */
-FindUserPage.prototype.selectUser = function(divID, itemID) {
+FindUserPage.prototype.selectUser = function(divID) {
     var prevSelected = $("ul#fetched_friends li div.selectedUser");
     var selectedUser = $("#" + divID);
     var selUserClass = 'selectedUser',
@@ -105,16 +111,19 @@ FindUserPage.prototype.selectUser = function(divID, itemID) {
     var prevIsCur = (hasPrev && prevSelected.attr('id') == selectedUser.attr('id'));
     var curButton = selectedUser.find("button.btn-clicked");
     var curBtnClicked = (curButton.length > 0);
+
     //console.log("prev is cur " + prevIsCur + ", prevBtnClicked = " + prevBtnClicked + ", curBtnClicked = " + curBtnClicked);
     if (!prevIsCur || (prevIsCur && !prevBtnClicked)) {
         //console.log("removing prev user");
         this.setUserVisibility(prevSelected, selUserClass, userDetailsSel, userMusicDiv, false);
     }
+
     //console.log("visible details: " + selectedUser.find(userDetailsSel).is(":visible"));
     if (!prevIsCur && (!curBtnClicked || !selectedUser.find(userDetailsSel).is(":visible"))) {
         //console.log("showing user");
         this.setUserVisibility(selectedUser, selUserClass, userDetailsSel, userMusicDiv, true);
     }
+
     if (prevBtnClicked) {
         //console.log("removing attribute from prev sel");
         prevButton.removeClass("btn-clicked");
@@ -124,6 +133,7 @@ FindUserPage.prototype.selectUser = function(divID, itemID) {
         curButton.removeClass("btn-clicked");
     }
 };
+
 // create a list item for a user
 FindUserPage.prototype.createUserListItem = function(item, divID) {
     var favoritesSel = "#" + divID + " div.favorite_tracks ul";
@@ -137,7 +147,7 @@ FindUserPage.prototype.createUserListItem = function(item, divID) {
                             " " + item.username +
                         "</a>" +
                     "</span>" +
-                    "<button class='btn btn-default' style='float: right' onclick='page.getUserPlaylists(\"" + item.id + "\", \"" + playlistsSel + "\"); return true;'>favorite playlists</button>" +
+                    "<button class='btn btn-default' style='float: right' onclick='page.getUserPlaylists(\"" + item.id + "\", \"" + playlistsSel + "\"); return true;'>playlists</button>" +
                     "<button class='btn btn-default' style='float: right' onclick='page.getUserFavorites(\"" + item.id + "\", \"" + favoritesSel + "\"); return true;'>favorite tracks</button>" +
                 "</div>" +
             "<div class='user_details'>";

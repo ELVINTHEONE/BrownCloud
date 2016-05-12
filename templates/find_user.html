@@ -33,11 +33,13 @@
         for (var ix = 0; ix < dataFromServer.data.length; ix++) {
             var item = dataFromServer.data[ix].obj;
             var divID = ix + "_" + item.id;
-            jqueryList.append("<li class='col-md-6' onclick='page.selectUser(\"" + divID + "\", \"" + item.id + "\")'>" + page.createUserListItem(item, divID) + "</li>");
+            jqueryList.append("<li class='col-md-6'>" + page.createUserListItem(item, divID) + "</li>");
         }
-        $("li").find("button").on('click', function(e) {
+        jqueryList.children("li").click(function() {
+            page.selectUser($(this).children("div").first().attr('id'));
+        });
+        jqueryList.find("li button").on('click', function(e) {
             $(this).addClass('btn-clicked');
-            //e.stopPropagation();
         });
     }
     $(document).ready(function() {
