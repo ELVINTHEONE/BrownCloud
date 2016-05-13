@@ -2,10 +2,10 @@ import os
 import datetime
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
 from flask.ext.cors import CORS, cross_origin
-from src.session import ChunkedSecureCookieSessionInterface
 from werkzeug.debug import get_current_traceback
 
 from lib.sc_lib import getGenericClient, toJson, sendQuery, RequestType
+from lib.session import ChunkedSecureCookieSessionInterface
 
 app = Flask(__name__)
 cors = CORS(app)

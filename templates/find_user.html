@@ -30,17 +30,19 @@
         // empty the list
         jqueryList.empty();
         // add the fetched data
-        for (var ix = 0; ix < dataFromServer.data.length; ix++) {
-            var item = dataFromServer.data[ix].obj;
-            var divID = ix + "_" + item.id;
-            jqueryList.append("<li class='col-md-6'>" + page.createUserListItem(item, divID) + "</li>");
+        if (dataFromServer.data != null) {
+            for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+                var item = dataFromServer.data[ix].obj;
+                var divID = ix + "_" + item.id;
+                jqueryList.append("<li class='col-md-6'>" + page.createUserListItem(item, divID) + "</li>");
+            }
+            jqueryList.children("li").click(function () {
+                page.selectUser($(this).children("div").first().attr('id'));
+            });
+            jqueryList.find("li button").on('click', function (e) {
+                $(this).addClass('btn-clicked');
+            });
         }
-        jqueryList.children("li").click(function() {
-            page.selectUser($(this).children("div").first().attr('id'));
-        });
-        jqueryList.find("li button").on('click', function(e) {
-            $(this).addClass('btn-clicked');
-        });
     }
     $(document).ready(function() {
         $("#friend_search").onDelayedKeyup({

@@ -11,17 +11,19 @@ FindUserPage.prototype.getUserData = function (request, user_id, jqueryList) {
         success: function(dataFromServer) {
             // empty the list
             jqueryList.empty();
-            // add the fetched data
-            for (var ix = 0; ix < dataFromServer.data.length; ix++) {
-                var item = dataFromServer.data[ix].obj;
-                var divID = ix + "_" + item.id;
-                jqueryList.append("<li class='col-md-12 user_favorites'>" + createSoundListItem(item, divID) + "</li>");
+            if (dataFromServer.data != null) {
+                // add the fetched data
+                for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+                    var item = dataFromServer.data[ix].obj;
+                    var divID = ix + "_" + item.id;
+                    jqueryList.append("<li class='col-md-12 user_favorites'>" + createSoundListItem(item, divID) + "</li>");
+                }
+                // Prevent the list item from shrinking when the track is clicked
+                jqueryList.children('li').click(function (e) {
+                    playSound($(this).children("div").first().attr('id'), $(this).find("div.sound_list_item").first().attr('id'));
+                    return false;
+                });
             }
-            // Prevent the list item from shrinking when the track is clicked
-            jqueryList.children('li').click(function(e) {
-                playSound($(this).children("div").first().attr('id'), $(this).find("div.sound_list_item").first().attr('id'));
-                return false;
-            });
         },
         contentType:"application/json",
         dataType: 'json'

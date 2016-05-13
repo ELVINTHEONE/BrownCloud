@@ -6,8 +6,7 @@ import soundcloud
 CLIENT_ID = os.environ['CLIENT_ID']
 CLIENT_SECRET = os.environ['CLIENT_SECRET']
 AUTH_REDIRECT = os.environ['AUTH_REDIRECT']
-
-DEFAULT_AVI_URL = 'http://a1.sndcdn.com/images/default_avatar_large.png?1462806539'
+DEFAULT_AVI_URL = os.environ['DEFAULT_AVI_URL']
 
 # request enumeration
 class RequestType(Enum):
@@ -31,36 +30,43 @@ def toJson(list):
 
 # returns true if the given user has an avatar
 def _hasAvi(user):
-    return user.avatar_url != 'http://a1.sndcdn.com/images/default_avatar_large.png?1462881391'
+    return DEFAULT_AVI_URL not in user.avatar_url
 
 # add the user, check if 'avatar-only' is true, if so, then make sure the user has an avatar
 def _addUser(ret, user, aviOnly):
     if not aviOnly or _hasAvi(user):
         ret.append(user)
 
+# filter out the users who have an avatar
+def _filterUsersWithAvi(users):
+    return list(filter(lambda user: _hasAvi(user), users))
+
 # process the users returned from SoundCloud
 def getUsers(users, numToFetch, aviOnly, city, country):
+    ret = []
     if len(users) <= numToFetch:
         # return the users
-        return users
+        if aviOnly:
+            ret = _filterUsersWithAvi(users)
+        else:
+            ret = users
     elif numToFetch > 0:
         # match the users to each of the criteria, rate them based on number matched
         matches = dict({
-            0: [], 1: [], 2: []
+            0: [], 1: []
         })
-        maxMatches = 3
-        ret = []
+        maxMatches = 2
         for user in users:
             matchCount = 0
-            if user.avatar_url != DEFAULT_AVI_URL:
-                matchCount += 1
+            if aviOnly and DEFAULT_AVI_URL in user.avatar_url:
+                continue # skip users with no avatar when we want avi-only users
             if user.city == city:
                 matchCount += 1
             if user.country == country:
                 matchCount += 1
             if matchCount == maxMatches:
                 # add the user to the array directly
-                _addUser(ret, match, aviOnly)
+                _addUser(ret, user, aviOnly)
                 if len(ret) >= numToFetch:
                     break
             else:
@@ -74,7 +80,7 @@ def getUsers(users, numToFetch, aviOnly, city, country):
                 if len(ret) >= numToFetch:
                     break
             matchesIx -= 1
-        return {'data': ret}
+    return {'data': ret}
 
 # send a request to SoundCloud
 # NOTE as of May 10th, 2016, the max limit is 200, any higher limit results in an error
@@ -95,11 +101,20 @@ def sendQuery(request, type, limit):
             limit = numToFetch
         ret = client.get(
             '/users',
-            q = query,
+            q = "{0} {1} {2}".format(query, city, country),
             limit = limit
-        )
+            )
+        if len(ret) == 0:
+            # try again with just the user name
+            ret = client.get(
+                '/users',
+                q = query,
+                limit = limit
+                )
         if len(ret) >= numToFetch:
             ret = getUsers(ret, numToFetch, aviOnly, city, country)
+        elif aviOnly:
+            ret = {'data': _filterUsersWithAvi(ret)}
     elif (type == RequestType.tracks):
         query = request.json['query']
         ret = client.get(
@@ -107,7 +122,7 @@ def sendQuery(request, type, limit):
             q = query,
             tags = request.json['tags'],
             filter = request.json['visibility'],
-            #license = request.json['license'],
+            license = request.json['license'],
             bpmFrom= request.json['bpmFrom'],
             bpmTo = request.json['bpmTo'],
             durationFrom = request.json['durationFrom'],

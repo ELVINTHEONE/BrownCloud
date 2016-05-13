@@ -69,11 +69,13 @@
     function onSuccess(dataFromServer, jqueryList) {
         // empty the list
         jqueryList.empty();
-        // add the fetched data
-        for (var ix = 0; ix < dataFromServer.data.length; ix++) {
-            var item = dataFromServer.data[ix].obj;
-            var divID = ix + "_" + item.user.id + "_" + item.id;
-            jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
+        if (dataFromServer.data != null) {
+            // add the fetched data
+            for (var ix = 0; ix < dataFromServer.data.length; ix++) {
+                var item = dataFromServer.data[ix].obj;
+                var divID = ix + "_" + item.user.id + "_" + item.id;
+                jqueryList.append("<li style='float:left;' onclick='playSound(\"" + divID + "\", \"" + item.id + "\"); return true;'>" + createSoundListItem(item, divID) + "</li>");
+            }
         }
     }
     $(document).ready(function() {
