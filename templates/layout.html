@@ -19,12 +19,11 @@
             <li>
                 <a href="{{ url_for('find_user') }}">Find users</a>
             </li>
+            {% if not connected %}
             <li>
-                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('connect') }}">Connect to SoundCloud</a>
             </li>
-            <li>
-                <a href="{{ url_for('logout') }}">Logout</a>
-            </li>
+            {% endif %}
         </ul>
     </nav>
     <div class="container col-md-12">
