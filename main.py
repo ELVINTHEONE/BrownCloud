@@ -8,28 +8,26 @@ from lib.session import ChunkedSecureCookieSessionInterface
 
 app = Flask(__name__)
 
+BASE_URI = os.environ['BASE_URI']
+SOUNDCLOUD_MAX_REQUEST_LIMIT = 200
+ACCESS_TOKEN = 'browncloud_access_token'
 try:
-    # if running from localhost, enable cross origin
-    if os.environ['env'] == local:
-        from flask.ext.cors import CORS, cross_origin
-        cors = CORS(app)
-        app.config.from_object(__name__)
-        app.config['CORS_HEADERS'] = 'Content-Type'
+    access_token = os.environ['ACCESS_TOKEN']
 except:
     pass
 
-BASE_URI = os.environ['BASE_URI']
-SOUNDCLOUD_MAX_REQUEST_LIMIT = 200
-
 # return the BrownCloud access token from the client's cookie, if they have one
 def _getAccessToken(request):
-    return request.cookies.get('browncloud_access_token')
+    token = request.cookies.get(ACCESS_TOKEN)
+    if token is None and access_token is not None:
+        token = access_token
+    return token
 
 # before each request, make sure we have a validation token, unless requesting the index or redirect
 #@app.before_request
 #def before_request():
     print("before request getting a token")
-    token = _getAccessToken(request)
+    # token = _getAccessToken(request)
     if (token):
         print("before request got a token " + token)
     #if (not token and
@@ -48,8 +46,12 @@ def print_err(ex):
 
 @app.route("/", methods=['GET'])
 def index():
+    token = _getAccessToken(request)
+    print(token)
+    print("token is not none {0}".format(token is not None))
     return render_template(
         "index.html",
+        connected=(token is not None),
         year=datetime.date.today().year,
         base_uri=BASE_URI
     )
@@ -60,28 +62,18 @@ def find_user():
 
 @app.route("/auth_redirect", methods=['GET'])
 def auth_redirect():
-    print("in redirect")
     code = request.args.get('code')
     client = getGenericClient()
-    print("exchanging token")
     obj = client.exchange_token(code)
-    print("making the response and setting the cookie")
     resp = make_response(redirect("/"))
-    resp.set_cookie('access_token', '{0}'.format(obj.access_token))
-    print("returning")
+    resp.set_cookie(ACCESS_TOKEN, '{0}'.format(obj.access_token))
     #resp.set_cookie('expires', '{0}'.format(obj.expires))
     return resp
 
-@app.route("/login", methods=['GET'])
-def login():
+@app.route("/connect", methods=['GET'])
+def connect():
     client = getGenericClient()
     return redirect(client.authorize_url())
-
-@app.route("/logout", methods=['GET'])
-def logout():
-    return "not implemented"
-    #client = getGenericClient()
-    #return redirect(client.authorize_url())
 
 # api functions
 @app.route("/friends", methods=['POST'])
