@@ -85,7 +85,6 @@ def logout():
 
 # api functions
 @app.route("/friends", methods=['POST'])
-@cross_origin()
 def get_friends():
     return sendQuery(request, RequestType.friends, SOUNDCLOUD_MAX_REQUEST_LIMIT)
 
