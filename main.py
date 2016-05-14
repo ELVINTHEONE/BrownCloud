@@ -8,12 +8,15 @@ from lib.session import ChunkedSecureCookieSessionInterface
 
 app = Flask(__name__)
 
-# if running from localhost, enable cross origin
-if os.environ['env'] == local:
-    from flask.ext.cors import CORS, cross_origin
-    cors = CORS(app)
-    app.config.from_object(__name__)
-    app.config['CORS_HEADERS'] = 'Content-Type'
+try:
+    # if running from localhost, enable cross origin
+    if os.environ['env'] == local:
+        from flask.ext.cors import CORS, cross_origin
+        cors = CORS(app)
+        app.config.from_object(__name__)
+        app.config['CORS_HEADERS'] = 'Content-Type'
+except:
+    pass
 
 BASE_URI = os.environ['BASE_URI']
 SOUNDCLOUD_MAX_REQUEST_LIMIT = 200
