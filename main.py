@@ -1,16 +1,19 @@
 import os
 import datetime
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, make_response
-from flask.ext.cors import CORS, cross_origin
 from werkzeug.debug import get_current_traceback
 
 from lib.sc_lib import getGenericClient, toJson, sendQuery, RequestType
 from lib.session import ChunkedSecureCookieSessionInterface
 
 app = Flask(__name__)
-cors = CORS(app)
-app.config.from_object(__name__)
-app.config['CORS_HEADERS'] = 'Content-Type'
+
+# if running from localhost, enable cross origin
+if os.environ['env'] == local:
+    from flask.ext.cors import CORS, cross_origin
+    cors = CORS(app)
+    app.config.from_object(__name__)
+    app.config['CORS_HEADERS'] = 'Content-Type'
 
 BASE_URI = os.environ['BASE_URI']
 SOUNDCLOUD_MAX_REQUEST_LIMIT = 200
@@ -54,13 +57,28 @@ def find_user():
 
 @app.route("/auth_redirect", methods=['GET'])
 def auth_redirect():
+    print("in redirect")
     code = request.args.get('code')
     client = getGenericClient()
+    print("exchanging token")
     obj = client.exchange_token(code)
+    print("making the response and setting the cookie")
     resp = make_response(redirect("/"))
     resp.set_cookie('access_token', '{0}'.format(obj.access_token))
+    print("returning")
     #resp.set_cookie('expires', '{0}'.format(obj.expires))
     return resp
+
+@app.route("/login", methods=['GET'])
+def login():
+    client = getGenericClient()
+    return redirect(client.authorize_url())
+
+@app.route("/logout", methods=['GET'])
+def logout():
+    return "not implemented"
+    #client = getGenericClient()
+    #return redirect(client.authorize_url())
 
 # api functions
 @app.route("/friends", methods=['POST'])
